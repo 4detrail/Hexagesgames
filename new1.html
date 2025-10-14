@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Nexus Yakında Yayınlanıyor! - HEXAGES GAMES</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Haber Detay Sayfası için CSS */
+        .news-detail-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .news-detail-header {
+            margin-bottom: 3rem;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .news-category-badge {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid #374151;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .news-detail-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-detail-excerpt {
+            font-size: 1.125rem;
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .news-featured-image {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .news-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .news-content {
+            color: #d1d5db;
+            line-height: 1.8;
+            font-size: 1.125rem;
+        }
+
+        .news-content h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 2.5rem 0 1rem 0;
+        }
+
+        .news-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .news-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .news-content blockquote {
+            border-left: 4px solid #374151;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #9ca3af;
+        }
+
+        .news-content ul, .news-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .news-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .news-image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .news-image-gallery img {
+            width: 100%;
+            border-radius: 0.5rem;
+        }
+
+        .news-features {
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .news-features h3 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item h4 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .feature-item p {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .news-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .news-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .news-tag {
+            background-color: #1f2937;
+            color: #9ca3af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: 1px solid #374151;
+        }
+
+        .news-share {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #111827;
+            border: 1px solid #374151;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .share-btn:hover {
+            background-color: #1f2937;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .news-detail-container {
+                padding: 1rem;
+            }
+
+            .news-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .news-image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .news-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://customer-assets.emergentagent.com/job_e87831ba-e8cf-43d5-884d-2da986876752/artifacts/bq8ihc0b_Ads%C4%B1z%20tasar%C4%B1m%20%281%29.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="developers.html" class="nav-link">Geliştiriciler</a>
+                <a href="news.html" class="nav-link active">Haberler</a>
+                <a href="contact.html" class="nav-link">İletişim</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="mobile-link">Ana Sayfa</a>
+            <a href="games.html" class="mobile-link">Oyunlar</a>
+            <a href="developers.html" class="mobile-link">Geliştiriciler</a>
+            <a href="news.html" class="mobile-link active">Haberler</a>
+            <a href="contact.html" class="mobile-link">İletişim</a>
+        </div>
+    </nav>
+
+    <section class="page-section">
+        <div class="container">
+            <div class="news-detail-container">
+                <!-- Haber Başlık ve Meta Bilgileri -->
+                <div class="news-detail-header">
+                    <div class="news-meta">
+                        <span class="news-category-badge">Duyuru</span>
+                        <span>15 Kasım 2023</span>
+                        <span>5 dakika okuma</span>
+                    </div>
+                    <h1 class="news-detail-title">Cyber Nexus: Yeni Nesil Cyberpunk RPG'miz Yakında Yayınlanıyor!</h1>
+                    <p class="news-detail-excerpt">HEXAGES GAMES olarak heyecanla duyuruyoruz: Yeni nesil cyberpunk RPG'miz "Cyber Nexus" yakında tüm platformlarda olacak.</p>
+                </div>
+
+                <!-- Öne Çıkan Görsel -->
+                <div class="news-featured-image">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Cyber Nexus Oyun Görseli">
+                </div>
+
+                <!-- Haber İçeriği -->
+                <div class="news-content">
+                    <p>Oyun severleri bekleyen yepyeni bir deneyim için geri sayım başladı! HEXAGES GAMES'in 3 yıllık geliştirme sürecinin ardından hazırlanan <strong>Cyber Nexus</strong>, cyberpunk evreninde soluk kesici bir macera vaat ediyor.</p>
+
+                    <h2>⚡ Devrim Niteliğinde Özellikler</h2>
+                    
+                    <p>Cyber Nexus, oyunculara sınırsız bir özgürlük sunarken, derin hikaye anlatımı ve etkileyici görsellerle benzersiz bir deneyim yaşatmayı hedefliyor.</p>
+
+                    <div class="news-features">
+                        <h3>🎮 Başlıca Özellikler</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">🌆</div>
+                                <h4>Açık Dünya</h4>
+                                <p>Devasa neon şehirde keşfedilecek yüzlerce lokasyon</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🤖</div>
+                                <h4>Yapay Zeka</h4>
+                                <p>Gelişmiş NPC davranışları ve dinamik diyalog sistemi</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🔫</div>
+                                <h4>Stratejik Savaş</h4>
+                                <p>Karmaşık düşman yapay zekası ve taktiksel savaş sistemi</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎭</div>
+                                <h4>Karakter Gelişimi</h4>
+                                <p>Derin skill ağacı ve kişiselleştirilebilir yetenekler</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>🖥️ Platformlar ve Sistem Gereksinimleri</h2>
+
+                    <p>Cyber Nexus, PC, PlayStation 5 ve Xbox Series X/S platformlarında aynı anda yayınlanacak. Cross-platform kayıt özelliği sayesinde oyun verilerinizi platformlar arasında taşıyabileceksiniz.</p>
+
+                    <h3>Minimum Sistem Gereksinimleri:</h3>
+                    <ul>
+                        <li><strong>İşletim Sistemi:</strong> Windows 10 64-bit</li>
+                        <li><strong>İşlemci:</strong> Intel Core i5-8400 veya AMD Ryzen 5 2600</li>
+                        <li><strong>Bellek:</strong> 12 GB RAM</li>
+                        <li><strong>Ekran Kartı:</strong> NVIDIA GTX 1060 6GB veya AMD Radeon RX 580</li>
+                        <li><strong>Depolama:</strong> 80 GB kullanılabilir alan</li>
+                    </ul>
+
+                    <h2>🎬 Hikaye ve Evren</h2>
+
+                    <p>2077 yılında geçen oyun, mega şirketlerin dünyayı yönettiği distopik bir gelecekte geçiyor. Oyuncular, sibernetik implantları ve hacking yetenekleriyle donatılmış bir "Netrunner" olarak, şirketlerin kirli sırlarını ortaya çıkarmak ve dünyanın kaderini değiştirmek için tehlikeli bir yolculuğa çıkıyor.</p>
+
+                    <blockquote>
+                        "Cyber Nexus sadece bir oyun değil, cyberpunk hayranları için bir rüyanın gerçeğe dönüşmesi. Oyunculara sunacağımız deneyim, bu türü yeniden tanımlayacak."
+                        <br>- Ahmet Yılmaz, Yaratıcı Yönetmen
+                    </blockquote>
+
+                    <div class="news-image-gallery">
+                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cyber Nexus Gameplay 1">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cyber Nexus Gameplay 2">
+                    </div>
+
+                    <h2>📅 Çıkış Tarihi ve Ön Sipariş</h2>
+
+                    <p>Cyber Nexus'un resmi çıkış tarihi <strong>15 Mart 2024</strong> olarak belirlendi. Ön siparişler 1 Aralık'ta başlayacak ve ön sipariş veren oyunculara özel dijital içerikler hediye edilecek.</p>
+
+                    <p>HEXAGES GAMES olarak, Cyber Nexus'un oyun dünyasında yeni bir standart belirleyeceğine inanıyoruz. Sizleri bu unutulmaz maceraya katılmaya davet ediyoruz!</p>
+                </div>
+
+                <!-- Haber Footer -->
+                <div class="news-footer">
+                    <div class="news-tags">
+                        <span class="news-tag">#CyberNexus</span>
+                        <span class="news-tag">#RPG</span>
+                        <span class="news-tag">#Cyberpunk</span>
+                        <span class="news-tag">#OyunLansmanı</span>
+                        <span class="news-tag">#HEXAGES</span>
+                    </div>
+                    <div class="news-share">
+                        <a href="#" class="share-btn">📋</a>
+                        <a href="#" class="share-btn">🐦</a>
+                        <a href="#" class="share-btn">📘</a>
+                        <a href="#" class="share-btn">💬</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="https://customer-assets.emergentagent.com/job_e87831ba-e8cf-43d5-884d-2da986876752/artifacts/bq8ihc0b_Ads%C4%B1z%20tasar%C4%B1m%20%281%29.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@hexagesgames.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                        <li>📞 +90 212 123 4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <a href="#">Kullanım Şartları</a>
+                    <a href="#">Çerezler</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll efekti
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Paylaşım butonları
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = window.location.href;
+                const title = document.title;
+                
+                // Burada paylaşım işlemleri yapılabilir
+                alert('Paylaşım bağlantısı kopyalandı: ' + url);
+            });
+        });
+    </script>
+</body>
+</html>

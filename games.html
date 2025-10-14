@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEXAGES GAMES - Oyunlar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link active">Oyunlar</a>
+                <a href="developers.html" class="nav-link">Geliştiriciler</a>
+                <a href="news.html" class="nav-link">Haberler</a>
+                <a href="contact.html" class="nav-link">İletişim</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Oyunlarımız</h1>
+                <p>Tutkuyla geliştirdiğimiz, oyun dünyasına yenilik getiren projelerimizi keşfedin</p>
+            </div>
+            
+            <!-- Yatay Oyun Grid -->
+            <div class="games-grid-large horizontal-games">
+                <!-- Oyun 1 -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="helfdoomss.jpg" alt="Helf Doom">
+                        <div class="game-status status-development">
+                            Geliştirme Aşamasında
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-meta">
+                            <span>Aksiyon</span>
+                            <span>RPG</span>
+                        </div>
+                        <h3>Helf Doom</h3>
+                        <p>arkadaşlarınızla birlikte oynayabileceğiniz bir multiplayer akıl oyunu</p>
+                    </div>
+                </div>
+
+                <!-- Oyun 2 -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="hexagesgames.png" alt="yakında">
+                        <div class="game-status status-development">
+                            Geliştirme Aşamasında
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-meta">
+                            <span>Fantazi</span>
+                            <span>Açık Dünya</span>
+                        </div>
+                        <h3>yakında</h3>
+                        <p>yakında yeni projelere.</p>
+                    </div>
+                </div>
+
+                <!-- Oyun 3 -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="hexagesgames.png" alt="Yakında">
+                        <div class="game-status status-soon">
+                            Yakında
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-meta">
+                            <span>Bilim Kurgu</span>
+                            <span>Simülasyon</span>
+                        </div>
+                        <h3>yakında</h3>
+                        <p>yakında yeni projelere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@hexagesgames.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geliştiriciler - HEXAGES GAMES</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Geliştirici Sayfası için Ek CSS */
+        .developers-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #000 0%, #111827 100%);
+            border-bottom: 1px solid #374151;
+        }
+
+        .developers-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .developers-hero p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-0.5rem);
+            border-color: #4b5563;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .team-section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-0.5rem) scale(1.02);
+            border-color: #4b5563;
+        }
+
+        .member-header {
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 3px solid #374151;
+            overflow: hidden;
+        }
+
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .member-role {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-specialty {
+            color: #6b7280;
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        .member-content {
+            padding: 0 2rem 2rem;
+        }
+
+        .member-bio {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background-color: #1f2937;
+            color: #9ca3af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: 1px solid #374151;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            background-color: #111827;
+            border: 1px solid #374151;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: #1f2937;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .values-section {
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 4rem 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-item {
+            text-align: center;
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-item p {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .join-team {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #000 0%, #111827 100%);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            margin: 4rem 0;
+        }
+
+        .join-team h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .join-team p {
+            color: #9ca3af;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .team-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://customer-assets.emergentagent.com/job_e87831ba-e8cf-43d5-884d-2da986876752/artifacts/bq8ihc0b_Ads%C4%B1z%20tasar%C4%B1m%20%281%29.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="developers.html" class="nav-link active">Geliştiriciler</a>
+                <a href="news.html" class="nav-link">Haberler</a>
+                <a href="contact.html" class="nav-link">İletişim</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="mobile-link">Ana Sayfa</a>
+            <a href="games.html" class="mobile-link">Oyunlar</a>
+            <a href="developers.html" class="mobile-link active">Geliştiriciler</a>
+            <a href="news.html" class="mobile-link">Haberler</a>
+            <a href="contact.html" class="mobile-link">İletişim</a>
+        </div>
+    </nav>
+
+    <section class="page-section">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="developers-hero">
+                <h1>Ekibimizle Tanışın</h1>
+                <p>HEXAGES GAMES'in arkasındaki yetenekli ekip - oyun dünyasında devrim yaratmak için bir araya gelmiş tutkulu geliştiriciler</p>
+                
+                <div class="team-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Takım Üyesi</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Yayınlanan Oyun</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Ülke</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15M+</div>
+                        <div class="stat-label">Oyuncu</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kurucu Ekibi -->
+            <div class="team-section">
+                <h2 class="section-title">Kurucu Ekibi</h2>
+                <div class="team-grid">
+                    <!-- Üye 1 -->
+                    <div class="team-member">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ahmet Yılmaz">
+                            </div>
+                            <div class="member-info">
+                                <h3>Ahmet Yılmaz</h3>
+                                <div class="member-role">Kurucu & CEO</div>
+                                <div class="member-specialty">Strateji & Yönetim</div>
+                            </div>
+                        </div>
+                        <div class="member-content">
+                            <p class="member-bio">15 yıllık oyun endüstrisi deneyimiyle HEXAGES GAMES'in kurucusu. Önceki deneyimleri arasında büyük oyun stüdyolarında yöneticilik pozisyonları bulunuyor.</p>
+                            <div class="member-skills">
+                                <span class="skill-tag">Liderlik</span>
+                                <span class="skill-tag">Strateji</span>
+                                <span class="skill-tag">İş Geliştirme</span>
+                            </div>
+                            <div class="member-social">
+                                <a href="#" class="social-link">📘</a>
+                                <a href="#" class="social-link">🐦</a>
+                                <a href="#" class="social-link">💼</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Üye 2 -->
+                    <div class="team-member">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mehmet Kaya">
+                            </div>
+                            <div class="member-info">
+                                <h3>Mehmet Kaya</h3>
+                                <div class="member-role">Teknik Direktör</div>
+                                <div class="member-specialty">Mühendislik & Ar-Ge</div>
+                            </div>
+                        </div>
+                        <div class="member-content">
+                            <p class="member-bio">Unity ve Unreal Engine konusunda uzman, 12 yıllık teknik deneyime sahip. Shadow Realms ve Quantum Quest projelerinin teknik lideri.</p>
+                            <div class="member-skills">
+                                <span class="skill-tag">Unity</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Unreal</span>
+                                <span class="skill-tag">Optimizasyon</span>
+                            </div>
+                            <div class="member-social">
+                                <a href="#" class="social-link">📘</a>
+                                <a href="#" class="social-link">💻</a>
+                                <a href="#" class="social-link">🎮</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Üye 3 -->
+                    <div class="team-member">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ayşe Demir">
+                            </div>
+                            <div class="member-info">
+                                <h3>Ayşe Demir</h3>
+                                <div class="member-role">Yaratıcı Direktör</div>
+                                <div class="member-specialty">Sanat & Tasarım</div>
+                            </div>
+                        </div>
+                        <div class="member-content">
+                            <p class="member-bio">Görsel sanatlar ve karakter tasarımı alanında 10 yıllık deneyim. Cyber Nexus'un yaratıcı vizyonunun arkasındaki isim.</p>
+                            <div class="member-skills">
+                                <span class="skill-tag">3D Modelleme</span>
+                                <span class="skill-tag">Concept Art</span>
+                                <span class="skill-tag">UI/UX</span>
+                                <span class="skill-tag">Animasyon</span>
+                            </div>
+                            <div class="member-social">
+                                <a href="#" class="social-link">📘</a>
+                                <a href="#" class="social-link">🎨</a>
+                                <a href="#" class="social-link">📷</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Geliştirme Ekibi -->
+            <div class="team-section">
+                <h2 class="section-title">Geliştirme Ekibi</h2>
+                <div class="team-grid">
+                    <!-- Üye 4 -->
+                    <div class="team-member">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">EC</div>
+                            </div>
+                            <div class="member-info">
+                                <h3>Emre Can</h3>
+                                <div class="member-role">Senior Game Developer</div>
+                                <div class="member-specialty">Gameplay Programlama</div>
+                            </div>
+                        </div>
+                        <div class="member-content">
+                            <p class="member-bio">8 yıllık oyun programlama deneyimi. Özellikle AI sistemleri ve gameplay mekanikleri konusunda uzman.</p>
+                            <div class="member-skills">
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">AI</span>
+                                <span class="skill-tag">Gameplay</span>
+                                <span class="skill-tag">Physics</span>
+                            </div>
+                            <div class="member-social">
+                                <a href="#" class="social-link">💻</a>
+                                <a href="#" class="social-link">🎮</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Üye 5 -->
+                    <div class="team-member">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">ZD</div>
+                            </div>
+                            <div class="member-info">
+                                <h3>Zeynep Doğan</h3>
+                                <div class="member-role">3D Artist</div>
+                                <div class="member-specialty">Karakter & Çevre Tasarımı</div>
+                            </div>
+                        </div>
+                        <div class="member-content">
+                            <p class="member-bio">6 yıllık 3D sanat deneyimi. Cyber Nexus'un karakter ve çevre modellerinin baş sanatçısı.</p>
+                            <div class="member-skills">
+                                <span class="skill-tag">Blender</span>
+                                <span class="skill-tag">ZBrush</span>
+                                <span class="skill-tag">Substance</span>
+                                <span class="skill-tag">Maya</span>
+                            </div>
+                            <div class="member-social">
+                                <a href="#" class="social-link">🎨</a>
+                                <a href="#" class="social-link">📷</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Üye 6 -->
+                    <div class="team-member">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">CY</div>
+                            </div>
+                            <div class="member-info">
+                                <h3>Can Yıldız</h3>
+                                <div class="member-role">Sound Designer</div>
+                                <div class="member-specialty">Ses Tasarımı & Müzik</div>
+                            </div>
+                        </div>
+                        <div class="member-content">
+                            <p class="member-bio">Oyunlar için immersive ses deneyimleri yaratma konusunda 7 yıllık deneyim. Tüm HEXAGES oyunlarının ses tasarımı.</p>
+                            <div class="member-skills">
+                                <span class="skill-tag">FMOD</span>
+                                <span class="skill-tag">Wwise</span>
+                                <span class="skill-tag">Kompozisyon</span>
+                                <span class="skill-tag">Mixing</span>
+                            </div>
+                            <div class="member-social">
+                                <a href="#" class="social-link">🎵</a>
+                                <a href="#" class="social-link">🎧</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Değerlerimiz -->
+            <div class="values-section">
+                <h2 class="section-title">Değerlerimiz</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon">🚀</div>
+                        <h3>Yenilikçilik</h3>
+                        <p>Sürekli olarak yeni teknolojiler ve oyun mekanikleri geliştirerek sektöre öncülük ediyoruz.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🤝</div>
+                        <h3>İşbirliği</h3>
+                        <p>Takım çalışmasına inanıyor, her üyenin katkısını değerli buluyoruz.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🎯</div>
+                        <h3>Kalite</h3>
+                        <p>En yüksek kalite standartlarını koruyarak oyunculara unutulmaz deneyimler sunuyoruz.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">❤️</div>
+                        <h3>Topluluk</h3>
+                        <p>Oyuncu topluluğumuzla güçlü bağlar kurarak onların geri bildirimlerini dinliyoruz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İşe Alım -->
+            <div class="join-team">
+                <h2>Ekibimize Katılın</h2>
+                <p>HEXAGES GAMES'te kariyer fırsatlarını keşfedin ve oyun dünyasında iz bırakan projelerde yer alın.</p>
+                <a href="contact.html" class="btn btn-primary">Kariyer Fırsatları</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="https://customer-assets.emergentagent.com/job_e87831ba-e8cf-43d5-884d-2da986876752/artifacts/bq8ihc0b_Ads%C4%B1z%20tasar%C4%B1m%20%281%29.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@hexagesgames.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                        <li>📞 +90 212 123 4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <a href="#">Kullanım Şartları</a>
+                    <a href="#">Çerezler</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll efekti
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

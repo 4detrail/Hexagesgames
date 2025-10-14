@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEXAGES GAMES - İletişim</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://customer-assets.emergentagent.com/job_e87831ba-e8cf-43d5-884d-2da986876752/artifacts/bq8ihc0b_Ads%C4%B1z%20tasar%C4%B1m%20%281%29.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="developers.html" class="nav-link">Geliştiriciler</a>
+                <a href="news.html" class="nav-link">Haberler</a>
+                <a href="contact.html" class="nav-link active">İletişim</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>İletişim</h1>
+                <p>Sorularınız, önerileriniz veya iş birliği teklifleriniz için bize ulaşın</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>E-posta</h3>
+                        <p>hexagesgames@gmail.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <h3>Telefon</h3>
+                        <p>şu anlık telefon hizmeti vermiyoruz.</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <h3>Adres</h3>
+                        <p>İstanbul, Türkiye</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Çalışma Saatlerimiz</h3>
+                        <p>Pazartesi - Cuma: 09:00 - 18:00</p>
+                        <p>Cumartesi: 10:00 - 14:00</p>
+                        <p>Pazar: Kapalı</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h2>Bize Mesaj Gönderin</h2>
+                    <!-- FormSpree entegrasyonu burada -->
+                    <form id="contactForm" action="https://formspree.io/f/xeorpqve" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Ad Soyad</label>
+                                <input type="text" id="name" name="name" required placeholder="Adınız Soyadınız">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-posta</label>
+                                <input type="email" id="email" name="email" required placeholder="ornek@email.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Konu</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Mesajınızın konusu">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mesaj</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Mesajınızı buraya yazın..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Mesaj Gönder →</button>
+                    </form>
+                    <div id="formMessage" class="form-message"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="https://customer-assets.emergentagent.com/job_e87831ba-e8cf-43d5-884d-2da986876752/artifacts/bq8ihc0b_Ads%C4%B1z%20tasar%C4%B1m%20%281%29.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 hexagesgames@gmail.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
