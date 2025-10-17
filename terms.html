@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanım Şartları - HEXAGES GAMES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.5s;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-logo img {
+            height: 48px;
+            width: 48px;
+        }
+
+        .nav-logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background-color: #1f2937;
+        }
+
+        .nav-link.active {
+            color: #fff;
+            background-color: #1f2937;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #9ca3af;
+            position: relative;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: #9ca3af;
+            transition: all 0.3s;
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            top: 8px;
+        }
+
+        .mobile-menu {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+        }
+
+        .mobile-link {
+            display: block;
+            padding: 1rem 2rem;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .mobile-link:hover,
+        .mobile-link.active {
+            color: #fff;
+            background-color: #1f2937;
+            transform: translateX(0.5rem);
+        }
+
+        /* Page Section */
+        .page-section {
+            min-height: 100vh;
+            padding: 8rem 0 5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .page-header p {
+            font-size: 1.125rem;
+            color: #9ca3af;
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        /* Kullanım Şartları Özel Stilleri */
+        .terms-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .terms-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            transition: all 0.3s;
+        }
+
+        .terms-section:hover {
+            border-color: #4b5563;
+            transform: translateY(-0.25rem);
+        }
+
+        .terms-section h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #374151;
+            padding-bottom: 0.5rem;
+        }
+
+        .terms-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #d1d5db;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .terms-section p {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .terms-section ul {
+            color: #9ca3af;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terms-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .terms-update {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            margin-top: 2rem;
+        }
+
+        .terms-update p {
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        .terms-acceptance {
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            transition: all 0.5s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: none;
+            border-color: #374151;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(to bottom right, #10b981, #059669);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+            transition: transform 0.3s;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-card {
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-0.25rem) scale(1.05);
+            border-color: #4b5563;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin: 0.25rem 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, #000, #0a0a0a);
+            border-top: 1px solid #1f2937;
+            margin-top: 5rem;
+            padding: 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col-wide {
+            grid-column: span 1;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            width: 40px;
+            transition: transform 0.3s;
+        }
+
+        .footer-logo:hover img {
+            transform: scale(1.1);
+        }
+
+        .footer-logo span {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .footer-description {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            max-width: 28rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: #111827;
+            border: 1px solid #374151;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            color: #fff;
+            border-color: #4b5563;
+            background-color: #1f2937;
+            transform: translateY(-0.25rem) scale(1.1);
+        }
+
+        .footer-col h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul li a {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(0.25rem);
+        }
+
+        .footer-col ul li a.active {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #1f2937;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #6b7280;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .terms-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .terms-section h2 {
+                font-size: 1.25rem;
+            }
+            
+            .terms-section h3 {
+                font-size: 1.1rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="developers.html" class="nav-link">Geliştiriciler</a>
+                <a href="news.html" class="nav-link">Haberler</a>
+                <a href="contact.html" class="nav-link">İletişim</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="index.html" class="mobile-link">Ana Sayfa</a>
+            <a href="games.html" class="mobile-link">Oyunlar</a>
+            <a href="developers.html" class="mobile-link">Geliştiriciler</a>
+            <a href="news.html" class="mobile-link">Haberler</a>
+            <a href="contact.html" class="mobile-link">İletişim</a>
+        </div>
+    </nav>
+
+    <!-- Kullanım Şartları İçeriği -->
+    <section class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Kullanım Şartları</h1>
+                <p>HEXAGES GAMES web sitesini ve hizmetlerini kullanmadan önce lütfen bu kullanım şartlarını dikkatlice okuyun.</p>
+            </div>
+
+            <div class="terms-content">
+                <div class="terms-section">
+                    <h2>1. Kabul ve Değişiklikler</h2>
+                    <p>HEXAGES GAMES web sitesini ziyaret ederek ve hizmetlerimizi kullanarak bu kullanım şartlarını kabul etmiş sayılırsınız. Şartlarda yapılacak değişiklikleri takip etmek sizin sorumluluğunuzdadır. Değişiklikler yayınlandıktan sonra geçerli olacaktır.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>2. Hizmetlerin Kullanımı</h2>
+                    <h3>2.1. Uygunluk</h3>
+                    <p>Hizmetlerimizi kullanmak için:</p>
+                    <ul>
+                        <li>13 yaşın üzerinde olmalısınız</li>
+                        <li>Yürürlükteki yasalara uygun şekilde hareket etmelisiniz</li>
+                        <li>Hesap bilgilerinizi doğru ve güncel tutmalısınız</li>
+                    </ul>
+
+                    <h3>2.2. Yasaklı Faaliyetler</h3>
+                    <p>Hizmetlerimizi kullanırken aşağıdaki faaliyetler yasaktır:</p>
+                    <ul>
+                        <li>Yasa dışı içerik paylaşmak veya yasa dışı faaliyetlerde bulunmak</li>
+                        <li>Diğer kullanıcıları rahatsız etmek veya taciz etmek</li>
+                        <li>Hizmetlerimizin güvenliğini ihlal etmek</li>
+                        <li>Otomatik botlar veya script'ler kullanmak</li>
+                        <li>Telif hakkıyla korunan içerikleri izinsiz paylaşmak</li>
+                        <li>Sahte hesap oluşturmak veya kimlik gizlemek</li>
+                        <li>Ticari amaçlarla hizmetlerimizi kullanmak (izin verilmedikçe)</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>3. Hesap Sorumlulukları</h2>
+                    <p>Hesabınızın güvenliğinden siz sorumlusunuz. Şifrenizi gizli tutmalı ve hesabınız üzerindeki tüm faaliyetleri takip etmelisiniz. Hesabınızın yetkisiz kullanımından şüphelenirseniz derhal bizimle iletişime geçin.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>4. Fikri Mülkiyet</h2>
+                    <h3>4.1. HEXAGES GAMES Hakları</h3>
+                    <p>HEXAGES GAMES'e ait tüm oyunlar, yazılımlar, tasarımlar, logolar, markalar ve diğer içerikler telif hakkı ve diğer fikri mülkiyet yasalarıyla korunmaktadır. Bu içerikleri izinsiz kopyalayamaz, dağıtamaz veya değiştiremezsiniz.</p>
+
+                    <h3>4.2. Kullanıcı İçeriği</h3>
+                    <p>Hizmetlerimizde paylaştığınız içeriklerin size ait olduğunu veya paylaşım hakkına sahip olduğunuzu garanti etmiş olursunuz. HEXAGES GAMES'e, bu içerikleri hizmetlerimizde kullanma hakkını verirsiniz.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>5. Ödeme ve Abonelikler</h2>
+                    <p>Ücretli hizmetlerimiz için:</p>
+                    <ul>
+                        <li>Ödemeler önceden yapılmalıdır</li>
+                        <li>İade politikalarımız geçerlidir</li>
+                        <li>Abonelikler otomatik olarak yenilenebilir</li>
+                        <li>Fiyat değişiklikleri önceden duyurulur</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>6. Hizmet Değişiklikleri ve Sonlandırma</h2>
+                    <p>HEXAGES GAMES, hizmetleri herhangi bir zamanda değiştirme, askıya alma veya sonlandırma hakkını saklı tutar. Ayrıca, bu şartları ihlal etmeniz durumunda hesabınızı askıya alabilir veya sonlandırabiliriz.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>7. Sorumluluk Reddi</h2>
+                    <p>Hizmetlerimiz "olduğu gibi" sunulmaktadır. Aşağıdaki durumlar için sorumluluk kabul etmiyoruz:</p>
+                    <ul>
+                        <li>Hizmet kesintileri veya teknik sorunlar</li>
+                        <li>Üçüncü taraf içerik veya bağlantılar</li>
+                        <li>Kullanıcı hataları veya kayıpları</li>
+                        <li>Güvenlik ihlalleri (makul önlemlerimize rağmen)</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>8. Üçüncü Taraf Hizmetler</h2>
+                    <p>Hizmetlerimiz üçüncü taraf bağlantılar veya entegrasyonlar içerebilir. Bu hizmetlerin gizlilik politikaları ve kullanım şartları kendi sorumluluklarındadır.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>9. Uygulanabilir Hukuk</h2>
+                    <p>Bu kullanım şartları Türkiye Cumhuriyeti yasalarına tabidir. Herhangi bir anlaşmazlık durumunda İstanbul mahkemeleri yetkilidir.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>10. İletişim</h2>
+                    <p>Bu kullanım şartları hakkında sorularınız için bizimle iletişime geçebilirsiniz:</p>
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">📧</div>
+                            <h3>E-posta</h3>
+                            <p>info@hexagesgames.com</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">📍</div>
+                            <h3>Adres</h3>
+                            <p>İstanbul, Türkiye</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terms-update">
+                    <p><strong>Son Güncelleme:</strong> 15 Ocak 2025</p>
+                </div>
+
+                <div class="terms-acceptance">
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Kabul ve Onay</h3>
+                        <p>HEXAGES GAMES hizmetlerini kullanmaya devam ederek, bu kullanım şartlarını tamamen okuduğunuzu, anladığınızı ve kabul ettiğinizi onaylıyorsunuz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz. Tutkulu ekibimizle geleceğin oyunlarını tasarlıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="https://x.com/hexages_games" class="social-link">🐦</a>
+                        <a href="https://www.instagram.com/hexagesgames" class="social-link">📷</a>
+                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link">📺</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Yasal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Gizlilik Politikası</a></li>
+                        <li><a href="terms.html" class="active">Kullanım Şartları</a></li>
+                        <li><a href="cookies.html">Çerez Politikası</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Gizlilik Politikası</a>
+                    <a href="terms.html">Kullanım Şartları</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
