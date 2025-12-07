@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Yetenekler Ailemize Katıldı - HEXAGES GAMES</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .news-detail-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .news-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        .news-category-badge {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid #374151;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .news-detail-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .news-featured-image {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .news-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .news-content {
+            color: #d1d5db;
+            line-height: 1.8;
+            font-size: 1.125rem;
+        }
+        .members-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .member-card {
+            background: linear-gradient(to bottom, #111827, #000);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .member-info h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .member-role {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        .news-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+        }
+        .news-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .news-tag {
+            background-color: #1f2937;
+            color: #9ca3af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: 1px solid #374151;
+        }
+        @media (max-width: 768px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="developers.html" class="nav-link">Geliştiriciler</a>
+                <a href="news.html" class="nav-link active">Haberler</a>
+                <a href="contact.html" class="nav-link">İletişim</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-section">
+        <div class="container">
+            <div class="news-detail-container">
+                <div class="news-meta">
+                    <span class="news-category-badge">Takım</span>
+                    <span>20 Ocak 2024</span>
+                </div>
+                <h1 class="news-detail-title">Yeni Yetenekler Ailemize Katıldı!</h1>
+
+                <div class="news-featured-image">
+                    <img src="welcome1.png" alt="Takım Çalışması">
+                </div>
+
+                <div class="news-content">
+                    <p><strong>HEXAGES GAMES ailesi büyüyor!</strong> Hikaye ve senaryo ekibimize iki yıldız yetenek katıldı: <strong>Muhamet Geçer</strong> ve <strong>Bedirhan Odabaşı</strong>! 🚀</p>
+
+                    <div class="members-grid">
+                        <div class="member-card">
+                            <div class="member-avatar">MG</div>
+                            <div class="member-info">
+                                <h3>Muhamet Geçer</h3>
+                                <div class="member-role">Hikaye Yazarı</div>
+                            </div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">BO</div>
+                            <div class="member-info">
+                                <h3>Bedirhan Odabaşı</h3>
+                                <div class="member-role">Senaryo yazarı</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>İki yetenekli arkadaşımız, gelecek projelerimizin hikaye dünyasını şekillendirecek. <strong>Yeni kapılar açılıyor, yeni evrenler keşfediliyor!</strong> 🌌</p>
+
+                    <p><strong>Muhamet ve Bedirhan'a HEXAGES GAMES ailesine hoş geldin diyor, başarılarının devamını diliyoruz! </strong>🎉</p>
+
+                    <p>Yeni projelerimiz için geri sayım başladı. Takipte kalın! ⏳</p>
+                </div>
+
+                <div class="news-footer">
+                    <div class="news-tags">
+                        <span class="news-tag">#Takım</span>
+                        <span class="news-tag">#YeniYetenekler</span>
+                        <span class="news-tag">#GelecekProjeler</span>
+                        <span class="news-tag">#HEXAGES</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 hexagesgames@gmail.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
