@@ -48,37 +48,6 @@
             padding: 0.5rem 1.5rem;
         }
         
-        /* Mobil menü için ek CSS */
-        .mobile-menu {
-            display: none;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-        }
-        
-        .mobile-menu.active {
-            max-height: 400px;
-        }
-        
-        .mobile-link {
-            display: block;
-            padding: 1rem 2rem;
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .mobile-link:hover,
-        .mobile-link.active {
-            color: #fff;
-            background-color: #1f2937;
-            transform: translateX(0.5rem);
-        }
-        
         /* Sosyal linkler için ek CSS */
         .social-links {
             display: flex;
@@ -122,6 +91,149 @@
         .footer-links a:hover {
             color: #fff;
         }
+        
+        /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1000;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+
+        .hamburger {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #9ca3af;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:before,
+        .hamburger:after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: #9ca3af;
+            transition: all 0.3s ease;
+            left: 0;
+        }
+
+        .hamburger:before {
+            top: -8px;
+        }
+
+        .hamburger:after {
+            bottom: -8px;
+        }
+
+        /* Hamburger animasyonu */
+        .mobile-menu-btn.active .hamburger {
+            background-color: transparent;
+        }
+
+        .mobile-menu-btn.active .hamburger:before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-btn.active .hamburger:after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+
+        /* Mobil menü container */
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgba(17, 24, 39, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(55, 65, 81, 0.5);
+            z-index: 999;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+
+        /* Mobil menü linkleri */
+        .mobile-link {
+            display: block;
+            padding: 1.25rem 2rem;
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-link:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-link:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-link:hover,
+        .mobile-link.active {
+            color: #fff;
+            background-color: rgba(31, 41, 55, 0.5);
+            padding-left: 2.5rem;
+        }
+
+        .mobile-link:hover:before,
+        .mobile-link.active:before {
+            transform: translateX(0);
+        }
+
+        /* Responsive tasarım */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+            
+            /* Navbar yüksekliği mobile uyumlu */
+            .nav-container {
+                min-height: 70px;
+            }
+        }
+
+        /* Ekstra güvenlik */
+        body.menu-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -138,7 +250,7 @@
                 <a href="news.html" class="nav-link active">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <span class="hamburger"></span>
             </button>
         </div>
@@ -166,7 +278,7 @@
                         <span class="news-category">Duyuru</span>
                     </div>
                     <div class="featured-news-text">
-                        <h2>6 KASIM 2025 2025</h2>
+                        <h2>6 KASIM 2025</h2>
                         <p class="news-date">GELİŞTİRMELER</p>
                         <p>Geri dönüş sonrası geliştirmeler...</p>
                         <a href="duyuru.html" class="read-more">Devamını Oku <span>→</span></a>
@@ -308,7 +420,75 @@
         </div>
     </footer>
 
+    <!-- HAMBURGER MENÜ JAVASCRIPT (HTML'YE GÖMÜLMÜŞ) -->
     <script>
+    // Hamburger menü toggle fonksiyonu
+    function toggleMobileMenu() {
+        console.log('Hamburger menüye tıklandı!');
+        
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        // Menüyü aç/kapat
+        mobileMenu.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+        
+        // Body scroll kontrolü
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+            console.log('Menü açıldı');
+        } else {
+            document.body.style.overflow = '';
+            console.log('Menü kapandı');
+        }
+    }
+    
+    // Sayfa yüklendiğinde çalışacak kod
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM yüklendi, hamburger menü hazırlanıyor...');
+        
+        // Hamburger butonuna click eventi ekle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            console.log('Hamburger butonuna event listener eklendi');
+        }
+        
+        // Mobil menü linklerine tıklayınca menüyü kapat
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Mobil linke tıklandı, menü kapanıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Pencere boyutu değişince mobil menüyü kapat
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                console.log('Desktop boyutuna geçildi, mobil menü kapatılıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+        
         // Navbar scroll efekti
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -318,18 +498,15 @@
                 navbar.classList.remove('scrolled');
             }
         });
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('active');
-        }
-
-        // Haber verilerini dinamik olarak yükleme (örnek)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Burada API'den haber verileri çekilebilir
-            console.log('Haber sayfası yüklendi');
-        });
+        
+        console.log('Hamburger menü sistemi hazır!');
+    });
+    
+    // Fonksiyonu global scope'a ekle
+    window.toggleMobileMenu = toggleMobileMenu;
     </script>
+    
+    <!-- ESKİ SCRIPT.JS DOSYASI -->
+    <script src="script.js"></script>
 </body>
 </html>
