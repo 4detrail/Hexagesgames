@@ -18,6 +18,7 @@
         height: 44px;
         align-items: center;
         justify-content: center;
+        margin-left: auto;
     }
 
     .hamburger {
@@ -51,7 +52,6 @@
     /* Hamburger animasyonu */
     .mobile-menu-btn.active .hamburger {
         background-color: transparent;
-        transform: rotate(180deg);
     }
 
     .mobile-menu-btn.active .hamburger:before {
@@ -66,8 +66,8 @@
 
     /* Mobil menü container */
     .mobile-menu {
-        position: fixed;
-        top: 70px; /* Navbar yüksekliği kadar */
+        position: absolute;
+        top: 100%;
         left: 0;
         right: 0;
         background-color: rgba(17, 24, 39, 0.98);
@@ -79,6 +79,7 @@
         overflow: hidden;
         transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: block;
     }
 
     .mobile-menu.active {
@@ -136,10 +137,6 @@
         .nav-links {
             display: none !important;
         }
-
-        .mobile-menu {
-            display: block;
-        }
         
         /* Navbar yüksekliği mobile uyumlu */
         .nav-container {
@@ -167,7 +164,7 @@
                 <a href="news.html" class="nav-link">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <span class="hamburger"></span>
             </button>
         </div>
@@ -284,6 +281,93 @@
         </div>
     </footer>
 
+    <!-- HAMBURGER MENÜ JAVASCRIPT (HTML'YE GÖMÜLMÜŞ) -->
+    <script>
+    // Hamburger menü toggle fonksiyonu
+    function toggleMobileMenu() {
+        console.log('Hamburger menüye tıklandı!');
+        
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        // Menüyü aç/kapat
+        mobileMenu.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+        
+        // Body scroll kontrolü
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+            console.log('Menü açıldı');
+        } else {
+            document.body.style.overflow = '';
+            console.log('Menü kapandı');
+        }
+    }
+    
+    // Sayfa yüklendiğinde çalışacak kod
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM yüklendi, hamburger menü hazırlanıyor...');
+        
+        // Hamburger butonuna click eventi ekle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            console.log('Hamburger butonuna event listener eklendi');
+        }
+        
+        // Mobil menü linklerine tıklayınca menüyü kapat
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Mobil linke tıklandı, menü kapanıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Pencere boyutu değişince mobil menüyü kapat
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                console.log('Desktop boyutuna geçildi, mobil menü kapatılıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Navbar scroll efekti
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        console.log('Hamburger menü sistemi hazır!');
+    });
+    
+    // Fonksiyonu global scope'a ekle
+    window.toggleMobileMenu = toggleMobileMenu;
+    </script>
+    
+    <!-- ESKİ SCRIPT.JS DOSYASI -->
     <script src="script.js"></script>
 </body>
 </html>
