@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yeni Yetenekler Ailemize Katıldı - HEXAGES GAMES</title>
+    <title>Yeni Başlangıç: Tüm Projeler Restartlanıyor! - HEXAGES GAMES</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .news-detail-container {
@@ -50,41 +50,68 @@
             line-height: 1.8;
             font-size: 1.125rem;
         }
-        .members-grid {
+        .highlight-box {
+            background: linear-gradient(to right, #1e3a8a, #1e40af);
+            border-left: 4px solid #60a5fa;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .update-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 3rem 0;
         }
-        .member-card {
+        .update-card {
             background: linear-gradient(to bottom, #111827, #000);
             border: 1px solid #374151;
             border-radius: 1rem;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
         }
-        .member-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+        .update-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
-        .member-info h3 {
+        .update-info h3 {
             font-size: 1.25rem;
             font-weight: bold;
             color: #fff;
             margin-bottom: 0.5rem;
         }
-        .member-role {
+        .update-info p {
             color: #9ca3af;
             font-size: 0.875rem;
+        }
+        .timeline {
+            margin: 3rem 0;
+            position: relative;
+        }
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-date {
+            min-width: 120px;
+            color: #60a5fa;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        .timeline-content {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .timeline-content:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #60a5fa;
         }
         .news-footer {
             margin-top: 3rem;
@@ -105,7 +132,7 @@
             border: 1px solid #374151;
         }
         @media (max-width: 768px) {
-            .members-grid {
+            .update-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -132,48 +159,106 @@
         <div class="container">
             <div class="news-detail-container">
                 <div class="news-meta">
-                    <span class="news-category-badge">Takım</span>
-                    <span>20 Ocak 2024</span>
+                    <span class="news-category-badge" style="background: linear-gradient(135deg, #1e3a8a, #1e40af);">ÖNEMLİ DUYURU</span>
+                    <span>21 Ekim 2025</span>
                 </div>
-                <h1 class="news-detail-title">Yeni Yetenekler Ailemize Katıldı!</h1>
+                <h1 class="news-detail-title">YENİ BAŞLANGIÇ: Tüm Projeler Restartlanıyor!</h1>
 
                 <div class="news-featured-image">
-                    <img src="welcome1.png" alt="Takım Çalışması">
+                    <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Yeni Başlangıç">
                 </div>
 
                 <div class="news-content">
-                    <p><strong>HEXAGES GAMES ailesi büyüyor!</strong> Hikaye ve senaryo ekibimize iki yıldız yetenek katıldı: <strong>Muhamet Geçer</strong> ve <strong>Bedirhan Odabaşı</strong>! 🚀</p>
+                    <div class="highlight-box">
+                        <h2 style="color: white; margin-bottom: 1rem;">🎯 ÖZET</h2>
+                        <p>America GDC (Game Developers Conference) konferansından dönen HEXAGES GAMES ekibi, edindiği yeni teknolojiler ve network sayesinde tüm geliştirme süreçlerini baştan tasarlıyor. Sunucular yenilendi, altyapı güçlendirildi ve tüm oyun projeleri tekrar başlatılıyor!</p>
+                    </div>
 
-                    <div class="members-grid">
-                        <div class="member-card">
-                            <div class="member-avatar">MG</div>
-                            <div class="member-info">
-                                <h3>Muhamet Geçer</h3>
-                                <div class="member-role">Hikaye Yazarı</div>
+                    <h2>🏆 Konferans Kazanımları</h2>
+                    <p>America GDC konferansında, oyun geliştirme dünyasının en son trendlerini, teknolojilerini ve metodolojilerini yakından inceledik. Unity ve Unreal Engine'in yeni sürümleri, yapay zeka destekli geliştirme araçları ve modern sunucu mimarileri konusunda değerli bilgiler edindik.</p>
+
+                    <h2>⚡ Teknolojik Gelişmeler</h2>
+                    
+                    <div class="update-grid">
+                        <div class="update-card">
+                            <div class="update-icon">🚀</div>
+                            <div class="update-info">
+                                <h3>Sunucu Altyapısı</h3>
+                                <p>Yüksek performanslı sunuculara geçiş yapıldı. Daha hızlı, daha güvenli!</p>
                             </div>
                         </div>
-                        <div class="member-card">
-                            <div class="member-avatar">BO</div>
-                            <div class="member-info">
-                                <h3>Bedirhan Odabaşı</h3>
-                                <div class="member-role">Senaryo yazarı</div>
+                        <div class="update-card">
+                            <div class="update-icon">🛠️</div>
+                            <div class="update-info">
+                                <h3>Geliştirme Araçları</h3>
+                                <p>Unity 2023 LTS ve Unreal Engine 5.3'e geçiş tamamlandı.</p>
+                            </div>
+                        </div>
+                        <div class="update-card">
+                            <div class="update-icon">🤖</div>
+                            <div class="update-info">
+                                <h3>AI Entegrasyonu</h3>
+                                <p>Yapay zeka destekli geliştirme araçları eklendi.</p>
+                            </div>
+                        </div>
+                        <div class="update-card">
+                            <div class="update-icon">🔧</div>
+                            <div class="update-info">
+                                <h3>CI/CD Pipeline</h3>
+                                <p>Otomatik test ve dağıtım sistemleri kuruldu.</p>
                             </div>
                         </div>
                     </div>
 
-                    <p>İki yetenekli arkadaşımız, gelecek projelerimizin hikaye dünyasını şekillendirecek. <strong>Yeni kapılar açılıyor, yeni evrenler keşfediliyor!</strong> 🌌</p>
+                    <h2>🔄 Proje Güncellemeleri</h2>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">5 kasım 2025</div>
+                            <div class="timeline-content">
+                                <h3>Tüm Projeler Restart</h3>
+                                <p>Tüm aktif oyun projeleri yeni teknolojilerle baştan tasarlanıyor.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">6 kasım 2025</div>
+                            <div class="timeline-content">
+                                <h3>Sunucu Migrasyonu</h3>
+                                <p>Yeni sunucu altyapısına geçiş tamamlandı.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">7 kasım 2025</div>
+                            <div class="timeline-content">
+                                <h3>Konferans Dönüşü</h3>
+                                <p>America GDC konferansından dönüş ve bilgi paylaşım toplantıları.</p>
+                            </div>
 
-                    <p><strong>Muhamet ve Bedirhan'a HEXAGES GAMES ailesine hoş geldin diyor, başarılarının devamını diliyoruz! </strong>🎉</p>
+                    <h2>🚀 Gelecek Planları</h2>
+                    <p>Önümüzdeki 6 ay içinde:</p>
+                    <ol style="padding-left: 1.5rem; margin: 1.5rem 0;">
+                        <li>Tüm projelerin yeni teknolojilere geçişi tamamlanacak</li>
+                        <li>2 yeni oyun projesi duyurulacak</li>
+                        <li>Beta test programları başlatılacak</li>
+                        <li>Topluluk geri bildirim sistemleri kurulacak</li>
+                    </ol>
 
-                    <p>Yeni projelerimiz için geri sayım başladı. Takipte kalın! ⏳</p>
+                    <div style="background: linear-gradient(135deg, #111827, #000); padding: 2rem; border-radius: 1rem; margin: 2rem 0; border: 1px solid #374151;">
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">💡 Neden Restart?</h3>
+                        <p>GDC konferansında gördük ki, oyun geliştirme teknolojileri çok hızlı ilerliyor. Mevcut projelerimizi eski teknolojilerle devam ettirmek yerine, en son araç ve metodolojilerle baştan başlamak, uzun vadede çok daha verimli ve kaliteli ürünler ortaya çıkaracak.</p>
+                    </div>
+
+                    <p><strong>Tüm HEXAGES GAMES takımı olarak, bu yeni başlangıçtan büyük bir heyecan duyuyoruz. Yolculuğumuza katıldığınız için teşekkür ederiz! 🎮✨</strong></p>
                 </div>
 
                 <div class="news-footer">
                     <div class="news-tags">
-                        <span class="news-tag">#Takım</span>
-                        <span class="news-tag">#YeniYetenekler</span>
-                        <span class="news-tag">#GelecekProjeler</span>
-                        <span class="news-tag">#HEXAGES</span>
+                        <span class="news-tag">#YeniBaşlangıç</span>
+                        <span class="news-tag">#GDC2025</span>
+                        <span class="news-tag">#TeknolojiGüncellemesi</span>
+                        <span class="news-tag">#ProjeRestart</span>
+                        <span class="news-tag">#HEXAGESGames</span>
+                        <span class="news-tag">#OyunGeliştirme</span>
                     </div>
                 </div>
             </div>
@@ -209,7 +294,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
             </div>
         </div>
     </footer>
