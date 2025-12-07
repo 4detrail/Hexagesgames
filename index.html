@@ -5,6 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEXAGES GAMES - Ana Sayfa</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+    /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1000;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hamburger {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #9ca3af;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger:before,
+    .hamburger:after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background-color: #9ca3af;
+        transition: all 0.3s ease;
+        left: 0;
+    }
+
+    .hamburger:before {
+        top: -8px;
+    }
+
+    .hamburger:after {
+        bottom: -8px;
+    }
+
+    /* Hamburger animasyonu */
+    .mobile-menu-btn.active .hamburger {
+        background-color: transparent;
+        transform: rotate(180deg);
+    }
+
+    .mobile-menu-btn.active .hamburger:before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .mobile-menu-btn.active .hamburger:after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+
+    /* Mobil menü container */
+    .mobile-menu {
+        position: fixed;
+        top: 70px; /* Navbar yüksekliği kadar */
+        left: 0;
+        right: 0;
+        background-color: rgba(17, 24, 39, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(55, 65, 81, 0.5);
+        z-index: 999;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+
+    /* Mobil menü linkleri */
+    .mobile-link {
+        display: block;
+        padding: 1.25rem 2rem;
+        color: #d1d5db;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mobile-link:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-link:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+        color: #fff;
+        background-color: rgba(31, 41, 55, 0.5);
+        padding-left: 2.5rem;
+    }
+
+    .mobile-link:hover:before,
+    .mobile-link.active:before {
+        transform: translateX(0);
+    }
+
+    /* Responsive tasarım */
+    @media (max-width: 768px) {
+        .mobile-menu-btn {
+            display: flex;
+        }
+
+        .nav-links {
+            display: none !important;
+        }
+
+        .mobile-menu {
+            display: block;
+        }
+        
+        /* Navbar yüksekliği mobile uyumlu */
+        .nav-container {
+            min-height: 70px;
+        }
+    }
+
+    /* Ekstra güvenlik */
+    body.menu-open {
+        overflow: hidden;
+    }
+</style>
 </head>
 <body>
     <nav id="navbar">
