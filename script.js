@@ -128,6 +128,72 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString('tr-TR', options);
 }
 
+// ==================== HAMBURGER MENÜ SİSTEMİ ====================
+
+// Hamburger menü toggle fonksiyonu
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    
+    // Menüyü aç/kapat
+    mobileMenu.classList.toggle('active');
+    
+    // Buton animasyonu
+    if (mobileMenuBtn) {
+        mobileMenuBtn.classList.toggle('active');
+    }
+    
+    // Body scroll'u kilitle/kilidi aç
+    if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+// Mobil menü linklerine tıklayınca menüyü kapat
+function setupMobileMenuLinks() {
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            // Menüyü kapat
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+            }
+            
+            // Buton animasyonunu kaldır
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.remove('active');
+            }
+            
+            // Body scroll'u aktif et
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// Pencere boyutu değişince mobil menüyü kontrol et
+function handleWindowResize() {
+    window.addEventListener('resize', () => {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
+        // Desktop boyutuna geçince menüyü kapat
+        if (window.innerWidth > 768) {
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+            }
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+    });
+}
+
 // Navbar Scroll Effect
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
@@ -138,11 +204,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile Menu Toggle
-function toggleMobileMenu() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.classList.toggle('active');
-}
+// ==================== SAYFA YÜKLEME FONKSİYONLARI ====================
 
 // Load Featured Games (Home Page)
 function loadFeaturedGames() {
@@ -278,12 +340,28 @@ function handleContactSubmit(event) {
     }, 5000);
 }
 
+// ==================== UYGULAMA BAŞLATMA ====================
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Sayfa yükleme fonksiyonları
     loadFeaturedGames();
     loadAllGames();
     loadDevelopers();
     loadNews();
+    
+    // Hamburger menü sistemini kur
+    setupMobileMenuLinks();
+    handleWindowResize();
+    
+    // Contact form submit eventini dinle
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactSubmit);
+    }
 });
+
+// Global olarak erişilebilir yap
+window.toggleMobileMenu = toggleMobileMenu;
 EOFJS
-echo "JavaScript file created"
+echo "JavaScript file updated with complete hamburger menu system"
