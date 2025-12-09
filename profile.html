@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - HEXAGES GAMES</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
+    
+    <style>
+    /* PROFİL SAYFASI ÖZEL STİLLER */
+    .profile-hero {
+        position: relative;
+        min-height: 400px;
+        background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(3, 7, 18, 0.95));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding-top: 100px;
+    }
+    
+    .profile-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="%233b82f6" opacity="0.1" d="M0,500L250,400L500,600L750,300L1000,500L1000,1000L0,1000Z"/></svg>') bottom center no-repeat;
+        background-size: 100% auto;
+        opacity: 0.3;
+    }
+    
+    .profile-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 4rem;
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .profile-avatar-container {
+        position: relative;
+    }
+    
+    .profile-avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        border: 4px solid #3b82f6;
+        object-fit: cover;
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .profile-avatar:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 60px rgba(59, 130, 246, 0.5);
+    }
+    
+    .avatar-badge {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        border: 3px solid #111827;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    
+    .profile-info {
+        text-align: center;
+    }
+    
+    .profile-name {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #60a5fa, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+    }
+    
+    .profile-email {
+        color: #9ca3af;
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .profile-meta {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .meta-item {
+        text-align: center;
+    }
+    
+    .meta-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #3b82f6;
+        display: block;
+    }
+    
+    .meta-label {
+        font-size: 0.875rem;
+        color: #9ca3af;
+    }
+    
+    /* PROGRESS BARS */
+    .progress-section {
+        margin-bottom: 4rem;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .progress-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .progress-card {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(55, 65, 81, 0.3);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .progress-card:hover {
+        border-color: #3b82f6;
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+    }
+    
+    .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .progress-title {
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .progress-value {
+        font-weight: 700;
+        color: #3b82f6;
+    }
+    
+    .progress-bar {
+        height: 8px;
+        background: rgba(55, 65, 81, 0.3);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        border-radius: 4px;
+        position: relative;
+        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .progress-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        color: #9ca3af;
+    }
+    
+    /* ACHIEVEMENTS */
+    .achievements-section {
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .achievement-card {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(55, 65, 81, 0.3);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .achievement-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .achievement-card:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .achievement-card:hover {
+        transform: translateY(-5px);
+        border-color: #3b82f6;
+    }
+    
+    .achievement-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+    
+    .achievement-info {
+        flex: 1;
+    }
+    
+    .achievement-name {
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.25rem;
+    }
+    
+    .achievement-desc {
+        font-size: 0.875rem;
+        color: #9ca3af;
+    }
+    
+    .achievement-date {
+        font-size: 0.75rem;
+        color: #6b7280;
+        margin-top: 0.5rem;
+    }
+    
+    .achievement-locked {
+        opacity: 0.5;
+    }
+    
+    .achievement-locked .achievement-icon {
+        background: #374151;
+    }
+    
+    /* RECENT ACTIVITY */
+    .activity-section {
+        animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    
+    .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .activity-item {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(55, 65, 81, 0.3);
+        border-radius: 1rem;
+        padding: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .activity-item:hover {
+        border-color: #3b82f6;
+        transform: translateX(10px);
+    }
+    
+    .activity-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #3b82f6;
+    }
+    
+    .activity-content {
+        flex: 1;
+    }
+    
+    .activity-title {
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.25rem;
+    }
+    
+    .activity-desc {
+        font-size: 0.875rem;
+        color: #9ca3af;
+    }
+    
+    .activity-time {
+        font-size: 0.75rem;
+        color: #6b7280;
+        white-space: nowrap;
+    }
+    
+    /* EDIT PROFILE BUTTON */
+    .edit-profile-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: #3b82f6;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .edit-profile-btn:hover {
+        background: rgba(59, 130, 246, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .profile-hero {
+            min-height: 300px;
+            padding-top: 80px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+        }
+        
+        .avatar-badge {
+            width: 36px;
+            height: 36px;
+            font-size: 1rem;
+        }
+        
+        .profile-name {
+            font-size: 2rem;
+        }
+        
+        .profile-meta {
+            gap: 1.5rem;
+        }
+        
+        .meta-value {
+            font-size: 1.25rem;
+        }
+        
+        .edit-profile-btn {
+            position: relative;
+            top: 0;
+            right: 0;
+            margin-top: 1rem;
+        }
+        
+        .progress-grid,
+        .achievements-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    /* GLOW EFFECT */
+    .glow-effect {
+        position: relative;
+    }
+    
+    .glow-effect::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+        border-radius: inherit;
+        padding: 2px;
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .glow-effect:hover::before {
+        opacity: 1;
+        animation: rotate 2s linear infinite;
+    }
+    
+    @keyframes rotate {
+        100% { transform: rotate(360deg); }
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation (Ana sayfadan kopyala) -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                <span>HEXAGES GAMES</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="developers.html" class="nav-link">Geliştiriciler</a>
+                <a href="news.html" class="nav-link">Haberler</a>
+                <a href="contact.html" class="nav-link">İletişim</a>
+                <a href="profile.html" class="nav-link active">Profil</a>
+                
+                <!-- Auth Section -->
+                <div class="auth-section">
+                    <button id="authBtn" class="auth-btn">
+                        <span>👤</span>
+                        <span>Giriş Yap</span>
+                    </button>
+                    <button id="profileBtn" class="profile-btn" style="display: none;">
+                        <span>👤</span>
+                        <span id="profileBtnText">Profil</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-auth">
+                <button id="mobileAuthBtn" class="auth-btn">👤</button>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="index.html" class="mobile-link">Ana Sayfa</a>
+            <a href="games.html" class="mobile-link">Oyunlar</a>
+            <a href="developers.html" class="mobile-link">Geliştiriciler</a>
+            <a href="news.html" class="mobile-link">Haberler</a>
+            <a href="contact.html" class="mobile-link">İletişim</a>
+            <a href="profile.html" class="mobile-link active">Profil</a>
+            <div class="mobile-auth-link">
+                <button id="mobileAuthLink" class="mobile-link auth-btn" style="border: none; background: none; width: 100%; text-align: left;">
+                    <span>👤</span> Giriş Yap
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Hero Section -->
+    <section class="profile-hero">
+        <div class="profile-container">
+            <button class="edit-profile-btn" id="editProfileBtn">
+                <span>✏️</span>
+                <span>Profili Düzenle</span>
+            </button>
+            
+            <div class="profile-header">
+                <div class="profile-avatar-container">
+                    <img id="profileAvatar" class="profile-avatar" src="" alt="Profil Fotoğrafı">
+                    <div class="avatar-badge glow-effect">🏆</div>
+                </div>
+                
+                <div class="profile-info">
+                    <h1 id="profileName" class="profile-name">Kullanıcı Adı</h1>
+                    <p id="profileEmail" class="profile-email">kullanici@email.com</p>
+                    
+                    <div class="profile-meta">
+                        <div class="meta-item">
+                            <span id="memberSince" class="meta-value">01.01.2025</span>
+                            <span class="meta-label">Üyelik Tarihi</span>
+                        </div>
+                        <div class="meta-item">
+                            <span id="totalGames" class="meta-value">5</span>
+                            <span class="meta-label">Oyun</span>
+                        </div>
+                        <div class="meta-item">
+                            <span id="totalHours" class="meta-value">42</span>
+                            <span class="meta-label">Saat</span>
+                        </div>
+                        <div class="meta-item">
+                            <span id="playerLevel" class="meta-value">7</span>
+                            <span class="meta-label">Seviye</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="profile-container">
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <h2 class="section-title">
+                <span>📈</span>
+                İlerleme Durumun
+            </h2>
+            
+            <div class="progress-grid">
+                <div class="progress-card glow-effect">
+                    <div class="progress-header">
+                        <h3 class="progress-title">
+                            <span>🎮</span>
+                            Oyun Tamamlama
+                        </h3>
+                        <span id="completionRate" class="progress-value">65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="completionBar" class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>0%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+                
+                <div class="progress-card glow-effect">
+                    <div class="progress-header">
+                        <h3 class="progress-title">
+                            <span>🏆</span>
+                            Başarım Oranı
+                        </h3>
+                        <span id="achievementRate" class="progress-value">42%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="achievementBar" class="progress-fill" style="width: 42%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>0/50</span>
+                        <span>50/50</span>
+                    </div>
+                </div>
+                
+                <div class="progress-card glow-effect">
+                    <div class="progress-header">
+                        <h3 class="progress-title">
+                            <span>⏱️</span>
+                            Oyun Süresi
+                        </h3>
+                        <span id="playTime" class="progress-value">42h</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="playTimeBar" class="progress-fill" style="width: 28%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>0h</span>
+                        <span>150h</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="achievements-section">
+            <h2 class="section-title">
+                <span>🏆</span>
+                Başarımlar
+            </h2>
+            
+            <div class="achievements-grid" id="achievementsList">
+                <!-- Başarımlar buraya JavaScript ile eklenecek -->
+            </div>
+        </section>
+
+        <!-- Recent Activity Section -->
+        <section class="activity-section">
+            <h2 class="section-title">
+                <span>🕒</span>
+                Son Aktiviteler
+            </h2>
+            
+            <div class="activity-list" id="activityList">
+                <!-- Aktiviteler buraya JavaScript ile eklenecek -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer (Ana sayfadan aynı) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz. Tutkulu ekibimizle geleceğin oyunlarını tasarlıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="https://x.com/hexages_games" class="social-link">🐦</a>
+                        <a href="https://www.instagram.com/hexagesgames" class="social-link">📷</a>
+                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link">📺</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                        <li><a href="profile.html">Profil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@hexagesgames.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Gizlilik Politikası</a>
+                    <a href="terms.html">Kullanım Koşulları</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROFILE PAGE JAVASCRIPT -->
+    <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAroBTexiXeaJGYqMiIIM5POdN2JUuigvo",
+        authDomain: "hexagesgames-f8fe2.firebaseapp.com",
+        projectId: "hexagesgames-f8fe2",
+        storageBucket: "hexagesgames-f8fe2.firebasestorage.app",
+        messagingSenderId: "469976981538",
+        appId: "1:469976981538:web:c5b49c15b0206c7fb76a7b",
+        measurementId: "G-6E33GJ0ZB0"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const profileAvatar = document.getElementById('profileAvatar');
+    const profileName = document.getElementById('profileName');
+    const profileEmail = document.getElementById('profileEmail');
+    const memberSince = document.getElementById('memberSince');
+    const totalGames = document.getElementById('totalGames');
+    const totalHours = document.getElementById('totalHours');
+    const playerLevel = document.getElementById('playerLevel');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const achievementsList = document.getElementById('achievementsList');
+    const activityList = document.getElementById('activityList');
+
+    // Örnek başarımlar
+    const achievements = [
+        { id: 1, name: "İlk Adım", desc: "İlk giriş yap", icon: "👣", unlocked: true, date: "2025-01-15" },
+        { id: 2, name: "Beta Kaşifi", desc: "İlk beta testine katıl", icon: "🔍", unlocked: true, date: "2025-01-20" },
+        { id: 3, name: "Oyun Sever", desc: "5 farklı oyun dene", icon: "🎮", unlocked: true, date: "2025-02-01" },
+        { id: 4, name: "Usta Oynatıcı", desc: "50 saat oyun oyna", icon: "⏱️", unlocked: false },
+        { id: 5, name: "Koleksiyoncu", desc: "10 başarım kazan", icon: "🏆", unlocked: false },
+        { id: 6, name: "Sosyal Kelebek", desc: "Arkadaş ekle", icon: "👥", unlocked: false },
+        { id: 7, name: "Gece Kuşu", desc: "Gece 2'den sonra oyna", icon: "🌙", unlocked: true, date: "2025-02-10" },
+        { id: 8, name: "Hızlı Tamamlayıcı", desc: "Bir oyunu 24 saatte bitir", icon: "⚡", unlocked: false }
+    ];
+
+    // Örnek aktiviteler
+    const activities = [
+        { icon: "🎮", title: "Beta Testine Katıldın", desc: "Cyber Hex oyununun beta testine katıldın", time: "2 saat önce" },
+        { icon: "🏆", title: "Yeni Başarım Kazandın", desc: "Beta Kaşifi başarımını kazandın", time: "1 gün önce" },
+        { icon: "⭐", title: "Oyun Puanladın", desc: "Neon Run oyununa 5 yıldız verdin", time: "2 gün önce" },
+        { icon: "👥", title: "Arkadaş Eklendi", desc: "Yeni bir arkadaş ekledin", time: "3 gün önce" },
+        { icon: "📊", title: "İstatistik Güncellendi", desc: "Oyun süren 42 saate ulaştı", time: "1 hafta önce" }
+    ];
+
+    // Auth State Listener
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            updateProfile(user);
+            console.log('✅ Profil sayfası yüklendi:', user.email);
+        } else {
+            // Kullanıcı giriş yapmamışsa ana sayfaya yönlendir
+            window.location.href = 'index.html';
+        }
+    });
+
+    // Profil bilgilerini güncelle
+    function updateProfile(user) {
+        const displayName = user.displayName || 'Kullanıcı';
+        const email = user.email || '';
+        const photoURL = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=3b82f6&color=fff`;
+        const creationTime = user.metadata.creationTime;
+        
+        // Profil bilgilerini güncelle
+        profileAvatar.src = photoURL;
+        profileName.textContent = displayName;
+        profileEmail.textContent = email;
+        
+        // Üyelik tarihini formatla
+        if (creationTime) {
+            const date = new Date(creationTime);
+            memberSince.textContent = date.toLocaleDateString('tr-TR');
+        }
+        
+        // Rastgele istatistikler (gerçek uygulamada Firebase'den çekilecek)
+        const games = Math.floor(Math.random() * 8) + 1;
+        const hours = Math.floor(Math.random() * 100) + 10;
+        const level = Math.floor(hours / 10) + 1;
+        
+        totalGames.textContent = games;
+        totalHours.textContent = hours;
+        playerLevel.textContent = level;
+        
+        // Progress bar değerlerini güncelle
+        updateProgressBars(games, hours, level);
+        
+        // Başarımları yükle
+        loadAchievements();
+        
+        // Aktiviteleri yükle
+        loadActivities();
+    }
+
+    // Progress bar'ları güncelle
+    function updateProgressBars(games, hours, level) {
+        const completionRate = Math.min(100, Math.floor((games / 8) * 100));
+        const achievementRate = Math.floor((achievements.filter(a => a.unlocked).length / achievements.length) * 100);
+        const playTimePercent = Math.min(100, Math.floor((hours / 150) * 100));
+        
+        // Değerleri güncelle
+        document.getElementById('completionRate').textContent = completionRate + '%';
+        document.getElementById('achievementRate').textContent = achievementRate + '%';
+        document.getElementById('playTime').textContent = hours + 'h';
+        
+        // Progress bar'ları animasyonla güncelle
+        setTimeout(() => {
+            document.getElementById('completionBar').style.width = completionRate + '%';
+            document.getElementById('achievementBar').style.width = achievementRate + '%';
+            document.getElementById('playTimeBar').style.width = playTimePercent + '%';
+        }, 500);
+    }
+
+    // Başarımları yükle
+    function loadAchievements() {
+        achievementsList.innerHTML = '';
+        
+        achievements.forEach(achievement => {
+            const achievementCard = document.createElement('div');
+            achievementCard.className = `achievement-card ${achievement.unlocked ? '' : 'achievement-locked'}`;
+            
+            achievementCard.innerHTML = `
+                <div class="achievement-icon">${achievement.icon}</div>
+                <div class="achievement-info">
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-desc">${achievement.desc}</div>
+                    ${achievement.unlocked && achievement.date ? 
+                        `<div class="achievement-date">${achievement.date}</div>` : ''}
+                </div>
+            `;
+            
+            achievementsList.appendChild(achievementCard);
+        });
+    }
+
+    // Aktiviteleri yükle
+    function loadActivities() {
+        activityList.innerHTML = '';
+        
+        activities.forEach(activity => {
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item';
+            
+            activityItem.innerHTML = `
+                <div class="activity-icon">${activity.icon}</div>
+                <div class="activity-content">
+                    <div class="activity-title">${activity.title}</div>
+                    <div class="activity-desc">${activity.desc}</div>
+                </div>
+                <div class="activity-time">${activity.time}</div>
+            `;
+            
+            activityList.appendChild(activityItem);
+        });
+    }
+
+    // Edit Profile Button
+    editProfileBtn.addEventListener('click', () => {
+        alert('Profili düzenleme özelliği yakında eklenecek!');
+    });
+
+    // Page Load Animation
+    document.addEventListener('DOMContentLoaded', () => {
+        // Animasyonları başlat
+        setTimeout(() => {
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                const currentWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = currentWidth;
+                }, 100);
+            });
+        }, 1000);
+    });
+
+    // Navbar toggle (ana sayfadan kopyala)
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+    
+    console.log('🎮 Profil sayfası hazır!');
+    </script>
+</body>
+</html>
