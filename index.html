@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEXAGES GAMES - Ana Sayfa</title>
+    
+    <!-- Ana CSS -->
     <link rel="stylesheet" href="styles.css">
     
     <!-- Firebase Scripts -->
@@ -11,6 +13,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
     
+    <!-- HARİCİ CSS (HTML İÇİNE EKLENEN STİLLER) -->
     <style>
     /* AUTH STYLES */
     .auth-section {
@@ -400,10 +403,132 @@
         font-size: 0.875rem;
     }
     
-    /* MOBILE */
+    /* HAMBURGER MENÜ CSS */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1000;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    .hamburger {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #9ca3af;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger:before,
+    .hamburger:after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background-color: #9ca3af;
+        transition: all 0.3s ease;
+        left: 0;
+    }
+
+    .hamburger:before {
+        top: -8px;
+    }
+
+    .hamburger:after {
+        bottom: -8px;
+    }
+
+    /* Hamburger animasyonu */
+    .mobile-menu-btn.active .hamburger {
+        background-color: transparent;
+    }
+
+    .mobile-menu-btn.active .hamburger:before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .mobile-menu-btn.active .hamburger:after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+
+    /* Mobil menü container */
+    .mobile-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(17, 24, 39, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(55, 65, 81, 0.5);
+        z-index: 999;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: block;
+    }
+
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+
+    /* Mobil menü linkleri */
+    .mobile-link {
+        display: block;
+        padding: 1.25rem 2rem;
+        color: #d1d5db;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mobile-link:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-link:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+        color: #fff;
+        background-color: rgba(31, 41, 55, 0.5);
+        padding-left: 2.5rem;
+    }
+
+    .mobile-link:hover:before,
+    .mobile-link.active:before {
+        transform: translateX(0);
+    }
+
+    /* MOBILE AUTH */
     @media (max-width: 768px) {
         .auth-section {
-            display: none;
+            display: none !important;
         }
         
         .mobile-auth {
@@ -413,10 +538,28 @@
         .user-name {
             max-width: 80px;
         }
+        
+        .mobile-menu-btn {
+            display: flex;
+        }
+
+        .nav-links {
+            display: none !important;
+        }
+        
+        /* Navbar yüksekliği mobile uyumlu */
+        .nav-container {
+            min-height: 70px;
+        }
     }
     
     .mobile-auth {
         display: none;
+    }
+    
+    /* Ekstra güvenlik */
+    body.menu-open {
+        overflow: hidden;
     }
     </style>
 </head>
@@ -580,10 +723,114 @@
         </div>
     </nav>
 
-    <!-- ... (site içeriği aynı) ... -->
+    <!-- ANA İÇERİK (İKİNCİ HTML'DEN ALINDI) -->
+    <section class="hero">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="https://customer-assets.emergentagent.com/job_golden-hex-games/artifacts/yuep7m61_WhatsApp%20Video%202025-10-02%20saat%2020.17.01_99fbc83e.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="hexagesgames.png" alt="HEXAGES GAMES" class="hero-logo">
+            <h1 class="hero-title">HEXAGES GAMES</h1>
+            <p class="hero-subtitle">Geleceğin Oyunlarını Bugünden Yaratıyoruz</p>
+            <p class="hero-description">Yenilikçi tasarımlar, etkileyici hikayeler ve unutulmaz oyun deneyimleri ile oyun dünyasında iz bırakıyoruz.</p>
+            <div class="hero-buttons">
+                <a href="games.html" class="btn btn-primary">Oyunlarımızı Keşfet →</a>
+                <a href="contact.html" class="btn btn-secondary">Bizimle İletişime Geç</a>
+            </div>
+        </div>
+        <br>
+        <div class="scroll-indicator">
+            <br>
+            <div class="mouse"></div>
+        </div>
+    </section>
 
-    <!-- FIREBASE AUTH -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Neden HEXAGES GAMES?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>İnovatif Oyunlar</h3>
+                    <p>Benzersiz oyun mekaniği ve hikaye anlatımı</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Tutkulu Ekip</h3>
+                    <p>Deneyimli ve yaratıcı geliştiriciler</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Sürekli Büyüme</h3>
+                    <p>Her gün daha iyiye giden teknoloji ve içerik</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Kaliteli İçerik</h3>
+                    <p>AAA kalitesinde oyun deneyimleri</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Öne Çıkan Oyunlar</h2>
+                <a href="games.html" class="view-all">Tümünü Gör →</a>
+            </div>
+            <div class="games-grid" id="featuredGames"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="hexagesgames.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz. Tutkulu ekibimizle geleceğin oyunlarını tasarlıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="https://x.com/hexages_games" class="social-link">🐦</a>
+                        <a href="https://www.instagram.com/hexagesgames" class="social-link">📷</a>
+                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link">📺</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@hexagesgames.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Gizlilik Politikası</a>
+                    <a href="terms.html">Kullanım Koşulları</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TÜM JAVASCRIPT KODLARI -->
     <script>
+    // FIREBASE AUTH SİSTEMİ
     // Firebase Config
     const firebaseConfig = {
         apiKey: "AIzaSyAroBTexiXeaJGYqMiIIM5POdN2JUuigvo",
@@ -600,7 +847,7 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // DOM Elements
+    // DOM Elements - Auth
     const authModal = document.getElementById('authModal');
     const authTabs = document.querySelectorAll('.auth-tab');
     const loginForm = document.getElementById('loginForm');
@@ -620,6 +867,8 @@
     const logoutBtn = document.getElementById('logoutBtn');
     const achievementPopup = document.getElementById('achievementPopup');
     const achievementMessage = document.getElementById('achievementMessage');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    const mobileAuthLink = document.getElementById('mobileAuthLink');
 
     // Tab Switching
     authTabs.forEach(tab => {
@@ -769,9 +1018,11 @@
             
             userProfile.style.display = 'flex';
             authBtn.style.display = 'none';
+            if (mobileAuthBtn) mobileAuthBtn.style.display = 'none';
         } else {
             userProfile.style.display = 'none';
             authBtn.style.display = 'flex';
+            if (mobileAuthBtn) mobileAuthBtn.style.display = 'flex';
         }
     });
 
@@ -782,9 +1033,11 @@
     });
 
     // Toggle Dropdown
-    userProfile.addEventListener('click', () => {
-        userDropdown.classList.toggle('active');
-    });
+    if (userProfile) {
+        userProfile.addEventListener('click', () => {
+            userDropdown.classList.toggle('active');
+        });
+    }
 
     // Modal Functions
     function openAuthModal() {
@@ -798,12 +1051,14 @@
     }
 
     // Event Listeners
-    authBtn.addEventListener('click', openAuthModal);
-    authClose.addEventListener('click', closeAuthModal);
+    if (authBtn) authBtn.addEventListener('click', openAuthModal);
+    if (authClose) authClose.addEventListener('click', closeAuthModal);
+    if (mobileAuthBtn) mobileAuthBtn.addEventListener('click', openAuthModal);
+    if (mobileAuthLink) mobileAuthLink.addEventListener('click', openAuthModal);
 
     // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
-        if (!userProfile.contains(e.target) && !userDropdown.contains(e.target)) {
+        if (userProfile && userDropdown && !userProfile.contains(e.target) && !userDropdown.contains(e.target)) {
             userDropdown.classList.remove('active');
         }
     });
@@ -818,35 +1073,93 @@
         if (e.key === 'Escape') closeAuthModal();
     });
 
-    console.log('Firebase Auth hazır!');
-    </script>
-    
-    <!-- Hamburger JS -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+    // HAMBURGER MENÜ SİSTEMİ
+    function toggleMobileMenu() {
+        console.log('Hamburger menüye tıklandı!');
         
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        // Menüyü aç/kapat
+        mobileMenu.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+        
+        // Body scroll kontrolü
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+            console.log('Menü açıldı');
+        } else {
+            document.body.style.overflow = '';
+            console.log('Menü kapandı');
+        }
+    }
+    
+    // Sayfa yüklendiğinde çalışacak kod
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM yüklendi, sistem hazırlanıyor...');
+        
+        // Hamburger butonuna click eventi ekle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-                mobileMenuBtn.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-            });
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            console.log('Hamburger butonuna event listener eklendi');
         }
         
-        // Navbar scroll
-        window.addEventListener('scroll', () => {
+        // Mobil menü linklerine tıklayınca menüyü kapat
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Mobil linke tıklandı, menü kapanıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Pencere boyutu değişince mobil menüyü kapat
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                console.log('Desktop boyutuna geçildi, mobil menü kapatılıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Navbar scroll efekti
+        window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 20) {
+            if (navbar && window.scrollY > 20) {
                 navbar.classList.add('scrolled');
-            } else {
+            } else if (navbar) {
                 navbar.classList.remove('scrolled');
             }
         });
+        
+        console.log('Tüm sistemler hazır!');
+        console.log('Firebase Auth: Çalışıyor');
+        console.log('Hamburger Menü: Çalışıyor');
     });
+    
+    // Fonksiyonu global scope'a ekle
+    window.toggleMobileMenu = toggleMobileMenu;
     </script>
     
+    <!-- ESKİ SCRIPT.JS DOSYASI (EĞER VARSA) -->
     <script src="script.js"></script>
 </body>
 </html>
