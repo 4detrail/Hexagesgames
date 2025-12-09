@@ -826,10 +826,22 @@
                 <a href="contact.html" class="nav-link">İletişim</a>
                 <a href="profile.html" class="nav-link">Profil</a>
                 <a href="beta.html" class="nav-link active">Beta Test</a>
-                
-                <!-- Auth Section -->
-
+            </div>
+            
+            <!-- Sağ taraf: Hamburger menü butonu ve minik profil -->
+            <div class="nav-right">
+                <div id="miniProfileBtn" class="mini-profile-btn" style="display: none;">
+                    <span>👤</span>
+                </div>
+                <button id="mobileMenuBtn" class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
+        
+        <!-- Mobil Menü -->
         <div id="mobileMenu" class="mobile-menu">
             <a href="index.html" class="mobile-link">Ana Sayfa</a>
             <a href="games.html" class="mobile-link">Oyunlar</a>
@@ -1076,9 +1088,10 @@
     const loadingSkeleton = document.getElementById('loadingSkeleton');
     const betaModal = document.getElementById('betaModal');
     const modalContent = document.getElementById('modalContent');
-    const authBtn = document.getElementById('authBtn');
-    const profileBtn = document.getElementById('profileBtn');
-    const profileBtnText = document.getElementById('profileBtnText');
+    const miniProfileBtn = document.getElementById('miniProfileBtn');
+    const mobileAuthLink = document.getElementById('mobileAuthLink');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
     // Örnek Beta Test Verileri
     const betaTests = [
@@ -1172,19 +1185,26 @@
 
     // Kullanıcı arayüzünü güncelle
     function updateUserUI(user) {
-        authBtn.style.display = 'none';
-        profileBtn.style.display = 'flex';
+        // Minik profil butonunu göster
+        miniProfileBtn.style.display = 'flex';
         
-        const displayName = user.displayName || user.email.split('@')[0];
-        const shortName = displayName.length > 8 ? displayName.substring(0, 8) + '...' : displayName;
-        profileBtnText.textContent = shortName;
+        // Mobil menüde giriş butonunu kullanıcı adıyla değiştir
+        if (mobileAuthLink) {
+            const displayName = user.displayName || user.email.split('@')[0];
+            const shortName = displayName.length > 8 ? displayName.substring(0, 8) + '...' : displayName;
+            mobileAuthLink.innerHTML = `<span>👤</span> ${shortName}`;
+        }
     }
 
     // UI'yi sıfırla
     function resetUI() {
-        authBtn.style.display = 'flex';
-        profileBtn.style.display = 'none';
-        profileBtnText.textContent = 'Profil';
+        // Minik profil butonunu gizle
+        miniProfileBtn.style.display = 'none';
+        
+        // Mobil menüdeki butonu tekrar "Giriş Yap" yap
+        if (mobileAuthLink) {
+            mobileAuthLink.innerHTML = `<span>👤</span> Giriş Yap`;
+        }
     }
 
     // Beta testlerini yükle
@@ -1489,7 +1509,6 @@
 
     // Auth modal'ını aç (ana sayfadan)
     function openAuthModal() {
-        // Bu fonksiyon ana sayfadan alınacak
         alert('Beta testlerine katılmak için önce giriş yapmalısınız!');
     }
 
@@ -1521,9 +1540,6 @@
     }
 
     // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
