@@ -4,837 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEXAGES GAMES - Ana Sayfa</title>
-    
-    <!-- Ana CSS -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-    /* RESET VE TEMEL STİLLER */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-        background-color: #030712;
-        color: #f9fafb;
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
-    
-    /* NAVBAR */
-    #navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: rgba(3, 7, 18, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
-        z-index: 1000;
-        padding: 0 1rem;
-    }
-    
-    #navbar.scrolled {
-        background: rgba(3, 7, 18, 0.98);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
-    
-    .nav-logo img {
-        height: 40px;
-        width: auto;
-    }
-    
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
-    
-    .nav-link {
-        color: #d1d5db;
-        text-decoration: none;
-        font-weight: 500;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.5rem;
-        transition: all 0.3s;
-    }
-    
-    .nav-link:hover {
-        color: #fff;
-        background: rgba(55, 65, 81, 0.3);
-    }
-    
-    .nav-link.active {
-        color: #3b82f6;
-        background: rgba(59, 130, 246, 0.1);
-    }
-    
-    /* HERO SECTION */
-    .hero {
-        position: relative;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        padding-top: 80px;
-    }
-    
-    .hero-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 1;
-    }
-    
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(to bottom, rgba(3, 7, 18, 0.8), rgba(3, 7, 18, 0.95));
-        z-index: 2;
-    }
-    
-    .hero-content {
-        position: relative;
-        z-index: 3;
-        text-align: center;
-        max-width: 800px;
-        padding: 2rem;
-    }
-    
-    .hero-logo {
-        height: 120px;
-        width: auto;
-        margin-bottom: 1.5rem;
-        animation: float 6s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-    
-    .hero-title {
-        font-size: 3.5rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #60a5fa, #8b5cf6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.5rem;
-        color: #60a5fa;
-        margin-bottom: 1.5rem;
-    }
-    
-    .hero-description {
-        font-size: 1.125rem;
-        color: #d1d5db;
-        margin-bottom: 2.5rem;
-        line-height: 1.8;
-    }
-    
-    .hero-buttons {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .btn {
-        padding: 1rem 2rem;
-        border-radius: 0.75rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .btn-primary {
-        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-        color: white;
-        border: none;
-    }
-    
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-    }
-    
-    .btn-secondary {
-        background: rgba(55, 65, 81, 0.5);
-        color: #d1d5db;
-        border: 1px solid rgba(139, 92, 246, 0.3);
-    }
-    
-    .btn-secondary:hover {
-        background: rgba(139, 92, 246, 0.1);
-        color: #fff;
-        border-color: #8b5cf6;
-    }
-    
-    /* FEATURES SECTION */
-    .features {
-        padding: 6rem 1rem;
-        background: #030712;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: 800;
-        margin-bottom: 3rem;
-        background: linear-gradient(135deg, #60a5fa, #8b5cf6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-    }
-    
-    .feature-card {
-        background: rgba(17, 24, 39, 0.6);
-        border: 1px solid rgba(55, 65, 81, 0.3);
-        border-radius: 1rem;
-        padding: 2rem;
-        text-align: center;
-        transition: all 0.3s;
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-5px);
-        border-color: #8b5cf6;
-        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
-    }
-    
-    .feature-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-    
-    .feature-card h3 {
-        font-size: 1.25rem;
-        margin-bottom: 0.75rem;
-        color: #fff;
-    }
-    
-    .feature-card p {
-        color: #9ca3af;
-    }
-    
-    /* GAMES SECTION */
-    .games-section {
-        padding: 6rem 1rem;
-        background: rgba(3, 7, 18, 0.9);
-    }
-    
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 3rem;
-    }
-    
-    .view-all {
-        color: #60a5fa;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s;
-    }
-    
-    .view-all:hover {
-        color: #3b82f6;
-    }
-    
-    .games-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-    
-    /* FOOTER */
-    .footer {
-        background: #030712;
-        border-top: 1px solid rgba(55, 65, 81, 0.3);
-        padding: 4rem 1rem 2rem;
-    }
-    
-    .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 3rem;
-        margin-bottom: 3rem;
-    }
-    
-    .footer-col-wide {
-        grid-column: span 2;
-    }
-    
-    .footer-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
-        color: #fff;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-    
-    .footer-logo img {
-        height: 50px;
-        width: auto;
-    }
-    
-    .footer-description {
-        color: #9ca3af;
-        margin-bottom: 1.5rem;
-        line-height: 1.8;
-    }
-    
-    .social-links {
-        display: flex;
-        gap: 0.75rem;
-    }
-    
-    .social-link {
-        width: 44px;
-        height: 44px;
-        background: rgba(17, 24, 39, 0.6);
-        border: 1px solid rgba(55, 65, 81, 0.3);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #9ca3af;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-    
-    .social-link:hover {
-        background: rgba(139, 92, 246, 0.1);
-        color: #8b5cf6;
-        border-color: #8b5cf6;
-        transform: translateY(-2px);
-    }
-    
-    .footer-col h3 {
-        font-size: 1.125rem;
-        margin-bottom: 1.5rem;
-        color: #fff;
-    }
-    
-    .footer-col ul {
-        list-style: none;
-    }
-    
-    .footer-col li {
-        margin-bottom: 0.75rem;
-        color: #9ca3af;
-    }
-    
-    .footer-col a {
-        color: #9ca3af;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    
-    .footer-col a:hover {
-        color: #60a5fa;
-    }
-    
-    .footer-bottom {
-        border-top: 1px solid rgba(55, 65, 81, 0.3);
-        padding-top: 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-    
-    .footer-bottom p {
-        color: #9ca3af;
-    }
-    
-    .footer-links {
-        display: flex;
-        gap: 1.5rem;
-    }
-    
-    .footer-links a {
-        color: #9ca3af;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    
-    .footer-links a:hover {
-        color: #60a5fa;
-    }
-    
-    /* SCROLL INDICATOR */
-    .scroll-indicator {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 3;
-        text-align: center;
-    }
-    
-    .mouse {
-        width: 30px;
-        height: 50px;
-        border: 2px solid #fff;
-        border-radius: 20px;
-        position: relative;
-        margin: 0 auto;
-    }
-    
-    .mouse::before {
-        content: '';
-        width: 4px;
-        height: 10px;
-        background: #fff;
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 2px;
-        animation: scroll 2s infinite;
-    }
-    
-    @keyframes scroll {
-        0% { transform: translate(-50%, 0); opacity: 1; }
-        100% { transform: translate(-50%, 20px); opacity: 0; }
-    }
-    
-    /* AUTH STYLES */
-    .auth-section {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    .auth-btn {
-        background: #1f2937;
-        border: 1px solid #374151;
-        border-radius: 0.5rem;
-        color: #fff;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s;
-    }
-    
-    .auth-btn:hover {
-        background: #374151;
-        transform: translateY(-2px);
-    }
-    
-    .user-profile {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        cursor: pointer;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.5rem;
-        transition: background 0.3s;
-    }
-    
-    .user-profile:hover {
-        background: rgba(31, 41, 55, 0.5);
-    }
-    
-    .user-avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 2px solid #374151;
-        object-fit: cover;
-    }
-    
-    .user-name {
-        color: #fff;
-        font-size: 0.875rem;
-        font-weight: 500;
-        max-width: 120px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    /* AUTH MODAL */
-    .auth-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-    }
-    
-    .auth-modal.active {
-        display: flex;
-    }
-    
-    .auth-container {
-        background: #111827;
-        border: 1px solid #374151;
-        border-radius: 1rem;
-        padding: 3rem;
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-    
-    .auth-container h2 {
-        color: #fff;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    .auth-container p {
-        color: #9ca3af;
-        margin-bottom: 2rem;
-    }
-    
-    /* TABS */
-    .auth-tabs {
-        display: flex;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #374151;
-    }
-    
-    .auth-tab {
-        flex: 1;
-        padding: 1rem;
-        background: none;
-        border: none;
-        color: #9ca3af;
-        font-size: 1rem;
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-    }
-    
-    .auth-tab.active {
-        color: #fff;
-        border-bottom-color: #3b82f6;
-    }
-    
-    /* FORMS */
-    .auth-form {
-        display: none;
-    }
-    
-    .auth-form.active {
-        display: block;
-    }
-    
-    .form-group {
-        margin-bottom: 1.5rem;
-        text-align: left;
-    }
-    
-    .form-group label {
-        display: block;
-        color: #d1d5db;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-    }
-    
-    .form-group input {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        background: #1f2937;
-        border: 1px solid #374151;
-        border-radius: 0.5rem;
-        color: #fff;
-        font-size: 1rem;
-    }
-    
-    .form-group input:focus {
-        outline: none;
-        border-color: #3b82f6;
-    }
-    
-    .form-btn {
-        width: 100%;
-        padding: 1rem;
-        background: #3b82f6;
-        color: white;
-        border: none;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-    
-    .form-btn:hover {
-        background: #2563eb;
-    }
-    
-    .auth-divider {
-        text-align: center;
-        margin: 1.5rem 0;
-        position: relative;
-    }
-    
-    .auth-divider::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: #374151;
-    }
-    
-    .auth-divider span {
-        background: #111827;
-        padding: 0 1rem;
-        color: #9ca3af;
-        font-size: 0.875rem;
-        position: relative;
-    }
-    
-    .google-login-btn {
-        background: #fff;
-        color: #444;
-        border: none;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        width: 100%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        font-size: 1rem;
-        transition: background 0.3s;
-    }
-    
-    .google-login-btn:hover {
-        background: #f5f5f5;
-    }
-    
-    .google-login-btn img {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .auth-close {
-        background: none;
-        border: none;
-        color: #9ca3af;
-        margin-top: 1rem;
-        cursor: pointer;
-        font-size: 0.875rem;
-    }
-    
-    .auth-close:hover {
-        color: #fff;
-    }
-    
-    /* DROPDOWN */
-    .user-dropdown {
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: #111827;
-        border: 1px solid #374151;
-        border-radius: 0.5rem;
-        min-width: 200px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        display: none;
-        z-index: 1000;
-    }
-    
-    .user-dropdown.active {
-        display: block;
-    }
-    
-    .user-stats {
-        padding: 1rem;
-        border-bottom: 1px solid #374151;
-    }
-    
-    .stat-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-    }
-    
-    .stat-label {
-        color: #9ca3af;
-    }
-    
-    .stat-value {
-        color: #fff;
-        font-weight: 600;
-    }
-    
-    .dropdown-item {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1rem;
-        color: #d1d5db;
-        text-decoration: none;
-        border-bottom: 1px solid #374151;
-        transition: background 0.3s;
-    }
-    
-    .dropdown-item:hover {
-        background: rgba(31, 41, 55, 0.5);
-    }
-    
-    .dropdown-item:last-child {
-        border-bottom: none;
-    }
-    
-    .social-links-profile {
-        display: flex;
-        gap: 0.5rem;
-        padding: 1rem;
-        justify-content: center;
-        border-top: 1px solid #374151;
-    }
-    
-    .social-link-profile {
-        width: 36px;
-        height: 36px;
-        background: #1f2937;
-        border: 1px solid #374151;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #9ca3af;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-    
-    .social-link-profile:hover {
-        background: #374151;
-        color: #fff;
-        transform: translateY(-2px);
-    }
-    
-    /* BAŞARIM */
-    .achievement-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        border: 1px solid #374151;
-        border-radius: 9999px;
-        padding: 0.25rem 0.75rem;
-        margin-left: 0.5rem;
-    }
-    
-    .achievement-count {
-        color: #f59e0b;
-        font-weight: bold;
-        font-size: 0.75rem;
-    }
-    
-    /* ACHIEVEMENT POPUP */
-    .achievement-popup {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #111827;
-        border: 1px solid #374151;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        z-index: 99999;
-        display: none;
-        animation: popupSlide 0.5s ease-out;
-    }
-    
-    @keyframes popupSlide {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    .achievement-popup.active {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-    
-    .achievement-icon {
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #f59e0b, #d97706);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-    }
-    
-    .achievement-text {
-        color: #fff;
-        font-weight: 600;
-        font-size: 0.875rem;
-    }
-    
-    /* HAMBURGER MENÜ CSS */
+    /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
     .mobile-menu-btn {
         display: none;
         background: none;
@@ -956,20 +128,8 @@
         transform: translateX(0);
     }
 
-    /* MOBILE AUTH */
+    /* Responsive tasarım */
     @media (max-width: 768px) {
-        .auth-section {
-            display: none !important;
-        }
-        
-        .mobile-auth {
-            display: block !important;
-        }
-        
-        .user-name {
-            max-width: 80px;
-        }
-        
         .mobile-menu-btn {
             display: flex;
         }
@@ -982,153 +142,15 @@
         .nav-container {
             min-height: 70px;
         }
-        
-        /* Responsive typography */
-        .hero-title {
-            font-size: 2.5rem;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-        }
-        
-        .hero-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .btn {
-            width: 100%;
-            justify-content: center;
-        }
     }
-    
-    .mobile-auth {
-        display: none;
-    }
-    
+
     /* Ekstra güvenlik */
     body.menu-open {
         overflow: hidden;
     }
-    </style>
-    
-    <!-- Firebase Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+</style>
 </head>
 <body>
-    <!-- Achievement Popup -->
-    <div id="achievementPopup" class="achievement-popup">
-        <div class="achievement-icon">🏆</div>
-        <div>
-            <div class="achievement-text">Yeni Başarım!</div>
-            <div style="color: #9ca3af; font-size: 0.75rem;" id="achievementMessage"></div>
-        </div>
-    </div>
-
-    <!-- Auth Modal -->
-    <div id="authModal" class="auth-modal">
-        <div class="auth-container">
-            <h2>HEXAGES GAMES</h2>
-            <p>Beta testleri ve özel içerikler için hesap oluşturun</p>
-            
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Giriş Yap</button>
-                <button class="auth-tab" data-tab="register">Kayıt Ol</button>
-            </div>
-            
-            <!-- Login Form -->
-            <form id="loginForm" class="auth-form active">
-                <div class="form-group">
-                    <label for="loginEmail">E-posta</label>
-                    <input type="email" id="loginEmail" placeholder="ornek@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Şifre</label>
-                    <input type="password" id="loginPassword" placeholder="Şifreniz" required>
-                </div>
-                <button type="submit" class="form-btn">Giriş Yap</button>
-            </form>
-            
-            <!-- Register Form -->
-            <form id="registerForm" class="auth-form">
-                <div class="form-group">
-                    <label for="registerUsername">Kullanıcı Adı</label>
-                    <input type="text" id="registerUsername" placeholder="Oyun içi görünecek isim" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerEmail">E-posta</label>
-                    <input type="email" id="registerEmail" placeholder="ornek@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerPassword">Şifre</label>
-                    <input type="password" id="registerPassword" placeholder="En az 6 karakter" minlength="6" required>
-                </div>
-                <button type="submit" class="form-btn" style="background: #10b981;">Hesap Oluştur</button>
-            </form>
-            
-            <div class="auth-divider">
-                <span>veya</span>
-            </div>
-            
-            <!-- Google butonunu geçici olarak gizle -->
-            <button id="googleLoginBtn" class="google-login-btn" style="display: none;">
-                <img src="https://www.google.com/favicon.ico" alt="Google">
-                Google ile Devam Et
-            </button>
-            
-            <button id="authClose" class="auth-close">Kapat</button>
-        </div>
-    </div>
-
-    <!-- User Dropdown -->
-    <div id="userDropdown" class="user-dropdown">
-        <div class="user-stats">
-            <div class="stat-item">
-                <span class="stat-label">Giriş Sayısı:</span>
-                <span class="stat-value" id="loginCount">1</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Başarım:</span>
-                <span class="stat-value" id="achievementCount">1</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Üyelik:</span>
-                <span class="stat-value" id="memberSince">Bugün</span>
-            </div>
-        </div>
-        
-        <a href="profile.html" class="dropdown-item">
-            <span>👤</span>
-            <span>Profilim</span>
-        </a>
-        <a href="beta.html" class="dropdown-item">
-            <span>🎮</span>
-            <span>Beta Testleri</span>
-        </a>
-        <a href="achievements.html" class="dropdown-item">
-            <span>🏆</span>
-            <span>Başarımlar</span>
-        </a>
-        
-        <div class="social-links-profile">
-            <a href="https://x.com/hexages_games" class="social-link-profile" target="_blank">🐦</a>
-            <a href="https://www.instagram.com/hexagesgames" class="social-link-profile" target="_blank">📷</a>
-            <a href="https://discord.gg/Pne3fnnKkK" class="social-link-profile" target="_blank">📺</a>
-        </div>
-        
-        <div class="dropdown-item" id="logoutBtn" style="cursor: pointer;">
-            <span>🚪</span>
-            <span>Çıkış Yap</span>
-        </div>
-    </div>
-
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -1141,30 +163,7 @@
                 <a href="developers.html" class="nav-link">Geliştiriciler</a>
                 <a href="news.html" class="nav-link">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
-                
-                <!-- Auth Section -->
-                <div class="auth-section">
-                    <div id="userProfile" class="user-profile" style="display: none;">
-                        <img id="userAvatar" class="user-avatar" src="" alt="Profil">
-                        <div>
-                            <div id="userName" class="user-name"></div>
-                            <div id="userAchievements" class="achievement-badge" style="display: none;">
-                                <span>🏆</span>
-                                <span class="achievement-count" id="achievementCountBadge">1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button id="authBtn" class="auth-btn">
-                        <span>👤</span>
-                        <span>Giriş Yap</span>
-                    </button>
-                </div>
             </div>
-            
-            <div class="mobile-auth">
-                <button id="mobileAuthBtn" class="auth-btn">👤</button>
-            </div>
-            
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <span class="hamburger"></span>
             </button>
@@ -1175,15 +174,9 @@
             <a href="developers.html" class="mobile-link">Geliştiriciler</a>
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
-            <div class="mobile-auth-link">
-                <button id="mobileAuthLink" class="mobile-link auth-btn" style="border: none; background: none; width: 100%; text-align: left;">
-                    <span>👤</span> Giriş Yap
-                </button>
-            </div>
         </div>
     </nav>
 
-    <!-- ANA İÇERİK -->
     <section class="hero">
         <video class="hero-video" autoplay loop muted playsinline>
             <source src="https://customer-assets.emergentagent.com/job_golden-hex-games/artifacts/yuep7m61_WhatsApp%20Video%202025-10-02%20saat%2020.17.01_99fbc83e.mp4" type="video/mp4">
@@ -1240,9 +233,7 @@
                 <h2 class="section-title">Öne Çıkan Oyunlar</h2>
                 <a href="games.html" class="view-all">Tümünü Gör →</a>
             </div>
-            <div class="games-grid" id="featuredGames">
-                <!-- Oyunlar dinamik olarak eklenecek -->
-            </div>
+            <div class="games-grid" id="featuredGames"></div>
         </div>
     </section>
 
@@ -1290,330 +281,93 @@
         </div>
     </footer>
 
-    <!-- TÜM JAVASCRIPT KODLARI -->
+    <!-- HAMBURGER MENÜ JAVASCRIPT (HTML'YE GÖMÜLMÜŞ) -->
     <script>
-    // FIREBASE AUTH SİSTEMİ
-    const firebaseConfig = {
-        apiKey: "AIzaSyAroBTexiXeaJGYqMiIIM5POdN2JUuigvo",
-        authDomain: "hexagesgames-f8fe2.firebaseapp.com",
-        projectId: "hexagesgames-f8fe2",
-        storageBucket: "hexagesgames-f8fe2.firebasestorage.app",
-        messagingSenderId: "469976981538",
-        appId: "1:469976981538:web:c5b49c15b0206c7fb76a7b",
-        measurementId: "G-6E33GJ0ZB0"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // DOM Elements
-    const authModal = document.getElementById('authModal');
-    const authTabs = document.querySelectorAll('.auth-tab');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const authBtn = document.getElementById('authBtn');
-    const googleLoginBtn = document.getElementById('googleLoginBtn');
-    const authClose = document.getElementById('authClose');
-    const userProfile = document.getElementById('userProfile');
-    const userName = document.getElementById('userName');
-    const userAvatar = document.getElementById('userAvatar');
-    const userAchievements = document.getElementById('userAchievements');
-    const achievementCountBadge = document.getElementById('achievementCountBadge');
-    const userDropdown = document.getElementById('userDropdown');
-    const loginCountElement = document.getElementById('loginCount');
-    const achievementCountElement = document.getElementById('achievementCount');
-    const memberSinceElement = document.getElementById('memberSince');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const achievementPopup = document.getElementById('achievementPopup');
-    const achievementMessage = document.getElementById('achievementMessage');
-    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
-    const mobileAuthLink = document.getElementById('mobileAuthLink');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    // Tab Switching
-    authTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.dataset.tab;
-            authTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            loginForm.classList.remove('active');
-            registerForm.classList.remove('active');
-            document.getElementById(`${tabId}Form`).classList.add('active');
-        });
-    });
-
-    // Email/Password Login - DÜZELTİLMİŞ VERSİYON
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
+    // Hamburger menü toggle fonksiyonu
+    function toggleMobileMenu() {
+        console.log('Hamburger menüye tıklandı!');
         
-        try {
-            const userCredential = await auth.signInWithEmailAndPassword(email, password);
-            console.log('Giriş başarılı:', userCredential.user.email);
-            await updateUserData(userCredential.user.uid);
-            closeAuthModal();
-            showAchievement('Hoş geldin! 🎮');
-        } catch (error) {
-            console.error('Giriş hatası:', error);
-            alert('Giriş hatası: ' + error.message);
-        }
-    });
-
-    // Email/Password Register - DÜZELTİLMİŞ VERSİYON
-    registerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('registerUsername').value;
-        const email = document.getElementById('registerEmail').value;
-        const password = document.getElementById('registerPassword').value;
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         
-        try {
-            console.log('Kayıt başlıyor:', email);
-            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-            console.log('Firebase kaydı tamam, kullanıcı oluştu:', userCredential.user.uid);
-            
-            // Kullanıcı adını güncelle
-            await userCredential.user.updateProfile({
-                displayName: username
-            });
-            console.log('Display name güncellendi');
-            
-            // Firestore'a kullanıcı verilerini kaydet
-            await db.collection('users').doc(userCredential.user.uid).set({
-                username: username,
-                email: email,
-                loginCount: 1,
-                achievements: ['first_login'],
-                memberSince: new Date().toLocaleDateString('tr-TR'),
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            console.log('Firestore kaydı tamam');
-            
-            closeAuthModal();
-            showAchievement('HEXAGES ailesine hoş geldin! 🎉');
-            
-        } catch (error) {
-            console.error('Kayıt hatası:', error);
-            alert('Kayıt hatası: ' + error.message);
-        }
-    });
-
-    // Google Login'i devre dışı bırak (hata veriyor)
-    if (googleLoginBtn) {
-        googleLoginBtn.style.display = 'none';
-        googleLoginBtn.removeEventListener('click', () => {});
-    }
-
-    // Update User Data - DÜZELTİLMİŞ VERSİYON
-    async function updateUserData(userId) {
-        try {
-            const userRef = db.collection('users').doc(userId);
-            const userDoc = await userRef.get();
-            
-            if (userDoc.exists) {
-                const data = userDoc.data();
-                const newLoginCount = (data.loginCount || 0) + 1;
-                
-                await userRef.update({
-                    loginCount: newLoginCount,
-                    lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                
-                // Başarımları kontrol et
-                const achievements = data.achievements || [];
-                let newAchievement = false;
-                
-                if (newLoginCount >= 5 && !achievements.includes('veteran_5')) {
-                    achievements.push('veteran_5');
-                    newAchievement = true;
-                }
-                if (newLoginCount >= 10 && !achievements.includes('veteran_10')) {
-                    achievements.push('veteran_10');
-                    newAchievement = true;
-                }
-                
-                if (newAchievement) {
-                    await userRef.update({ achievements: achievements });
-                }
-            }
-        } catch (error) {
-            console.error('Kullanıcı güncelleme hatası:', error);
-        }
-    }
-
-    // Show Achievement
-    function showAchievement(message) {
-        achievementMessage.textContent = message;
-        achievementPopup.classList.add('active');
-        setTimeout(() => {
-            achievementPopup.classList.remove('active');
-        }, 3000);
-    }
-
-    // Kullanıcı UI'sini güncelle - YENİ EKLENDİ
-    function updateUserUI(user) {
-        console.log('UI güncelleniyor:', user.email);
+        // Menüyü aç/kapat
+        mobileMenu.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
         
-        if (user) {
-            userName.textContent = user.displayName || user.email.split('@')[0] || 'Kullanıcı';
-            userAvatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(userName.textContent)}&background=374151&color=fff`;
-            
-            // Profili göster
-            userProfile.style.display = 'flex';
-            authBtn.style.display = 'none';
-            if (mobileAuthBtn) mobileAuthBtn.style.display = 'none';
+        // Body scroll kontrolü
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+            console.log('Menü açıldı');
         } else {
-            userProfile.style.display = 'none';
-            authBtn.style.display = 'flex';
-            if (mobileAuthBtn) mobileAuthBtn.style.display = 'flex';
-        }
-    }
-
-    // Auth State Listener - DÜZELTİLMİŞ VERSİYON
-    auth.onAuthStateChanged(async (user) => {
-        console.log('Auth state değişti:', user ? 'Giriş yapıldı' : 'Çıkış yapıldı');
-        
-        if (user) {
-            // Önce UI'yi güncelle
-            updateUserUI(user);
-            
-            // Sonra Firestore'dan verileri al
-            try {
-                const userDoc = await db.collection('users').doc(user.uid).get();
-                if (userDoc.exists) {
-                    const data = userDoc.data();
-                    
-                    // Başarımları göster
-                    const achievements = data.achievements || [];
-                    if (achievements.length > 0) {
-                        userAchievements.style.display = 'flex';
-                        achievementCountBadge.textContent = achievements.length;
-                        achievementCountElement.textContent = achievements.length;
-                    }
-                    
-                    // İstatistikleri güncelle
-                    loginCountElement.textContent = data.loginCount || 1;
-                    memberSinceElement.textContent = data.memberSince || 'Bugün';
-                }
-            } catch (error) {
-                console.error('Kullanıcı verileri alınırken hata:', error);
-            }
-        } else {
-            updateUserUI(null);
-        }
-    });
-
-    // Sign Out
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            auth.signOut();
-            userDropdown.classList.remove('active');
-        });
-    }
-
-    // Toggle Dropdown
-    if (userProfile) {
-        userProfile.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userDropdown.classList.toggle('active');
-        });
-    }
-
-    // Modal Functions
-    function openAuthModal() {
-        authModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeAuthModal() {
-        authModal.classList.add('closing');
-        setTimeout(() => {
-            authModal.classList.remove('active', 'closing');
             document.body.style.overflow = '';
-        }, 300);
+            console.log('Menü kapandı');
+        }
     }
-
-    // Event Listeners
-    if (authBtn) authBtn.addEventListener('click', openAuthModal);
-    if (authClose) authClose.addEventListener('click', closeAuthModal);
-    if (mobileAuthBtn) mobileAuthBtn.addEventListener('click', openAuthModal);
-    if (mobileAuthLink) mobileAuthLink.addEventListener('click', openAuthModal);
-
-    // Dropdown dışında tıklayınca kapat
-    document.addEventListener('click', (e) => {
-        if (userDropdown && !userProfile.contains(e.target) && !userDropdown.contains(e.target)) {
-            userDropdown.classList.remove('active');
+    
+    // Sayfa yüklendiğinde çalışacak kod
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM yüklendi, hamburger menü hazırlanıyor...');
+        
+        // Hamburger butonuna click eventi ekle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            console.log('Hamburger butonuna event listener eklendi');
         }
-    });
-
-    // Modal dışında tıklayınca kapat
-    authModal.addEventListener('click', (e) => {
-        if (e.target === authModal) {
-            closeAuthModal();
-        }
-    });
-
-    // Escape ile kapat
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && authModal.classList.contains('active')) {
-            closeAuthModal();
-        }
-    });
-
-    // HAMBURGER MENÜ
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
+        
         // Mobil menü linklerine tıklayınca menüyü kapat
         const mobileLinks = document.querySelectorAll('.mobile-link');
         mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
+            link.addEventListener('click', function() {
+                console.log('Mobil linke tıklandı, menü kapanıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
                 document.body.style.overflow = '';
             });
         });
-    }
-
-    // Navbar scroll efekti
-    window.addEventListener('scroll', () => {
-        const navbar = document.getElementById('navbar');
-        if (navbar) {
+        
+        // Pencere boyutu değişince mobil menüyü kapat
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                console.log('Desktop boyutuna geçildi, mobil menü kapatılıyor...');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Navbar scroll efekti
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
             if (window.scrollY > 20) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-        }
-    });
-
-    // Pencere boyutu değişince mobil menüyü kapat
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && mobileMenu && mobileMenuBtn) {
-            mobileMenu.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-
-    // DOM yüklendiğinde
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('HEXAGES GAMES yüklendi!');
+        });
         
-        // Formları resetle
-        if (loginForm) loginForm.reset();
-        if (registerForm) registerForm.reset();
+        console.log('Hamburger menü sistemi hazır!');
     });
-
-    // DEBUG: Konsola bilgi yaz
-    console.log('Firebase Auth sistemi hazır!');
+    
+    // Fonksiyonu global scope'a ekle
+    window.toggleMobileMenu = toggleMobileMenu;
     </script>
+    
+    <!-- ESKİ SCRIPT.JS DOSYASI -->
+    <script src="script.js"></script>
 </body>
 </html>
