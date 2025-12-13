@@ -4,718 +4,658 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil - HEXAGES GAMES</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
     
     <style>
-    /* TEMİZ SİYAH/BEYAZ TEMA */
-    :root {
-        --black: #000000;
-        --white: #ffffff;
-        --dark: #111111;
-        --gray: #222222;
-        --light-gray: #333333;
-        --text-gray: #aaaaaa;
-        --border: #444444;
-        --accent: #ffffff;
-        --hover: #1a1a1a;
-    }
-    
+    /* SADECE GEREKLİ STİLLER */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-    
+
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: var(--black);
-        color: var(--white);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #000000;
+        color: #ffffff;
         line-height: 1.6;
         min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
-    
-    /* NAVBAR */
+
+    /* NAV */
     .navbar {
-        background: var(--dark);
-        border-bottom: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
         padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333333;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 1000;
-        backdrop-filter: blur(10px);
     }
-    
-    .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
+
     .nav-logo {
-        color: var(--white);
-        font-weight: 700;
-        font-size: 1.3rem;
+        color: #3b82f6;
+        font-weight: bold;
+        font-size: 1.5rem;
         text-decoration: none;
-        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
-    
+
+    .nav-logo img {
+        height: 32px;
+        width: auto;
+    }
+
     .nav-links {
         display: flex;
         gap: 2rem;
     }
-    
-    .nav-link {
-        color: var(--text-gray);
+
+    .nav-links a {
+        color: #cccccc;
         text-decoration: none;
         font-weight: 500;
-        transition: color 0.2s;
-        position: relative;
+        transition: color 0.3s;
         padding: 0.5rem 0;
+        position: relative;
     }
-    
-    .nav-link:hover {
-        color: var(--white);
+
+    .nav-links a:hover {
+        color: #ffffff;
     }
-    
-    .nav-link.active {
-        color: var(--white);
+
+    .nav-links a.active {
+        color: #3b82f6;
     }
-    
-    .nav-link.active::after {
+
+    .nav-links a.active::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         height: 2px;
-        background: var(--white);
+        background: #3b82f6;
+        border-radius: 1px;
     }
-    
+
     /* HAMBURGER */
     .mobile-menu-btn {
         display: none;
         background: none;
         border: none;
+        color: #cccccc;
+        font-size: 1.8rem;
         cursor: pointer;
         padding: 0.5rem;
     }
-    
-    .hamburger {
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: var(--white);
-        position: relative;
-    }
-    
-    .hamburger::before,
-    .hamburger::after {
-        content: '';
-        position: absolute;
-        width: 24px;
-        height: 2px;
-        background: var(--white);
-        left: 0;
-    }
-    
-    .hamburger::before {
-        top: -8px;
-    }
-    
-    .hamburger::after {
-        bottom: -8px;
-    }
-    
+
     .mobile-menu {
         display: none;
         position: fixed;
-        top: 60px;
+        top: 70px;
         left: 0;
         right: 0;
-        background: var(--dark);
-        border-top: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
         padding: 1rem;
+        border-top: 1px solid #333333;
         z-index: 999;
     }
-    
+
     .mobile-menu.active {
         display: block;
     }
-    
-    .mobile-link {
+
+    .mobile-menu a {
         display: block;
-        padding: 1rem;
-        color: var(--text-gray);
+        color: #cccccc;
         text-decoration: none;
-        border-bottom: 1px solid var(--border);
-        transition: all 0.2s;
+        padding: 1rem;
+        border-bottom: 1px solid #333333;
+        font-size: 1.1rem;
+        transition: all 0.3s;
     }
-    
-    .mobile-link:hover,
-    .mobile-link.active {
-        color: var(--white);
-        background: var(--hover);
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+        color: #3b82f6;
+        background: rgba(59, 130, 246, 0.1);
+        padding-left: 1.5rem;
     }
-    
-    /* PROFILE HERO */
+
+    /* PROFİL */
     .profile-hero {
         padding: 120px 2rem 4rem;
-        background: linear-gradient(to bottom, var(--black), var(--dark));
+        background: linear-gradient(to bottom, #000000, #111111);
         text-align: center;
-        margin-top: 60px;
+        margin-top: 70px;
     }
-    
+
     .profile-avatar {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
-        border: 3px solid var(--white);
+        border: 4px solid #3b82f6;
         margin-bottom: 1.5rem;
         object-fit: cover;
+        background: #1a1a1a;
     }
-    
+
     .profile-name {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 2.2rem;
+        background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-bottom: 0.5rem;
-        letter-spacing: -0.5px;
+        font-weight: 800;
     }
-    
+
     .profile-email {
-        color: var(--text-gray);
-        margin-bottom: 2rem;
+        color: #9ca3af;
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
     }
-    
-    /* POINTS */
+
     .points-display {
         margin: 2rem 0 3rem;
     }
-    
+
+    .points-title {
+        color: #9ca3af;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
     .points-value {
-        font-size: 3rem;
+        font-size: 3.5rem;
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         font-weight: 800;
-        margin: 0.5rem 0;
-        letter-spacing: -1px;
     }
-    
-    /* STATS */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-        max-width: 600px;
-        margin: 0 auto;
+
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
     }
-    
-    .stat-card {
-        background: var(--gray);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 1.5rem 1rem;
+
+    .stat {
         text-align: center;
-        transition: transform 0.2s;
+        min-width: 150px;
     }
-    
-    .stat-card:hover {
-        transform: translateY(-2px);
-        border-color: var(--white);
-    }
-    
+
     .stat-value {
-        font-size: 1.5rem;
+        font-size: 2rem;
+        color: #3b82f6;
         font-weight: 700;
-        margin-bottom: 0.25rem;
+        display: block;
+        margin-bottom: 0.5rem;
     }
-    
+
     .stat-label {
-        color: var(--text-gray);
-        font-size: 0.9rem;
+        color: #9ca3af;
+        font-size: 0.95rem;
     }
-    
-    /* ACHIEVEMENTS */
-    .achievements-section {
+
+    /* BAŞARIMLAR */
+    .achievements {
         padding: 3rem 2rem;
         max-width: 1000px;
         margin: 0 auto;
+        flex: 1;
     }
-    
-    .section-title {
-        font-size: 1.5rem;
-        font-weight: 700;
+
+    .achievements h2 {
+        color: #ffffff;
+        font-size: 2rem;
         margin-bottom: 2rem;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
     }
-    
-    .achievements-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1rem;
-    }
-    
+
     .achievement-card {
-        background: var(--gray);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 1.25rem;
+        background: rgba(31, 41, 55, 0.7);
+        border: 1px solid #374151;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
     }
-    
+
     .achievement-card:hover {
-        border-color: var(--white);
-        background: var(--light-gray);
-        transform: translateY(-2px);
+        border-color: #3b82f6;
+        background: rgba(31, 41, 55, 0.9);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
     }
-    
+
     .achievement-card.unlocked {
-        border-color: var(--white);
-        background: var(--light-gray);
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
     }
-    
-    .achievement-card.unlocked::before {
-        content: '✓';
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: var(--white);
-        color: var(--black);
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 0.8rem;
+
+    .achievement-card.unlocked:hover {
+        border-color: #10b981;
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
     }
-    
+
     .achievement-header {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-bottom: 0.75rem;
+        gap: 1.2rem;
+        margin-bottom: 1rem;
     }
-    
+
     .achievement-icon {
-        width: 48px;
-        height: 48px;
-        background: var(--light-gray);
+        width: 56px;
+        height: 56px;
+        background: #374151;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
-        border: 1px solid var(--border);
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        transition: all 0.3s;
     }
-    
+
     .achievement-card.unlocked .achievement-icon {
-        background: var(--white);
-        color: var(--black);
-        border-color: var(--white);
+        background: linear-gradient(135deg, #3b82f6, #60a5fa);
     }
-    
+
+    .achievement-card:hover .achievement-icon {
+        transform: scale(1.1);
+    }
+
     .achievement-name {
-        font-weight: 600;
-        font-size: 1.1rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.3rem;
     }
-    
+
     .achievement-desc {
-        color: var(--text-gray);
-        font-size: 0.9rem;
-        margin-bottom: 0.75rem;
+        color: #9ca3af;
+        font-size: 1rem;
+        margin-bottom: 1rem;
         line-height: 1.5;
     }
-    
-    .achievement-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 0.5rem;
-    }
-    
+
     .achievement-points {
-        color: var(--white);
+        color: #f59e0b;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-right: 1rem;
+    }
+
+    .click-hint {
+        color: #3b82f6;
         font-weight: 600;
         font-size: 0.9rem;
-    }
-    
-    .click-hint {
-        color: var(--white);
-        font-size: 0.8rem;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        display: inline-block;
-        margin-top: 0.5rem;
-    }
-    
-    /* PROGRESS BARS */
-    .progress-section {
-        padding: 2rem;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-    
-    .progress-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-    }
-    
-    .progress-card {
-        background: var(--gray);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 1.5rem;
-    }
-    
-    .progress-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-    
-    .progress-title {
-        font-weight: 600;
+        margin-top: 1rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        animation: pulse 2s infinite;
     }
-    
-    .progress-value {
-        font-weight: 700;
-        font-size: 1.1rem;
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
     }
-    
-    .progress-bar {
-        height: 6px;
-        background: var(--light-gray);
-        border-radius: 3px;
-        overflow: hidden;
-        margin-bottom: 0.5rem;
-    }
-    
-    .progress-fill {
-        height: 100%;
-        background: var(--white);
-        border-radius: 3px;
-        transition: width 0.5s ease;
-    }
-    
-    .progress-label {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        color: var(--text-gray);
-    }
-    
-    /* NOTIFICATION */
+
+    /* BİLDİRİM */
     .notification {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: var(--dark);
-        border: 1px solid var(--white);
-        border-radius: 8px;
-        padding: 1rem 1.5rem;
-        color: var(--white);
+        background: rgba(17, 24, 39, 0.95);
+        border: 2px solid #3b82f6;
+        border-radius: 12px;
+        padding: 1.2rem;
+        color: white;
         z-index: 9999;
         display: none;
-        max-width: 300px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        animation: slideIn 0.3s ease;
+        max-width: 320px;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        backdrop-filter: blur(10px);
+        animation: slideIn 0.5s ease;
     }
-    
+
     @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
-    
-    /* FOOTER - SENİN STİLİNDE */
+
+    /* FOOTER - TAM PROFESYONEL */
     .footer {
-        background: var(--dark);
-        border-top: 1px solid var(--border);
+        background: #111111;
         padding: 3rem 2rem 2rem;
-        margin-top: 4rem;
+        margin-top: auto;
+        border-top: 1px solid #333333;
     }
-    
-    .footer .container {
+
+    .footer-container {
         max-width: 1200px;
         margin: 0 auto;
     }
-    
+
     .footer-grid {
         display: grid;
         grid-template-columns: 2fr 1fr 1fr;
-        gap: 3rem;
-        margin-bottom: 2rem;
+        gap: 4rem;
+        margin-bottom: 3rem;
     }
-    
-    .footer-col-wide {
-        grid-column: span 2;
+
+    @media (max-width: 768px) {
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
     }
-    
+
     .footer-logo {
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        color: var(--white);
-        font-weight: 700;
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
         text-decoration: none;
     }
-    
-    .footer-description {
-        color: var(--text-gray);
-        line-height: 1.6;
-        max-width: 400px;
+
+    .footer-logo img {
+        height: 40px;
+        width: auto;
     }
-    
+
+    .footer-description {
+        color: #9ca3af;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+    }
+
+    .social-link:hover {
+        background: #3b82f6;
+        transform: translateY(-3px);
+    }
+
     .footer-col h3 {
-        color: var(--white);
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
+        color: #ffffff;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
         font-weight: 600;
     }
-    
+
     .footer-col ul {
         list-style: none;
     }
-    
+
     .footer-col li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
     }
-    
+
     .footer-col a {
-        color: var(--text-gray);
+        color: #9ca3af;
         text-decoration: none;
-        transition: color 0.2s;
+        transition: color 0.3s;
         font-size: 0.95rem;
     }
-    
+
     .footer-col a:hover {
-        color: var(--white);
+        color: #3b82f6;
     }
-    
+
     .footer-bottom {
-        border-top: 1px solid var(--border);
+        border-top: 1px solid #333333;
         padding-top: 2rem;
         text-align: center;
-        color: var(--text-gray);
+        color: #6b7280;
         font-size: 0.9rem;
     }
-    
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .footer-links a {
+        color: #6b7280;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+        color: #9ca3af;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
         .navbar {
             padding: 1rem;
         }
-        
+
         .nav-links {
             display: none;
         }
-        
+
         .mobile-menu-btn {
             display: block;
         }
-        
+
         .profile-hero {
             padding: 100px 1rem 3rem;
+            margin-top: 60px;
         }
-        
-        .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
+
+        .profile-name {
+            font-size: 1.8rem;
         }
-        
-        .achievements-grid {
-            grid-template-columns: 1fr;
+
+        .points-value {
+            font-size: 2.8rem;
         }
-        
-        .progress-grid {
-            grid-template-columns: 1fr;
+
+        .stats {
+            gap: 1.5rem;
         }
-        
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
+
+        .stat {
+            min-width: 120px;
         }
-        
-        .footer-col-wide {
-            grid-column: span 1;
+
+        .achievements {
+            padding: 2rem 1rem;
+        }
+
+        .achievements h2 {
+            font-size: 1.8rem;
+        }
+
+        .footer {
+            padding: 2rem 1rem;
         }
     }
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
+    <!-- NAV -->
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">HEXAGES GAMES</a>
-            
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="games.html" class="nav-link">Oyunlar</a>
-                <a href="developers.html" class="nav-link">Geliştiriciler</a>
-                <a href="news.html" class="nav-link">Haberler</a>
-                <a href="contact.html" class="nav-link">İletişim</a>
-                <a href="profile.html" class="nav-link active">Profil</a>
-            </div>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <span class="hamburger"></span>
-            </button>
+        <a href="index.html" class="nav-logo">
+            <img src="hexagesgames.png" alt="HEXAGES GAMES">
+            HEXAGES GAMES
+        </a>
+        
+        <div class="nav-links">
+            <a href="index.html">Ana Sayfa</a>
+            <a href="games.html">Oyunlar</a>
+            <a href="developers.html">Geliştiriciler</a>
+            <a href="news.html">Haberler</a>
+            <a href="contact.html">İletişim</a>
+            <a href="profile.html" class="active">Profil</a>
         </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
     </nav>
     
-    <!-- MOBILE MENU -->
+    <!-- MOBİL MENÜ -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html" class="mobile-link">Ana Sayfa</a>
-        <a href="games.html" class="mobile-link">Oyunlar</a>
-        <a href="developers.html" class="mobile-link">Geliştiriciler</a>
-        <a href="news.html" class="mobile-link">Haberler</a>
-        <a href="contact.html" class="mobile-link">İletişim</a>
-        <a href="profile.html" class="mobile-link active">Profil</a>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="games.html">Oyunlar</a>
+        <a href="developers.html">Geliştiriciler</a>
+        <a href="news.html">Haberler</a>
+        <a href="contact.html">İletişim</a>
+        <a href="profile.html" class="active">Profil</a>
     </div>
     
-    <!-- PROFILE HERO -->
+    <!-- PROFİL -->
     <section class="profile-hero">
         <img id="profileAvatar" class="profile-avatar" src="" alt="Profil">
-        <h1 id="profileName" class="profile-name">Kullanıcı</h1>
+        <h1 id="profileName" class="profile-name">Kullanıcı Adı</h1>
         <p id="profileEmail" class="profile-email">kullanici@email.com</p>
         
         <div class="points-display">
-            <div>Toplam Puan</div>
+            <div class="points-title">Toplam Puan</div>
             <div id="totalPoints" class="points-value">0</div>
         </div>
         
-        <div class="stats-grid">
-            <div class="stat-card">
+        <div class="stats">
+            <div class="stat">
                 <div id="memberSince" class="stat-value">Bugün</div>
                 <div class="stat-label">Üyelik Tarihi</div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div id="totalGames" class="stat-value">0</div>
-                <div class="stat-label">Oyun</div>
+                <div class="stat-label">Oyun Sayısı</div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div id="playerLevel" class="stat-value">1</div>
                 <div class="stat-label">Seviye</div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div id="achievementCount" class="stat-value">0/6</div>
                 <div class="stat-label">Başarımlar</div>
             </div>
         </div>
     </section>
     
-    <!-- PROGRESS -->
-    <section class="progress-section">
-        <div class="progress-grid">
-            <div class="progress-card">
-                <div class="progress-header">
-                    <div class="progress-title">
-                        <span>🎮</span>
-                        Oyun İlerlemesi
-                    </div>
-                    <div id="completionRate" class="progress-value">0%</div>
-                </div>
-                <div class="progress-bar">
-                    <div id="completionBar" class="progress-fill" style="width: 0%"></div>
-                </div>
-                <div class="progress-label">
-                    <span>Başlangıç</span>
-                    <span>Tamamlandı</span>
-                </div>
-            </div>
-            
-            <div class="progress-card">
-                <div class="progress-header">
-                    <div class="progress-title">
-                        <span>🏆</span>
-                        Başarım Oranı
-                    </div>
-                    <div id="achievementRate" class="progress-value">0%</div>
-                </div>
-                <div class="progress-bar">
-                    <div id="achievementBar" class="progress-fill" style="width: 0%"></div>
-                </div>
-                <div class="progress-label">
-                    <span>0/6</span>
-                    <span>6/6</span>
-                </div>
-            </div>
+    <!-- BAŞARIMLAR -->
+    <section class="achievements">
+        <h2>🏆 Başarımlarım</h2>
+        <div id="achievementsList">
+            <!-- Başarımlar JavaScript ile eklenecek -->
         </div>
     </section>
     
-    <!-- ACHIEVEMENTS -->
-    <section class="achievements-section">
-        <h2 class="section-title">
-            <span>🏆</span>
-            Başarımlar
-        </h2>
-        
-        <div class="achievements-grid" id="achievementsList">
-            <!-- Başarımlar buraya gelecek -->
-        </div>
-    </section>
-    
-    <!-- NOTIFICATION -->
+    <!-- BİLDİRİM -->
     <div id="notification" class="notification"></div>
-    
-    <!-- FOOTER (SENİN STİLİNDE) -->
+
+    <!-- FOOTER -->
     <footer class="footer">
-        <div class="container">
+        <div class="footer-container">
             <div class="footer-grid">
-                <div class="footer-col footer-col-wide">
-                    <div class="footer-logo">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
                         <img src="hexagesgames.png" alt="HEXAGES GAMES">
-                        <span>HEXAGES GAMES</span>
+                        HEXAGES GAMES
+                    </a>
+                    <p class="footer-description">
+                        Geleceğin oyunlarını bugünden yaratıyoruz. Yenilikçi tasarımlar, 
+                        etkileyici hikayeler ve unutulmaz oyun deneyimleri ile oyun 
+                        dünyasında iz bırakıyoruz.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://x.com/hexages_games" class="social-link" target="_blank">𝕏</a>
+                        <a href="https://www.instagram.com/hexagesgames" class="social-link" target="_blank">📷</a>
+                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link" target="_blank">💬</a>
+                        <a href="#" class="social-link">📘</a>
                     </div>
-                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
                 </div>
+                
                 <div class="footer-col">
                     <h3>Hızlı Linkler</h3>
                     <ul>
                         <li><a href="index.html">Ana Sayfa</a></li>
-                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="games.html">Oyunlarımız</a></li>
                         <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler & Duyurular</a></li>
+                        <li><a href="contact.html">İletişim & Destek</a></li>
+                        <li><a href="profile.html">Profilim</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-col">
-                    <h3>İletişim</h3>
+                    <h3>İletişim Bilgileri</h3>
                     <ul>
-                        <li>📧 hexagesgames@gmail.com</li>
-                        <li>📍 İstanbul, Türkiye</li>
+                        <li style="color: #9ca3af; margin-bottom: 1rem;">📧 info@hexagesgames.com</li>
+                        <li style="color: #9ca3af; margin-bottom: 1rem;">📍 İstanbul, Türkiye</li>
+                        <li style="color: #9ca3af;">⏰ 7/24 Destek</li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır. Bu site bir hayal ürünüdür.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Gizlilik Politikası</a>
+                    <a href="terms.html">Kullanım Şartları</a>
+                    <a href="cookies.html">Çerez Politikası</a>
+                    <a href="sitemap.html">Site Haritası</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- JAVASCRIPT -->
     <script>
-    // ==================== BAŞARIM SİSTEMİ ====================
+    // ==================== LOCALSTORAGE SİSTEMİ ====================
     const ACHIEVEMENTS = [
-        { id: 1, name: "İlk Adım", desc: "HEXAGES GAMES'e giriş yap", icon: "👣", points: 10, page: "index.html" },
+        { id: 1, name: "İlk Adım", desc: "HEXAGES GAMES'e ilk giriş yap", icon: "👣", points: 10, page: "index.html" },
         { id: 2, name: "Site Müdavimi", desc: "Siteyi tekrar ziyaret et", icon: "⏱️", points: 20, page: "index.html" },
         { id: 3, name: "Oyun Sever", desc: "Oyunlar sayfasını ziyaret et", icon: "🎮", points: 30, page: "games.html" },
         { id: 4, name: "Destekçi", desc: "İletişim sayfasını ziyaret et", icon: "💬", points: 40, page: "contact.html" },
@@ -723,43 +663,24 @@
         { id: 6, name: "Haberci", desc: "Haberler sayfasını ziyaret et", icon: "📰", points: 25, page: "news.html" }
     ];
 
-    // ==================== LOCALSTORAGE YÖNETİMİ ====================
+    // İlk yükleme - HATA DÜZELTME
     function initializeStorage() {
-        if (!localStorage.getItem('hex_achievements')) {
-            localStorage.setItem('hex_achievements', JSON.stringify(ACHIEVEMENTS));
-            localStorage.setItem('hex_points', '0');
-            localStorage.setItem('hex_stats', JSON.stringify({
-                games: 0,
-                level: 1,
-                memberSince: new Date().toLocaleDateString('tr-TR')
-            }));
-        }
-        return true;
-    }
-
-    // ==================== TÜM BAŞARIMLAR YAPINCA LEVEL 2 ====================
-    function checkLevelUp() {
-        const achievements = JSON.parse(localStorage.getItem('hex_achievements') || '[]');
-        const allUnlocked = achievements.every(a => a.unlocked);
-        
-        if (allUnlocked) {
-            let stats = JSON.parse(localStorage.getItem('hex_stats') || '{}');
-            if (stats.level === 1) {
-                stats.level = 2;
-                localStorage.setItem('hex_stats', JSON.stringify(stats));
-                
-                // Level up bildirimi
-                showNotification('🎉 Tüm başarımları tamamladın! Seviye 2 oldun!');
-                
-                // Puan ekle
-                let points = parseInt(localStorage.getItem('hex_points') || '0');
-                points += 100; // Bonus puan
-                localStorage.setItem('hex_points', points.toString());
-                
-                return true;
+        try {
+            if (!localStorage.getItem('hex_achievements')) {
+                localStorage.setItem('hex_achievements', JSON.stringify(ACHIEVEMENTS));
+                localStorage.setItem('hex_points', '0');
+                localStorage.setItem('hex_stats', JSON.stringify({
+                    games: 0,
+                    level: 1,
+                    memberSince: new Date().toLocaleDateString('tr-TR')
+                }));
+                console.log('✅ Storage başlatıldı');
             }
+            return true;
+        } catch (error) {
+            console.error('❌ Storage hatası:', error);
+            return false;
         }
-        return false;
     }
 
     // ==================== DOM ELEMENTLERİ ====================
@@ -775,143 +696,164 @@
     const playerLevel = document.getElementById('playerLevel');
     const achievementCount = document.getElementById('achievementCount');
 
-    // ==================== BAŞARIMLARI YÜKLE ====================
+    // ==================== BAŞARIM GÖSTER ====================
     function loadAchievements() {
-        const achievements = JSON.parse(localStorage.getItem('hex_achievements') || '[]');
-        const points = parseInt(localStorage.getItem('hex_points') || '0');
-        const stats = JSON.parse(localStorage.getItem('hex_stats') || '{}');
-        
-        // Puanı göster
-        totalPoints.textContent = points;
-        
-        // İstatistikleri göster
-        memberSince.textContent = stats.memberSince || 'Bugün';
-        totalGames.textContent = stats.games || '0';
-        playerLevel.textContent = stats.level || '1';
-        
-        // Başarım sayısını göster
-        const unlockedCount = achievements.filter(a => a.unlocked).length;
-        achievementCount.textContent = `${unlockedCount}/${achievements.length}`;
-        
-        // Progress bar'ları güncelle
-        updateProgressBars(unlockedCount, achievements.length);
-        
-        // Başarımları listele
-        achievementsList.innerHTML = '';
-        
-        achievements.forEach(ach => {
-            const card = document.createElement('div');
-            card.className = `achievement-card ${ach.unlocked ? 'unlocked' : ''}`;
+        try {
+            const achievements = JSON.parse(localStorage.getItem('hex_achievements') || '[]');
+            const points = parseInt(localStorage.getItem('hex_points') || '0');
+            const stats = JSON.parse(localStorage.getItem('hex_stats') || '{}');
             
-            card.innerHTML = `
-                <div class="achievement-header">
-                    <div class="achievement-icon">${ach.icon}</div>
-                    <div>
-                        <div class="achievement-name">${ach.name}</div>
-                        <div style="color: #666; font-size: 0.8rem; margin-top: 0.1rem;">
-                            ${ach.unlocked ? '✓ Tamamlandı' : '🔒 Kilitli'}
+            // Puanı göster
+            totalPoints.textContent = points;
+            
+            // İstatistikleri göster
+            memberSince.textContent = stats.memberSince || 'Bugün';
+            totalGames.textContent = stats.games || '0';
+            playerLevel.textContent = stats.level || '1';
+            
+            // Açılan başarım sayısını hesapla
+            const unlockedCount = achievements.filter(a => a.unlocked).length;
+            achievementCount.textContent = `${unlockedCount}/${achievements.length}`;
+            
+            // Başarımları listele
+            achievementsList.innerHTML = '';
+            
+            achievements.forEach(ach => {
+                const card = document.createElement('div');
+                card.className = `achievement-card ${ach.unlocked ? 'unlocked' : ''}`;
+                
+                card.innerHTML = `
+                    <div class="achievement-header">
+                        <div class="achievement-icon">${ach.icon}</div>
+                        <div>
+                            <div class="achievement-name">${ach.name}</div>
+                            <div style="font-size: 0.85rem; color: ${ach.unlocked ? '#10b981' : '#ef4444'}; margin-top: 0.2rem;">
+                                ${ach.unlocked ? '✓ AÇILDI' : '🔒 KİLİTLİ'}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="achievement-desc">${ach.desc}</div>
-                <div class="achievement-meta">
-                    <div class="achievement-points">⭐ ${ach.points} Puan</div>
-                    ${!ach.unlocked ? 
-                        `<div class="click-hint">Tıkla ve al → ${ach.page.replace('.html', '')}</div>` 
-                        : ''
+                    <div class="achievement-desc">${ach.desc}</div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
+                        <div style="color: #f59e0b; font-weight: 700; font-size: 1rem;">
+                            ⭐ ${ach.points} Puan
+                        </div>
+                        ${!ach.unlocked ? 
+                            `<div class="click-hint">
+                                <span>🎯</span> ALMAK İÇİN TIKLA → ${ach.page.replace('.html', '')}
+                            </div>` 
+                            : `<div style="color: #10b981; font-size: 0.85rem;">
+                                ✓ ${ach.date || 'Kazanıldı'}
+                            </div>`
+                        }
+                    </div>
+                `;
+                
+                // TIKLA = BAŞARIMI AL + SAYFAYA GİT
+                card.addEventListener('click', function() {
+                    if (!ach.unlocked) {
+                        if (unlockAchievement(ach.id)) {
+                            showNotification(`🏆 ${ach.name} başarımı kazandın! +${ach.points} puan`);
+                            
+                            // 1 saniye sonra sayfaya git
+                            setTimeout(() => {
+                                if (ach.page) {
+                                    window.location.href = ach.page;
+                                }
+                            }, 1000);
+                        }
                     }
-                </div>
-            `;
-            
-            // TIKLA = BAŞARIMI AL + SAYFAYA GİT
-            card.addEventListener('click', function() {
-                if (!ach.unlocked) {
-                    if (unlockAchievement(ach.id)) {
-                        showNotification(`🏆 ${ach.name} başarımını kazandın! +${ach.points} puan`);
-                        
-                        // Tüm başarımlar tamamlandı mı kontrol et
-                        checkLevelUp();
-                        
-                        // 1 saniye sonra sayfaya git
-                        setTimeout(() => {
-                            if (ach.page) {
-                                window.location.href = ach.page;
-                            }
-                        }, 1000);
-                    }
-                }
+                });
+                
+                achievementsList.appendChild(card);
             });
             
-            achievementsList.appendChild(card);
-        });
+            console.log('✅ Başarımlar yüklendi');
+        } catch (error) {
+            console.error('❌ Başarımları yüklerken hata:', error);
+            achievementsList.innerHTML = '<p style="color: #ef4444; text-align: center;">Başarımlar yüklenirken bir hata oluştu.</p>';
+        }
     }
 
     // ==================== BAŞARIM AÇ ====================
     function unlockAchievement(id) {
-        let achievements = JSON.parse(localStorage.getItem('hex_achievements') || '[]');
-        const achievement = achievements.find(a => a.id === id);
-        
-        if (achievement && !achievement.unlocked) {
-            achievement.unlocked = true;
-            achievement.date = new Date().toLocaleDateString('tr-TR');
+        try {
+            let achievements = JSON.parse(localStorage.getItem('hex_achievements') || '[]');
+            const achievement = achievements.find(a => a.id === id);
             
-            // Puan ekle
-            let points = parseInt(localStorage.getItem('hex_points') || '0');
-            points += achievement.points;
-            localStorage.setItem('hex_points', points.toString());
-            
-            // İstatistikleri güncelle
-            let stats = JSON.parse(localStorage.getItem('hex_stats') || '{}');
-            stats.games = (stats.games || 0) + 1;
-            localStorage.setItem('hex_stats', JSON.stringify(stats));
-            
-            // Kaydet
-            localStorage.setItem('hex_achievements', JSON.stringify(achievements));
-            
-            // Ekranı güncelle
-            loadAchievements();
-            
-            return true;
+            if (achievement && !achievement.unlocked) {
+                // Başarımı aç
+                achievement.unlocked = true;
+                achievement.date = new Date().toLocaleDateString('tr-TR');
+                
+                // Puan ekle
+                let points = parseInt(localStorage.getItem('hex_points') || '0');
+                points += achievement.points;
+                localStorage.setItem('hex_points', points.toString());
+                
+                // İstatistikleri güncelle
+                let stats = JSON.parse(localStorage.getItem('hex_stats') || '{}');
+                stats.games = (stats.games || 0) + 1;
+                stats.level = Math.floor((stats.games || 0) / 3) + 1;
+                localStorage.setItem('hex_stats', JSON.stringify(stats));
+                
+                // Kaydet
+                localStorage.setItem('hex_achievements', JSON.stringify(achievements));
+                
+                // Ekranı güncelle
+                loadAchievements();
+                
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('❌ Başarım açılırken hata:', error);
+            return false;
         }
-        return false;
     }
 
-    // ==================== PROGRESS BAR GÜNCELLE ====================
-    function updateProgressBars(unlockedCount, totalCount) {
-        const achievementRate = Math.floor((unlockedCount / totalCount) * 100);
-        
-        document.getElementById('achievementRate').textContent = `${achievementRate}%`;
-        document.getElementById('achievementBar').style.width = `${achievementRate}%`;
-        
-        // Oyun ilerlemesi (başarım sayısına göre)
-        const completionRate = Math.floor((unlockedCount / totalCount) * 100);
-        document.getElementById('completionRate').textContent = `${completionRate}%`;
-        document.getElementById('completionBar').style.width = `${completionRate}%`;
-    }
-
-    // ==================== BİLDİRİM ====================
+    // ==================== BİLDİRİM GÖSTER ====================
     function showNotification(message) {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.style.display = 'block';
-        
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 3000);
+        try {
+            const notification = document.getElementById('notification');
+            if (!notification) return;
+            
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            // 3 saniye sonra kaldır
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        } catch (error) {
+            console.error('❌ Bildirim gösterilirken hata:', error);
+        }
     }
 
     // ==================== HAMBURGER MENÜ ====================
     function setupMobileMenu() {
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-            });
-            
-            document.addEventListener('click', function(event) {
-                if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
-                    mobileMenu.classList.remove('active');
-                }
-            });
+        try {
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('active');
+                });
+                
+                // Menü dışına tıklayınca kapat
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+                
+                // Menü linklerine tıklayınca kapat
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+        } catch (error) {
+            console.error('❌ Hamburger menü hatası:', error);
         }
     }
 
@@ -925,80 +867,116 @@
         appId: "1:469976981538:web:c5b49c15b0206c7fb76a7b"
     };
 
-    // Firebase başlat
-    if (typeof firebase !== 'undefined') {
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                const displayName = user.displayName || user.email?.split('@')[0] || 'Kullanıcı';
-                const email = user.email || 'kullanici@email.com';
-                
-                profileName.textContent = displayName;
-                profileEmail.textContent = email;
-                profileAvatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=000&color=fff`;
-                
-                // İlk başarım
-                if (!localStorage.getItem('hex_first_login')) {
-                    localStorage.setItem('hex_first_login', 'true');
-                    setTimeout(() => {
-                        unlockAchievement(1);
-                        showNotification('👋 Hoş geldin! İlk başarımını kazandın!');
-                    }, 500);
+    // Firebase'i başlat - HATA YÖNETİMİ
+    try {
+        if (typeof firebase !== 'undefined') {
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            
+            // Auth durumunu dinle
+            auth.onAuthStateChanged(user => {
+                try {
+                    if (user) {
+                        // Kullanıcı bilgilerini göster
+                        const displayName = user.displayName || user.email.split('@')[0] || 'Kullanıcı';
+                        const email = user.email || 'kullanici@email.com';
+                        
+                        profileName.textContent = displayName;
+                        profileEmail.textContent = email;
+                        profileAvatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=3b82f6&color=fff`;
+                        
+                        // İlk başarımı ver (ilk giriş)
+                        if (!localStorage.getItem('hex_first_login')) {
+                            localStorage.setItem('hex_first_login', 'true');
+                            setTimeout(() => {
+                                unlockAchievement(1); // İlk Adım başarımı
+                                showNotification('👋 Hoş geldin! İlk başarımını kazandın!');
+                            }, 500);
+                        }
+                    } else {
+                        // Giriş yapmamışsa ana sayfaya yönlendir
+                        if (window.location.pathname.includes('profile.html')) {
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 1000);
+                        }
+                    }
+                } catch (error) {
+                    console.error('❌ Auth durum hatası:', error);
                 }
-            } else {
-                if (window.location.pathname.includes('profile.html')) {
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 1000);
-                }
-            }
-        });
+            });
+        }
+    } catch (error) {
+        console.error('❌ Firebase başlatma hatası:', error);
+        // Firebase çalışmazsa demo mod
+        profileName.textContent = "Demo Kullanıcı";
+        profileEmail.textContent = "demo@hexagesgames.com";
+        profileAvatar.src = "https://ui-avatars.com/api/?name=Demo+Kullanıcı&background=3b82f6&color=fff";
     }
 
     // ==================== SAYFA YÜKLENİNCE ====================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🎮 HEXAGES GAMES Profil');
+        console.log('🚀 HEXAGES GAMES Profil Sayfası Yükleniyor...');
         
-        // Storage başlat
-        initializeStorage();
-        
-        // Başarımları yükle
-        loadAchievements();
-        
-        // Hamburger menü
-        setupMobileMenu();
-        
-        // Site Müdavimi kontrolü
-        const lastVisit = localStorage.getItem('hex_last_visit');
-        const now = Date.now();
-        
-        if (lastVisit) {
-            const hoursSinceLastVisit = (now - parseInt(lastVisit)) / (1000 * 60 * 60);
-            if (hoursSinceLastVisit > 1) {
-                unlockAchievement(2);
+        try {
+            // LocalStorage'ı başlat
+            if (initializeStorage()) {
+                // Başarımları yükle
+                loadAchievements();
+                
+                // Hamburger menüyü kur
+                setupMobileMenu();
+                
+                // Site Müdavimi başarımını kontrol et
+                const lastVisit = localStorage.getItem('hex_last_visit');
+                const now = Date.now();
+                
+                if (lastVisit) {
+                    const hoursSinceLastVisit = (now - parseInt(lastVisit)) / (1000 * 60 * 60);
+                    if (hoursSinceLastVisit > 1) {
+                        unlockAchievement(2); // Site Müdavimi
+                    }
+                }
+                
+                localStorage.setItem('hex_last_visit', now.toString());
+                
+                console.log('✅ Tüm sistemler hazır!');
             }
+        } catch (error) {
+            console.error('❌ Sayfa yükleme hatası:', error);
+            showNotification('⚠️ Sistem yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.');
         }
-        
-        localStorage.setItem('hex_last_visit', now.toString());
-        
-        // Level kontrolü
-        checkLevelUp();
     });
 
-    // ==================== DİĞER SAYFALAR İÇİN ====================
+    // ==================== DİĞER SAYFALAR İÇİN KOLAY FONKSİYON ====================
     window.unlockPageAchievement = function(pageName) {
-        const pageMap = {
-            'games': 3,
-            'contact': 4,
-            'developers': 5,
-            'news': 6
-        };
-        
-        if (pageMap[pageName]) {
-            return unlockAchievement(pageMap[pageName]);
+        try {
+            const pageMap = {
+                'games': 3,
+                'contact': 4,
+                'developers': 5,
+                'news': 6
+            };
+            
+            if (pageMap[pageName]) {
+                return unlockAchievement(pageMap[pageName]);
+            }
+            return false;
+        } catch (error) {
+            console.error('❌ Sayfa başarımı hatası:', error);
+            return false;
         }
+    };
+
+    // Hata yakalama
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error('🛑 Global hata:', {
+            message: msg,
+            url: url,
+            line: lineNo,
+            column: columnNo,
+            error: error
+        });
         return false;
     };
     </script>
