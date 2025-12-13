@@ -359,5 +359,20 @@
     
     <!-- ESKİ SCRIPT.JS DOSYASI -->
     <script src="script.js"></script>
+    <script>
+    // Başarım kazanma kodu (games.html, contact.html, developers.html, news.html için)
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageName = window.location.pathname.split('/').pop().replace('.html', '');
+        if (pageName && pageName !== 'index' && pageName !== 'profile') {
+            // Başarımı aç
+            if (window.unlockPageAchievement) {
+                window.unlockPageAchievement(pageName);
+            }
+            
+            // LocalStorage'a kaydet (profil sayfası için)
+            localStorage.setItem('hexages_last_page', window.location.pathname.split('/').pop());
+        }
+    });
+</script>
 </body>
 </html>
