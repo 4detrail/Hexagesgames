@@ -134,6 +134,71 @@
         transform: translateX(0);
     }
 
+    /* Mobil profil linki - Giriş Yapılmışsa Görünür */
+    .mobile-profile-link {
+        display: none;
+        padding: 1.25rem 2rem;
+        color: #d1d5db;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        position: relative;
+        overflow: hidden;
+        background-color: rgba(31, 41, 55, 0.3);
+        border-left: 4px solid #3b82f6;
+    }
+
+    .mobile-profile-link:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-profile-link:hover,
+    .mobile-profile-link.active {
+        color: #fff;
+        background-color: rgba(31, 41, 55, 0.5);
+        padding-left: 2.5rem;
+    }
+
+    .mobile-profile-link:hover:before,
+    .mobile-profile-link.active:before {
+        transform: translateX(0);
+    }
+
+    /* Mobil çıkış yap butonu */
+    .mobile-logout-btn {
+        display: none;
+        padding: 1.25rem 2rem;
+        color: #ef4444;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        background-color: rgba(31, 41, 55, 0.3);
+        border-left: 4px solid #ef4444;
+        cursor: pointer;
+        text-align: left;
+        width: 100%;
+        border-right: none;
+        border-top: none;
+    }
+
+    .mobile-logout-btn:hover {
+        color: #fff;
+        background-color: rgba(239, 68, 68, 0.2);
+        padding-left: 2.5rem;
+    }
+
     /* Responsive tasarım */
     @media (max-width: 768px) {
         .mobile-menu-btn {
@@ -570,11 +635,21 @@
             <a href="developers.html" class="mobile-link">Geliştiriciler</a>
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
-            <div class="mobile-auth-link">
-                <button id="mobileAuthLink" class="mobile-link auth-btn" style="border: none; background: none; width: 100%; text-align: left;">
-                    <span>👤</span> Giriş Yap
-                </button>
-            </div>
+            
+            <!-- Mobil profil linki - Giriş yapılmışsa görünür -->
+            <a href="profile.html" id="mobileProfileLink" class="mobile-profile-link">
+                <span>👤</span> Profilim
+            </a>
+            
+            <!-- Mobil giriş yap butonu - Giriş yapılmamışsa görünür -->
+            <button id="mobileAuthLink" class="mobile-link auth-btn" style="border: none; background: none; width: 100%; text-align: left;">
+                <span>👤</span> Giriş Yap
+            </button>
+            
+            <!-- Mobil çıkış yap butonu - Giriş yapılmışsa görünür -->
+            <button id="mobileLogoutBtn" class="mobile-logout-btn">
+                <span>🚪</span> Çıkış Yap
+            </button>
         </div>
     </nav>
 
@@ -707,6 +782,8 @@
     const profileBtnText = document.getElementById('profileBtnText');
     const mobileAuthBtn = document.getElementById('mobileAuthBtn');
     const mobileAuthLink = document.getElementById('mobileAuthLink');
+    const mobileProfileLink = document.getElementById('mobileProfileLink');
+    const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
     const googleLoginBtn = document.getElementById('googleLoginBtn');
     const authClose = document.getElementById('authClose');
     const userDropdown = document.getElementById('userDropdown');
@@ -726,10 +803,12 @@
             // Kullanıcı giriş yaptı
             updateUserUI(user);
             updateDropdown(user);
+            updateMobileMenuUI(user);
             console.log('✅ Kullanıcı giriş yaptı:', user.displayName || user.email);
         } else {
             // Kullanıcı çıkış yaptı
             resetUI();
+            resetMobileMenuUI();
             console.log('🚪 Kullanıcı çıkış yaptı');
         }
     });
@@ -747,7 +826,45 @@
         
         // Mobil butonları güncelle
         if (mobileAuthBtn) mobileAuthBtn.style.display = 'none';
-        if (mobileAuthLink) mobileAuthLink.style.display = 'none';
+    }
+
+    // Mobil menü UI'sini güncelle
+    function updateMobileMenuUI(user) {
+        const displayName = user.displayName || user.email.split('@')[0];
+        
+        // Profil linkini göster
+        if (mobileProfileLink) {
+            mobileProfileLink.style.display = 'block';
+            mobileProfileLink.innerHTML = `<span>👤</span> ${displayName}`;
+        }
+        
+        // Giriş butonunu gizle
+        if (mobileAuthLink) {
+            mobileAuthLink.style.display = 'none';
+        }
+        
+        // Çıkış butonunu göster
+        if (mobileLogoutBtn) {
+            mobileLogoutBtn.style.display = 'block';
+        }
+    }
+
+    // Mobil menü UI'sini sıfırla
+    function resetMobileMenuUI() {
+        // Profil linkini gizle
+        if (mobileProfileLink) {
+            mobileProfileLink.style.display = 'none';
+        }
+        
+        // Giriş butonunu göster
+        if (mobileAuthLink) {
+            mobileAuthLink.style.display = 'block';
+        }
+        
+        // Çıkış butonunu gizle
+        if (mobileLogoutBtn) {
+            mobileLogoutBtn.style.display = 'none';
+        }
     }
 
     // Dropdown'ı güncelle
@@ -780,7 +897,6 @@
         
         // Mobil butonları göster
         if (mobileAuthBtn) mobileAuthBtn.style.display = 'flex';
-        if (mobileAuthLink) mobileAuthLink.style.display = 'flex';
         
         // Dropdown'ı kapat
         userDropdown.classList.remove('active');
@@ -818,6 +934,13 @@
             .then((result) => {
                 console.log('✅ Google girişi başarılı');
                 closeAuthModal();
+                
+                // Mobil menüyü kapat
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
             })
             .catch((error) => {
                 console.error('❌ Google giriş hatası:', error);
@@ -836,9 +959,33 @@
             .then(() => {
                 console.log('✅ Çıkış yapıldı');
                 userDropdown.classList.remove('active');
+                
+                // Mobil menüyü kapat
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
             })
             .catch((error) => {
                 console.error('❌ Çıkış hatası:', error);
+                alert('Çıkış yapılırken bir hata oluştu');
+            });
+    }
+
+    // Mobil çıkış yap
+    function mobileSignOut() {
+        auth.signOut()
+            .then(() => {
+                console.log('✅ Mobil çıkış yapıldı');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            })
+            .catch((error) => {
+                console.error('❌ Mobil çıkış hatası:', error);
                 alert('Çıkış yapılırken bir hata oluştu');
             });
     }
@@ -849,6 +996,8 @@
     
     if (mobileAuthBtn) mobileAuthBtn.addEventListener('click', openAuthModal);
     if (mobileAuthLink) mobileAuthLink.addEventListener('click', openAuthModal);
+    
+    if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', mobileSignOut);
     
     googleLoginBtn.addEventListener('click', signInWithGoogle);
     authClose.addEventListener('click', closeAuthModal);
@@ -922,6 +1071,19 @@
                 document.body.style.overflow = '';
             });
         });
+        
+        // Mobil profil linkine tıklayınca menüyü kapat
+        const mobileProfileLink = document.getElementById('mobileProfileLink');
+        if (mobileProfileLink) {
+            mobileProfileLink.addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
         
         // Pencere boyutu değişince mobil menüyü kapat
         window.addEventListener('resize', function() {
