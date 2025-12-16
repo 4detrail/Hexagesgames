@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEXAGES GAMES - Oyunlar</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    
     <style>
         /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
         .mobile-menu-btn {
@@ -128,6 +133,111 @@
             transform: translateX(0);
         }
 
+        /* Mobil profil linki - Giriş Yapılmışsa Görünür */
+        .mobile-profile-link {
+            display: none;
+            padding: 1.25rem 2rem;
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(31, 41, 55, 0.3);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .mobile-profile-link:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-profile-link:hover,
+        .mobile-profile-link.active {
+            color: #fff;
+            background-color: rgba(31, 41, 55, 0.5);
+            padding-left: 2.5rem;
+        }
+
+        .mobile-profile-link:hover:before,
+        .mobile-profile-link.active:before {
+            transform: translateX(0);
+        }
+
+        /* Mobil beta test linki - Giriş Yapılmışsa Görünür */
+        .mobile-beta-link {
+            display: none;
+            padding: 1.25rem 2rem;
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(31, 41, 55, 0.3);
+            border-left: 4px solid #10b981;
+        }
+
+        .mobile-beta-link:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #10b981, #34d399);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-beta-link:hover,
+        .mobile-beta-link.active {
+            color: #fff;
+            background-color: rgba(31, 41, 55, 0.5);
+            padding-left: 2.5rem;
+        }
+
+        .mobile-beta-link:hover:before,
+        .mobile-beta-link.active:before {
+            transform: translateX(0);
+        }
+
+        /* Mobil çıkış yap butonu */
+        .mobile-logout-btn {
+            display: none;
+            padding: 1.25rem 2rem;
+            color: #ef4444;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+            background-color: rgba(31, 41, 55, 0.3);
+            border-left: 4px solid #ef4444;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            border-right: none;
+            border-top: none;
+        }
+
+        .mobile-logout-btn:hover {
+            color: #fff;
+            background-color: rgba(239, 68, 68, 0.2);
+            padding-left: 2.5rem;
+        }
+
         /* Responsive tasarım */
         @media (max-width: 768px) {
             .mobile-menu-btn {
@@ -148,9 +258,179 @@
         body.menu-open {
             overflow: hidden;
         }
+        
+        /* NAVBAR AUTH STYLES */
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-auth-btn {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+            color: #d1d5db;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-auth-btn:hover {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            color: #fff;
+            border-color: #4b5563;
+            transform: translateY(-2px);
+        }
+        
+        /* Beta butonu */
+        .beta-btn {
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+            border: 1px solid #10b981;
+            border-radius: 0.5rem;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .beta-btn:hover {
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Auth Modal */
+        .auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .auth-modal.active {
+            display: flex;
+        }
+        
+        .auth-container {
+            background: linear-gradient(135deg, #111827 0%, #000 100%);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .auth-container h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .auth-container p {
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+        
+        .google-login-btn {
+            background: #fff;
+            color: #444;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .google-login-btn:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .google-login-btn img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .auth-close {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+        
+        .auth-close:hover {
+            color: #fff;
+        }
+        
+        /* Loading state */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #9ca3af;
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-container">
+            <h2>HEXAGES GAMES'e Hoş Geldiniz</h2>
+            <p>Beta testlerine katılmak ve özel içeriklere erişmek için giriş yapın</p>
+            
+            <button id="googleLoginBtn" class="google-login-btn">
+                <img src="https://www.google.com/favicon.ico" alt="Google">
+                Google ile Giriş Yap
+            </button>
+            
+            <button id="authClose" class="auth-close">Daha Sonra</button>
+        </div>
+    </div>
+
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -163,17 +443,59 @@
                 <a href="developers.html" class="nav-link">Geliştiriciler</a>
                 <a href="news.html" class="nav-link">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
+                
+                <!-- Auth Butonları -->
+                <div class="nav-auth">
+                    <!-- Beta butonu (giriş yapılmışsa görünür) -->
+                    <a href="beta.html" id="betaBtn" class="beta-btn" style="display: none;">
+                        <span>🎮</span>
+                        <span>Beta Testleri</span>
+                    </a>
+                    
+                    <!-- Profil butonu (giriş yapılmışsa görünür) -->
+                    <a href="profile.html" id="profileBtn" class="nav-auth-btn" style="display: none;">
+                        <span>👤</span>
+                        <span id="profileBtnText">Profil</span>
+                    </a>
+                    
+                    <!-- Giriş butonu (giriş yapılmamışsa) -->
+                    <button id="authBtn" class="nav-auth-btn">
+                        <span>👤</span>
+                        <span>Giriş Yap</span>
+                    </button>
+                </div>
             </div>
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <span class="hamburger"></span>
             </button>
         </div>
-        <div class="mobile-menu" id="mobileMenu">
+        <div id="mobileMenu" class="mobile-menu">
             <a href="index.html" class="mobile-link">Ana Sayfa</a>
             <a href="games.html" class="mobile-link active">Oyunlar</a>
             <a href="developers.html" class="mobile-link">Geliştiriciler</a>
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
+            
+            <!-- Mobil beta test linki - Giriş yapılmışsa görünür -->
+            <a href="beta.html" id="mobileBetaLink" class="mobile-beta-link">
+                <span>🎮</span> Beta Testleri
+            </a>
+            
+            <!-- Mobil profil linki - Giriş yapılmışsa görünür -->
+            <a href="profile.html" id="mobileProfileLink" class="mobile-profile-link">
+                <span>👤</span> Profilim
+            </a>
+            
+            <!-- Mobil giriş yap butonu - Giriş yapılmamışsa görünür -->
+            <button id="mobileAuthLink" class="mobile-link" style="border: none; background: none; width: 100%; text-align: left;">
+                <span>👤</span> Giriş Yap
+            </button>
+            
+            <!-- Mobil çıkış yap butonu - Giriş yapılmışsa görünür -->
+            <button id="mobileLogoutBtn" class="mobile-logout-btn">
+                <span>🚪</span> Çıkış Yap
+            </button>
         </div>
     </nav>
 
@@ -259,6 +581,8 @@
                         <li><a href="index.html">Ana Sayfa</a></li>
                         <li><a href="games.html">Oyunlar</a></li>
                         <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="profile.html">Profil</a></li>
+                        <li><a href="beta.html">Beta Testleri</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -275,7 +599,204 @@
         </div>
     </footer>
 
-    <!-- HAMBURGER MENÜ JAVASCRIPT (HTML'YE GÖMÜLMÜŞ) -->
+    <!-- FIREBASE AUTH JAVASCRIPT -->
+    <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAroBTexiXeaJGYqMiIIM5POdN2JUuigvo",
+        authDomain: "hexagesgames-f8fe2.firebaseapp.com",
+        projectId: "hexagesgames-f8fe2",
+        storageBucket: "hexagesgames-f8fe2.firebasestorage.app",
+        messagingSenderId: "469976981538",
+        appId: "1:469976981538:web:c5b49c15b0206c7fb76a7b"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const authModal = document.getElementById('authModal');
+    const authBtn = document.getElementById('authBtn');
+    const profileBtn = document.getElementById('profileBtn');
+    const profileBtnText = document.getElementById('profileBtnText');
+    const betaBtn = document.getElementById('betaBtn');
+    const mobileAuthLink = document.getElementById('mobileAuthLink');
+    const mobileProfileLink = document.getElementById('mobileProfileLink');
+    const mobileBetaLink = document.getElementById('mobileBetaLink');
+    const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+    const googleLoginBtn = document.getElementById('googleLoginBtn');
+    const authClose = document.getElementById('authClose');
+
+    // Auth State Listener
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            // Kullanıcı giriş yaptı
+            updateUserUI(user);
+            updateMobileMenuUI(user);
+            console.log('✅ Kullanıcı giriş yaptı:', user.displayName || user.email);
+        } else {
+            // Kullanıcı çıkış yaptı
+            resetUI();
+            resetMobileMenuUI();
+            console.log('🚪 Kullanıcı çıkış yaptı');
+        }
+    });
+
+    // Kullanıcı arayüzünü güncelle
+    function updateUserUI(user) {
+        // Giriş butonunu gizle, profil ve beta butonlarını göster
+        authBtn.style.display = 'none';
+        profileBtn.style.display = 'flex';
+        betaBtn.style.display = 'flex';
+        
+        // Profil butonuna kullanıcı adını ekle (kısa)
+        const displayName = user.displayName || user.email.split('@')[0];
+        const shortName = displayName.length > 8 ? displayName.substring(0, 8) + '...' : displayName;
+        profileBtnText.textContent = shortName;
+    }
+
+    // Mobil menü UI'sini güncelle
+    function updateMobileMenuUI(user) {
+        const displayName = user.displayName || user.email.split('@')[0];
+        
+        // Beta ve profil linklerini göster
+        if (mobileBetaLink) {
+            mobileBetaLink.style.display = 'block';
+        }
+        
+        if (mobileProfileLink) {
+            mobileProfileLink.style.display = 'block';
+            mobileProfileLink.innerHTML = `<span>👤</span> ${displayName}`;
+        }
+        
+        // Giriş butonunu gizle
+        if (mobileAuthLink) {
+            mobileAuthLink.style.display = 'none';
+        }
+        
+        // Çıkış butonunu göster
+        if (mobileLogoutBtn) {
+            mobileLogoutBtn.style.display = 'block';
+        }
+    }
+
+    // Mobil menü UI'sini sıfırla
+    function resetMobileMenuUI() {
+        // Beta ve profil linklerini gizle
+        if (mobileBetaLink) {
+            mobileBetaLink.style.display = 'none';
+        }
+        
+        if (mobileProfileLink) {
+            mobileProfileLink.style.display = 'none';
+        }
+        
+        // Giriş butonunu göster
+        if (mobileAuthLink) {
+            mobileAuthLink.style.display = 'block';
+        }
+        
+        // Çıkış butonunu gizle
+        if (mobileLogoutBtn) {
+            mobileLogoutBtn.style.display = 'none';
+        }
+    }
+
+    // UI'yi sıfırla (çıkış yapınca)
+    function resetUI() {
+        // Giriş butonunu göster, profil ve beta butonlarını gizle
+        authBtn.style.display = 'flex';
+        profileBtn.style.display = 'none';
+        betaBtn.style.display = 'none';
+        profileBtnText.textContent = 'Profil';
+    }
+
+    // Auth modal'ı aç
+    function openAuthModal() {
+        authModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Mobil menüyü kapat
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+    }
+
+    // Auth modal'ı kapat
+    function closeAuthModal() {
+        authModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Google ile giriş
+    function signInWithGoogle() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account'
+        });
+        
+        // Loading state
+        googleLoginBtn.innerHTML = '<span class="loading-spinner"></span> Giriş yapılıyor...';
+        googleLoginBtn.classList.add('loading');
+        
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                console.log('✅ Google girişi başarılı');
+                closeAuthModal();
+            })
+            .catch((error) => {
+                console.error('❌ Google giriş hatası:', error);
+                alert('Giriş yapılırken bir hata oluştu: ' + error.message);
+            })
+            .finally(() => {
+                // Reset button
+                googleLoginBtn.innerHTML = '<img src="https://www.google.com/favicon.ico" alt="Google"> Google ile Giriş Yap';
+                googleLoginBtn.classList.remove('loading');
+            });
+    }
+
+    // Çıkış yap
+    function signOut() {
+        auth.signOut()
+            .then(() => {
+                console.log('✅ Çıkış yapıldı');
+            })
+            .catch((error) => {
+                console.error('❌ Çıkış hatası:', error);
+                alert('Çıkış yapılırken bir hata oluştu');
+            });
+    }
+
+    // Event Listeners
+    authBtn.addEventListener('click', openAuthModal);
+    
+    if (mobileAuthLink) mobileAuthLink.addEventListener('click', openAuthModal);
+    
+    if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', signOut);
+    
+    googleLoginBtn.addEventListener('click', signInWithGoogle);
+    authClose.addEventListener('click', closeAuthModal);
+
+    // Modal dışında tıklayınca kapat
+    authModal.addEventListener('click', (event) => {
+        if (event.target === authModal) {
+            closeAuthModal();
+        }
+    });
+
+    // Escape tuşuyla modal'ı kapat
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeAuthModal();
+        }
+    });
+
+    console.log('🔥 Firebase Auth sistemi hazır!');
+    </script>
+    
+    <!-- HAMBURGER MENÜ JAVASCRIPT -->
     <script>
     // Hamburger menü toggle fonksiyonu
     function toggleMobileMenu() {
@@ -291,10 +812,8 @@
         // Body scroll kontrolü
         if (mobileMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
-            console.log('Menü açıldı');
         } else {
             document.body.style.overflow = '';
-            console.log('Menü kapandı');
         }
     }
     
@@ -306,23 +825,17 @@
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            console.log('Hamburger butonuna event listener eklendi');
         }
         
         // Mobil menü linklerine tıklayınca menüyü kapat
-        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-profile-link, .mobile-beta-link');
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
-                console.log('Mobil linke tıklandı, menü kapanıyor...');
                 const mobileMenu = document.getElementById('mobileMenu');
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
                 
-                if (mobileMenu) {
-                    mobileMenu.classList.remove('active');
-                }
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.classList.remove('active');
-                }
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
                 document.body.style.overflow = '';
             });
         });
@@ -330,16 +843,11 @@
         // Pencere boyutu değişince mobil menüyü kapat
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
-                console.log('Desktop boyutuna geçildi, mobil menü kapatılıyor...');
                 const mobileMenu = document.getElementById('mobileMenu');
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
                 
-                if (mobileMenu) {
-                    mobileMenu.classList.remove('active');
-                }
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.classList.remove('active');
-                }
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
@@ -353,12 +861,7 @@
                 navbar.classList.remove('scrolled');
             }
         });
-        
-        console.log('Hamburger menü sistemi hazır!');
     });
-    
-    // Fonksiyonu global scope'a ekle
-    window.toggleMobileMenu = toggleMobileMenu;
     </script>
     
     <!-- ESKİ SCRIPT.JS DOSYASI -->
