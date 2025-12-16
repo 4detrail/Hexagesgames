@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEXAGES GAMES - Ana Sayfa</title>
+    <title>HEXAGES GAMES - Oyunlar</title>
     <link rel="stylesheet" href="styles.css">
-
-    <meta name="google-site-verification" content="Uc4_k4uNqCtwSkQtYOjckdv0tcs9thJEOHGY-jJO74k" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" title="Sitemap">
+    
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
@@ -176,46 +174,6 @@
         transform: translateX(0);
     }
 
-    /* Mobil beta linki - Giriş Yapılmışsa Görünür */
-    .mobile-beta-link {
-        display: none;
-        padding: 1.25rem 2rem;
-        color: #d1d5db;
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
-        position: relative;
-        overflow: hidden;
-        background-color: rgba(31, 41, 55, 0.3);
-        border-left: 4px solid #10b981;
-    }
-
-    .mobile-beta-link:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 4px;
-        background: linear-gradient(to bottom, #10b981, #34d399);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
-
-    .mobile-beta-link:hover,
-    .mobile-beta-link.active {
-        color: #fff;
-        background-color: rgba(31, 41, 55, 0.5);
-        padding-left: 2.5rem;
-    }
-
-    .mobile-beta-link:hover:before,
-    .mobile-beta-link.active:before {
-        transform: translateX(0);
-    }
-
     /* Mobil çıkış yap butonu */
     .mobile-logout-btn {
         display: none;
@@ -324,29 +282,6 @@
         transform: translateY(-2px);
     }
     
-    /* Beta butonu */
-    .beta-btn {
-        background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-        border: 1px solid #10b981;
-        border-radius: 0.5rem;
-        color: #fff;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
-    }
-    
-    .beta-btn:hover {
-        background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-    }
-    
     /* Auth Modal */
     .auth-modal {
         position: fixed;
@@ -356,6 +291,7 @@
         bottom: 0;
         background: rgba(0, 0, 0, 0.8);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         display: none;
         align-items: center;
         justify-content: center;
@@ -655,30 +591,24 @@
                 <span>HEXAGES GAMES</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link active">Ana Sayfa</a>
-                <a href="games.html" class="nav-link">Oyunlar</a>
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="games.html" class="nav-link active">Oyunlar</a>
                 <a href="developers.html" class="nav-link">Geliştiriciler</a>
                 <a href="news.html" class="nav-link">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
                 
                 <!-- Auth Section - SADE BUTONLAR -->
                 <div class="auth-section">
-                    <!-- Beta butonu (giriş yapılmışsa görünür) -->
-                    <a href="beta.html" id="betaBtn" class="beta-btn" style="display: none;">
-                        <span>🎮</span>
-                        <span>Beta Testleri</span>
-                    </a>
-                    
-                    <!-- Profil butonu (giriş yapılmışsa görünür) -->
-                    <button id="profileBtn" class="profile-btn" style="display: none;">
-                        <span>👤</span>
-                        <span id="profileBtnText">Profil</span>
-                    </button>
-                    
                     <!-- Giriş butonu (giriş yapılmamışsa) -->
                     <button id="authBtn" class="auth-btn">
                         <span>👤</span>
                         <span>Giriş Yap</span>
+                    </button>
+                    
+                    <!-- Profil butonu (giriş yapılmışsa) -->
+                    <button id="profileBtn" class="profile-btn" style="display: none;">
+                        <span>👤</span>
+                        <span id="profileBtnText">Profil</span>
                     </button>
                 </div>
             </div>
@@ -693,16 +623,11 @@
             </button>
         </div>
         <div id="mobileMenu" class="mobile-menu">
-            <a href="index.html" class="mobile-link active">Ana Sayfa</a>
-            <a href="games.html" class="mobile-link">Oyunlar</a>
+            <a href="index.html" class="mobile-link">Ana Sayfa</a>
+            <a href="games.html" class="mobile-link active">Oyunlar</a>
             <a href="developers.html" class="mobile-link">Geliştiriciler</a>
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
-            
-            <!-- Mobil beta linki - Giriş yapılmışsa görünür -->
-            <a href="beta.html" id="mobileBetaLink" class="mobile-beta-link">
-                <span>🎮</span> Beta Testleri
-            </a>
             
             <!-- Mobil profil linki - Giriş yapılmışsa görünür -->
             <a href="profile.html" id="mobileProfileLink" class="mobile-profile-link">
@@ -721,65 +646,69 @@
         </div>
     </nav>
 
-    <section class="hero">
-        <video class="hero-video" autoplay loop muted playsinline>
-            <source src="https://customer-assets.emergentagent.com/job_golden-hex-games/artifacts/yuep7m61_WhatsApp%20Video%202025-10-02%20saat%2020.17.01_99fbc83e.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <img src="hexagesgames.png" alt="HEXAGES GAMES" class="hero-logo">
-            <h1 class="hero-title">HEXAGES GAMES</h1>
-            <p class="hero-subtitle">Geleceğin Oyunlarını Bugünden Yaratıyoruz</p>
-            <p class="hero-description">Yenilikçi tasarımlar, etkileyici hikayeler ve unutulmaz oyun deneyimleri ile oyun dünyasında iz bırakıyoruz.</p>
-            <div class="hero-buttons">
-                <a href="games.html" class="btn btn-primary">Oyunlarımızı Keşfet →</a>
-                <a href="contact.html" class="btn btn-secondary">Bizimle İletişime Geç</a>
-            </div>
-        </div>
-        <br>
-        <div class="scroll-indicator">
-            <br>
-            <br>
-            <br>
-            <div class="mouse"></div>
-        </div>
-    </section>
-
-    <section class="features">
+    <section class="page-section">
         <div class="container">
-            <h2 class="section-title">Neden HEXAGES GAMES?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
-                    <h3>İnovatif Oyunlar</h3>
-                    <p>Benzersiz oyun mekaniği ve hikaye anlatımı</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>Tutkulu Ekip</h3>
-                    <p>Deneyimli ve yaratıcı geliştiriciler</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Sürekli Büyüme</h3>
-                    <p>Her gün daha iyiye giden teknoloji ve içerik</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✨</div>
-                    <h3>Kaliteli İçerik</h3>
-                    <p>AAA kalitesinde oyun deneyimleri</p>
-                </div>
+            <div class="page-header">
+                <h1>Oyunlarımız</h1>
+                <p>Tutkuyla geliştirdiğimiz, oyun dünyasına yenilik getiren projelerimizi keşfedin</p>
             </div>
-        </div>
-    </section>
+            
+            <!-- Yatay Oyun Grid -->
+            <div class="games-grid-large horizontal-games">
+                <!-- Oyun 1 -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="helfdoomss.jpg" alt="Helf Doom">
+                        <div class="game-status status-development">
+                            Geliştirme Aşamasında
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-meta">
+                            <span>Aksiyon</span>
+                            <span>RPG</span>
+                        </div>
+                        <h3>Helf Doom</h3>
+                        <p>Arkadaşlarınızla birlikte oynayabileceğiniz bir multiplayer akıl oyunu</p>
+                    </div>
+                </div>
 
-    <section class="games-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Öne Çıkan Oyunlar</h2>
-                <a href="games.html" class="view-all">Tümünü Gör →</a>
+                <!-- Oyun 2 -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="hexagesgames.png" alt="yakında">
+                        <div class="game-status status-development">
+                            Geliştirme Aşamasında
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-meta">
+                            <span>Fantazi</span>
+                            <span>Açık Dünya</span>
+                        </div>
+                        <h3>yakında</h3>
+                        <p>yakında yeni projelere.</p>
+                    </div>
+                </div>
+
+                <!-- Oyun 3 -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="hexagesgames.png" alt="Yakında">
+                        <div class="game-status status-soon">
+                            Yakında
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-meta">
+                            <span>Bilim Kurgu</span>
+                            <span>Simülasyon</span>
+                        </div>
+                        <h3>yakında</h3>
+                        <p>yakında yeni projelere</p>
+                    </div>
+                </div>
             </div>
-            <div class="games-grid" id="featuredGames"></div>
         </div>
     </section>
 
@@ -791,14 +720,7 @@
                         <img src="hexagesgames.png" alt="HEXAGES GAMES">
                         <span>HEXAGES GAMES</span>
                     </div>
-                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz. Tutkulu ekibimizle geleceğin oyunlarını tasarlıyoruz.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">📘</a>
-                        <a href="https://x.com/hexages_games" class="social-link">🐦</a>
-                        <a href="https://www.instagram.com/hexagesgames" class="social-link">📷</a>
-                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link">📺</a>
-                        <a href="#" class="social-link">💼</a>
-                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
                 </div>
                 <div class="footer-col">
                     <h3>Hızlı Linkler</h3>
@@ -806,25 +728,18 @@
                         <li><a href="index.html">Ana Sayfa</a></li>
                         <li><a href="games.html">Oyunlar</a></li>
                         <li><a href="developers.html">Geliştiriciler</a></li>
-                        <li><a href="news.html">Haberler</a></li>
-                        <li><a href="profile.html">Profil</a></li>
-                        <li><a href="beta.html">Beta Testleri</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h3>İletişim</h3>
                     <ul>
-                        <li>📧 info@hexagesgames.com</li>
+                        <li>📧 hexagesgames@gmail.com</li>
                         <li>📍 İstanbul, Türkiye</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
-                <div class="footer-links">
-                    <a href="privacy.html">Gizlilik Politikası</a>
-                    <a href="terms.html">Kullanım Koşulları</a>
-                </div>
             </div>
         </div>
     </footer>
@@ -852,10 +767,8 @@
     const authBtn = document.getElementById('authBtn');
     const profileBtn = document.getElementById('profileBtn');
     const profileBtnText = document.getElementById('profileBtnText');
-    const betaBtn = document.getElementById('betaBtn');
     const mobileAuthBtn = document.getElementById('mobileAuthBtn');
     const mobileAuthLink = document.getElementById('mobileAuthLink');
-    const mobileBetaLink = document.getElementById('mobileBetaLink');
     const mobileProfileLink = document.getElementById('mobileProfileLink');
     const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
     const googleLoginBtn = document.getElementById('googleLoginBtn');
@@ -889,10 +802,9 @@
 
     // Kullanıcı arayüzünü güncelle
     function updateUserUI(user) {
-        // Giriş butonunu gizle, profil ve beta butonlarını göster
+        // Giriş butonunu gizle, profil butonunu göster
         authBtn.style.display = 'none';
         profileBtn.style.display = 'flex';
-        betaBtn.style.display = 'flex';
         
         // Profil butonuna kullanıcı adını ekle (kısa)
         const displayName = user.displayName || user.email.split('@')[0];
@@ -907,11 +819,7 @@
     function updateMobileMenuUI(user) {
         const displayName = user.displayName || user.email.split('@')[0];
         
-        // Beta ve profil linklerini göster
-        if (mobileBetaLink) {
-            mobileBetaLink.style.display = 'block';
-        }
-        
+        // Profil linkini göster
         if (mobileProfileLink) {
             mobileProfileLink.style.display = 'block';
             mobileProfileLink.innerHTML = `<span>👤</span> ${displayName}`;
@@ -930,11 +838,7 @@
 
     // Mobil menü UI'sini sıfırla
     function resetMobileMenuUI() {
-        // Beta ve profil linklerini gizle
-        if (mobileBetaLink) {
-            mobileBetaLink.style.display = 'none';
-        }
-        
+        // Profil linkini gizle
         if (mobileProfileLink) {
             mobileProfileLink.style.display = 'none';
         }
@@ -973,10 +877,9 @@
 
     // UI'yi sıfırla (çıkış yapınca)
     function resetUI() {
-        // Giriş butonunu göster, profil ve beta butonlarını gizle
+        // Giriş butonunu göster, profil butonunu gizle
         authBtn.style.display = 'flex';
         profileBtn.style.display = 'none';
-        betaBtn.style.display = 'none';
         profileBtnText.textContent = 'Profil';
         
         // Mobil butonları göster
@@ -1135,7 +1038,7 @@
     
     // Sayfa yüklendiğinde çalışacak kod
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🚀 HEXAGES GAMES yüklendi');
+        console.log('🚀 HEXAGES GAMES - Oyunlar sayfası yüklendi');
         
         // Hamburger butonuna click eventi ekle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1156,10 +1059,10 @@
             });
         });
         
-        // Mobil beta ve profil linklerine tıklayınca menüyü kapat
-        const mobileAuthLinks = document.querySelectorAll('.mobile-beta-link, .mobile-profile-link');
-        mobileAuthLinks.forEach(link => {
-            link.addEventListener('click', () => {
+        // Mobil profil linkine tıklayınca menüyü kapat
+        const mobileProfileLink = document.getElementById('mobileProfileLink');
+        if (mobileProfileLink) {
+            mobileProfileLink.addEventListener('click', () => {
                 const mobileMenu = document.getElementById('mobileMenu');
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
                 
@@ -1167,7 +1070,7 @@
                 if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
                 document.body.style.overflow = '';
             });
-        });
+        }
         
         // Pencere boyutu değişince mobil menüyü kapat
         window.addEventListener('resize', function() {
@@ -1191,7 +1094,7 @@
             }
         });
         
-        console.log('✅ Tüm sistemler hazır!');
+        console.log('✅ Oyunlar sayfası hazır!');
     });
     
     // Fonksiyonu global scope'a ekle
