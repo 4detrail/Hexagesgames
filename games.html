@@ -3,513 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEXAGES GAMES - Oyunlar</title>
+    <title>HEXAGES GAMES - Ana Sayfa</title>
     <link rel="stylesheet" href="styles.css">
-    
+
+    <meta name="google-site-verification" content="Uc4_k4uNqCtwSkQtYOjckdv0tcs9thJEOHGY-jJO74k" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" title="Sitemap">
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
     
     <style>
-        /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
+    /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1000;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    .hamburger {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #9ca3af;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger:before,
+    .hamburger:after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background-color: #9ca3af;
+        transition: all 0.3s ease;
+        left: 0;
+    }
+
+    .hamburger:before {
+        top: -8px;
+    }
+
+    .hamburger:after {
+        bottom: -8px;
+    }
+
+    /* Hamburger animasyonu */
+    .mobile-menu-btn.active .hamburger {
+        background-color: transparent;
+    }
+
+    .mobile-menu-btn.active .hamburger:before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .mobile-menu-btn.active .hamburger:after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+
+    /* Mobil menü container */
+    .mobile-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(17, 24, 39, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(55, 65, 81, 0.5);
+        z-index: 999;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: block;
+    }
+
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+
+    /* Mobil menü linkleri */
+    .mobile-link {
+        display: block;
+        padding: 1.25rem 2rem;
+        color: #d1d5db;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mobile-link:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-link:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+        color: #fff;
+        background-color: rgba(31, 41, 55, 0.5);
+        padding-left: 2.5rem;
+    }
+
+    .mobile-link:hover:before,
+    .mobile-link.active:before {
+        transform: translateX(0);
+    }
+
+    /* Mobil profil linki - Giriş Yapılmışsa Görünür */
+    .mobile-profile-link {
+        display: none;
+        padding: 1.25rem 2rem;
+        color: #d1d5db;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        position: relative;
+        overflow: hidden;
+        background-color: rgba(31, 41, 55, 0.3);
+        border-left: 4px solid #3b82f6;
+    }
+
+    .mobile-profile-link:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-profile-link:hover,
+    .mobile-profile-link.active {
+        color: #fff;
+        background-color: rgba(31, 41, 55, 0.5);
+        padding-left: 2.5rem;
+    }
+
+    .mobile-profile-link:hover:before,
+    .mobile-profile-link.active:before {
+        transform: translateX(0);
+    }
+
+    /* Mobil çıkış yap butonu */
+    .mobile-logout-btn {
+        display: none;
+        padding: 1.25rem 2rem;
+        color: #ef4444;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        background-color: rgba(31, 41, 55, 0.3);
+        border-left: 4px solid #ef4444;
+        cursor: pointer;
+        text-align: left;
+        width: 100%;
+        border-right: none;
+        border-top: none;
+    }
+
+    .mobile-logout-btn:hover {
+        color: #fff;
+        background-color: rgba(239, 68, 68, 0.2);
+        padding-left: 2.5rem;
+    }
+
+    /* Responsive tasarım */
+    @media (max-width: 768px) {
         .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1000;
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
-        }
-
-        .hamburger {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background-color: #9ca3af;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger:before,
-        .hamburger:after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 2px;
-            background-color: #9ca3af;
-            transition: all 0.3s ease;
-            left: 0;
-        }
-
-        .hamburger:before {
-            top: -8px;
-        }
-
-        .hamburger:after {
-            bottom: -8px;
-        }
-
-        /* Hamburger animasyonu */
-        .mobile-menu-btn.active .hamburger {
-            background-color: transparent;
-        }
-
-        .mobile-menu-btn.active .hamburger:before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-
-        .mobile-menu-btn.active .hamburger:after {
-            bottom: 0;
-            transform: rotate(-45deg);
-        }
-
-        /* Mobil menü container */
-        .mobile-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: rgba(17, 24, 39, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(55, 65, 81, 0.5);
-            z-index: 999;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            display: block;
-        }
-
-        .mobile-menu.active {
-            max-height: 600px; /* Yeni yükseklik */
-        }
-
-        /* Mobil menü linkleri */
-        .mobile-link {
-            display: block;
-            padding: 1.25rem 2rem;
-            color: #d1d5db;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(55, 65, 81, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mobile-link:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-link:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-link:hover,
-        .mobile-link.active {
-            color: #fff;
-            background-color: rgba(31, 41, 55, 0.5);
-            padding-left: 2.5rem;
-        }
-
-        .mobile-link:hover:before,
-        .mobile-link.active:before {
-            transform: translateX(0);
-        }
-
-        /* BÖLÜM AYIRICI - Kullanıcı Menüsü */
-        .mobile-section {
-            border-top: 1px solid rgba(55, 65, 81, 0.5);
-            background: rgba(31, 41, 55, 0.3);
-        }
-
-        .mobile-section-title {
-            display: block;
-            padding: 1rem 2rem;
-            color: #9ca3af;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* PROFİL BÖLÜMÜ - EKRAN GÖRÜNTÜSÜNDEKİ GİBİ */
-        .mobile-user-section {
-            padding: 1.5rem 2rem;
-            background: rgba(31, 41, 55, 0.5);
-            border-top: 1px solid rgba(55, 65, 81, 0.5);
-            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
-            display: none; /* Giriş yapılmışsa gösterilecek */
-        }
-
-        .mobile-user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .mobile-user-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid #3b82f6;
-            object-fit: cover;
-            background: #1f2937;
-        }
-
-        .mobile-user-details {
-            flex: 1;
-        }
-
-        .mobile-user-name {
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .mobile-user-email {
-            color: #9ca3af;
-            font-size: 0.75rem;
-        }
-
-        /* KULLANICI İSTATİSTİKLERİ - YAN YANA */
-        .mobile-user-stats {
-            display: flex;
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .mobile-stat-item {
-            flex: 1;
-        }
-
-        .mobile-stat-value {
-            color: #3b82f6;
-            font-size: 1.25rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .mobile-stat-label {
-            color: #9ca3af;
-            font-size: 0.75rem;
-        }
-
-        /* KULLANICI AKSİYON BUTONLARI */
-        .mobile-user-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .mobile-action-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            text-decoration: none;
-        }
-
-        .mobile-profile-btn {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid #374151;
-            color: #d1d5db;
-        }
-
-        .mobile-beta-btn {
-            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-            border: 1px solid #10b981;
-            color: #fff;
-        }
-
-        .mobile-logout-btn {
-            flex: 1;
-            display: none; /* Giriş yapılmışsa gösterilecek */
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
-            border: 1px solid #ef4444;
-            color: #fff;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            margin-top: 0.5rem;
-        }
-
-        .mobile-action-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .mobile-profile-btn:hover {
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            color: #fff;
-        }
-
-        .mobile-beta-btn:hover {
-            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .mobile-logout-btn:hover {
-            background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        /* GİRİŞ YAP BUTONU - Giriş yapılmamışsa gösterilecek */
-        .mobile-login-section {
-            padding: 1.5rem 2rem;
-            background: rgba(31, 41, 55, 0.5);
-            border-top: 1px solid rgba(55, 65, 81, 0.5);
-            text-align: center;
-        }
-
-        .mobile-login-title {
-            color: #9ca3af;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-
-        .mobile-login-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            width: 100%;
-            padding: 0.875rem;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            color: #d1d5db;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-login-btn:hover {
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        /* VERSİYON BİLGİSİ */
-        .mobile-version {
-            padding: 1rem 2rem;
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.75rem;
-            border-top: 1px solid rgba(55, 65, 81, 0.5);
-        }
-
-        /* Responsive tasarım */
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none !important;
-            }
-            
-            /* Navbar yüksekliği mobile uyumlu */
-            .nav-container {
-                min-height: 70px;
-            }
-        }
-
-        /* Ekstra güvenlik */
-        body.menu-open {
-            overflow: hidden;
-        }
-        
-        /* NAVBAR AUTH STYLES */
-        .nav-auth {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .nav-auth-btn {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            color: #d1d5db;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .nav-auth-btn:hover {
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            color: #fff;
-            border-color: #4b5563;
-            transform: translateY(-2px);
-        }
-        
-        /* Beta butonu */
-        .beta-btn {
-            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-            border: 1px solid #10b981;
-            border-radius: 0.5rem;
-            color: #fff;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-        
-        .beta-btn:hover {
-            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-        
-        /* Auth Modal */
-        .auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        
-        .auth-modal.active {
             display: flex;
         }
-        
-        .auth-container {
-            background: linear-gradient(135deg, #111827 0%, #000 100%);
-            border: 1px solid #374151;
-            border-radius: 1rem;
-            padding: 3rem;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+        .nav-links {
+            display: none !important;
         }
         
-        .auth-container h2 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        /* Navbar yüksekliği mobile uyumlu */
+        .nav-container {
+            min-height: 70px;
         }
         
-        .auth-container p {
-            color: #9ca3af;
-            margin-bottom: 2rem;
+        /* Mobilde auth butonunu göster */
+        .mobile-auth {
+            display: block !important;
         }
         
-        .google-login-btn {
-            background: #fff;
-            color: #444;
-            border: none;
-            border-radius: 0.5rem;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            width: 100%;
-            margin-bottom: 1rem;
+        .auth-section {
+            display: none !important;
         }
-        
-        .google-login-btn:hover {
-            background: #f5f5f5;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Ekstra güvenlik */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    /* FIREBASE AUTH STYLES - YENİ DÜZENLEME */
+    .auth-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+    }
+    
+    .auth-btn {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border: 1px solid #374151;
+        border-radius: 0.5rem;
+        color: #d1d5db;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .auth-btn:hover {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        color: #fff;
+        border-color: #4b5563;
+        transform: translateY(-2px);
+    }
+    
+    /* Profil butonu - SADE BUTON */
+    .profile-btn {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border: 1px solid #374151;
+        border-radius: 0.5rem;
+        color: #d1d5db;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .profile-btn:hover {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        color: #fff;
+        border-color: #4b5563;
+        transform: translateY(-2px);
+    }
+    
+    /* Auth Modal */
+    .auth-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+    
+    .auth-modal.active {
+        display: flex;
+    }
+    
+    .auth-container {
+        background: linear-gradient(135deg, #111827 0%, #000 100%);
+        border: 1px solid #374151;
+        border-radius: 1rem;
+        padding: 3rem;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .auth-container h2 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .auth-container p {
+        color: #9ca3af;
+        margin-bottom: 2rem;
+    }
+    
+    .google-login-btn {
+        background: #fff;
+        color: #444;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .google-login-btn:hover {
+        background: #f5f5f5;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .google-login-btn img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .auth-close {
+        background: none;
+        border: none;
+        color: #9ca3af;
+        font-size: 0.875rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s;
+    }
+    
+    .auth-close:hover {
+        color: #fff;
+    }
+    
+    /* Loading state */
+    .loading {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    
+    .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #9ca3af;
+        border-top-color: #3b82f6;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Dropdown menu - NAVBAR DIŞINDA GÖSTER */
+    .user-dropdown {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        background: linear-gradient(135deg, #111827 0%, #000 100%);
+        border: 1px solid #374151;
+        border-radius: 0.5rem;
+        min-width: 220px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 1000;
+        animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
         }
-        
-        .google-login-btn img {
-            width: 24px;
-            height: 24px;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        .auth-close {
-            background: none;
-            border: none;
-            color: #9ca3af;
-            font-size: 0.875rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
+    }
+    
+    .user-dropdown.active {
+        display: block;
+    }
+    
+    .dropdown-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid #374151;
+        text-align: center;
+    }
+    
+    .dropdown-user-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .dropdown-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid #3b82f6;
+        object-fit: cover;
+    }
+    
+    .dropdown-user-name {
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    .dropdown-user-email {
+        color: #9ca3af;
+        font-size: 0.75rem;
+    }
+    
+    .dropdown-stats {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.75rem;
+    }
+    
+    .dropdown-stat {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .stat-value {
+        color: #3b82f6;
+        font-size: 1.25rem;
+        font-weight: 700;
+        display: block;
+    }
+    
+    .stat-label {
+        color: #9ca3af;
+        font-size: 0.75rem;
+    }
+    
+    .dropdown-divider {
+        height: 1px;
+        background: #374151;
+        margin: 0.5rem 0;
+    }
+    
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        color: #d1d5db;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+    }
+    
+    .dropdown-item:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-item:hover {
+        background-color: rgba(31, 41, 55, 0.5);
+        color: #fff;
+        padding-left: 1.75rem;
+    }
+    
+    .dropdown-footer {
+        padding: 1rem 1.5rem;
+        border-top: 1px solid #374151;
+        text-align: center;
+    }
+    
+    /* Mobile auth */
+    .mobile-auth {
+        display: none;
+    }
+    
+    /* Desktop için */
+    @media (min-width: 769px) {
+        .user-dropdown {
+            top: 80px;
+            right: 20px;
         }
-        
-        .auth-close:hover {
-            color: #fff;
-        }
-        
-        /* Loading state */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #9ca3af;
-            border-top-color: #3b82f6;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <!-- Auth Modal -->
@@ -527,6 +536,51 @@
         </div>
     </div>
 
+    <!-- User Dropdown Menu - NAVBAR'IN DIŞINDA -->
+    <div id="userDropdown" class="user-dropdown">
+        <div class="dropdown-header">
+            <div class="dropdown-user-info">
+                <img id="dropdownAvatar" class="dropdown-avatar" src="" alt="Profil">
+                <div>
+                    <div id="dropdownUserName" class="dropdown-user-name"></div>
+                    <div id="dropdownUserEmail" class="dropdown-user-email"></div>
+                </div>
+            </div>
+            <div class="dropdown-stats">
+                <div class="dropdown-stat">
+                    <span class="stat-value" id="statGames">0</span>
+                    <span class="stat-label">Oyun</span>
+                </div>
+                <div class="dropdown-stat">
+                    <span class="stat-value" id="statHours">0</span>
+                    <span class="stat-label">Saat</span>
+                </div>
+                <div class="dropdown-stat">
+                    <span class="stat-value" id="statLevel">1</span>
+                    <span class="stat-label">Seviye</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dropdown-divider"></div>
+        
+        <a href="profile.html" class="dropdown-item">
+            <span>👤</span>
+            <span>Profilim</span>
+        </a>
+        
+        <div class="dropdown-divider"></div>
+        
+        <div class="dropdown-item" id="logoutBtn" style="cursor: pointer;">
+            <span>🚪</span>
+            <span>Çıkış Yap</span>
+        </div>
+        
+        <div class="dropdown-footer">
+            <small style="color: #6b7280">HEXAGES GAMES v1.1</small>
+        </div>
+    </div>
+
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -534,32 +588,31 @@
                 <span>HEXAGES GAMES</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="games.html" class="nav-link active">Oyunlar</a>
+                <a href="index.html" class="nav-link active">Ana Sayfa</a>
+                <a href="games.html" class="nav-link">Oyunlar</a>
                 <a href="developers.html" class="nav-link">Geliştiriciler</a>
                 <a href="news.html" class="nav-link">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
                 
-                <!-- Auth Butonları -->
-                <div class="nav-auth">
-                    <!-- Beta butonu (giriş yapılmışsa görünür) -->
-                    <a href="beta.html" id="betaBtn" class="beta-btn" style="display: none;">
-                        <span>🎮</span>
-                        <span>Beta Testleri</span>
-                    </a>
-                    
-                    <!-- Profil butonu (giriş yapılmışsa görünür) -->
-                    <a href="profile.html" id="profileBtn" class="nav-auth-btn" style="display: none;">
-                        <span>👤</span>
-                        <span id="profileBtnText">Profil</span>
-                    </a>
-                    
+                <!-- Auth Section - SADE BUTONLAR -->
+                <div class="auth-section">
                     <!-- Giriş butonu (giriş yapılmamışsa) -->
-                    <button id="authBtn" class="nav-auth-btn">
+                    <button id="authBtn" class="auth-btn">
                         <span>👤</span>
                         <span>Giriş Yap</span>
                     </button>
+                    
+                    <!-- Profil butonu (giriş yapılmışsa) -->
+                    <button id="profileBtn" class="profile-btn" style="display: none;">
+                        <span>👤</span>
+                        <span id="profileBtnText">Profil</span>
+                    </button>
                 </div>
+            </div>
+            
+            <!-- Mobile Auth -->
+            <div class="mobile-auth">
+                <button id="mobileAuthBtn" class="auth-btn">👤</button>
             </div>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -567,143 +620,88 @@
             </button>
         </div>
         <div id="mobileMenu" class="mobile-menu">
-            <!-- Ana Sayfa Linkleri -->
-            <a href="index.html" class="mobile-link">Ana Sayfa</a>
-            <a href="games.html" class="mobile-link active">Oyunlar</a>
+            <a href="index.html" class="mobile-link active">Ana Sayfa</a>
+            <a href="games.html" class="mobile-link">Oyunlar</a>
             <a href="developers.html" class="mobile-link">Geliştiriciler</a>
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
             
-            <!-- Bölüm Ayırıcı -->
-            <div class="mobile-section">
-                <span class="mobile-section-title">Kullanıcı Menüsü</span>
-            </div>
+            <!-- Mobil profil linki - Giriş yapılmışsa görünür -->
+            <a href="profile.html" id="mobileProfileLink" class="mobile-profile-link">
+                <span>👤</span> Profilim
+            </a>
             
-            <!-- GİRİŞ YAPILMAMIŞSA - Giriş Bölümü -->
-            <div id="mobileLoginSection" class="mobile-login-section">
-                <div class="mobile-login-title">Beta testlerine katılmak için giriş yapın</div>
-                <button id="mobileLoginBtn" class="mobile-login-btn">
-                    <span>👤</span>
-                    Giriş Yap
-                </button>
-            </div>
+            <!-- Mobil giriş yap butonu - Giriş yapılmamışsa görünür -->
+            <button id="mobileAuthLink" class="mobile-link auth-btn" style="border: none; background: none; width: 100%; text-align: left;">
+                <span>👤</span> Giriş Yap
+            </button>
             
-            <!-- GİRİŞ YAPILMIŞSA - Profil Bölümü -->
-            <div id="mobileUserSection" class="mobile-user-section">
-                <!-- Kullanıcı Bilgileri -->
-                <div class="mobile-user-info">
-                    <img id="mobileUserAvatar" class="mobile-user-avatar" src="" alt="Profil">
-                    <div class="mobile-user-details">
-                        <div id="mobileUserName" class="mobile-user-name"></div>
-                        <div id="mobileUserEmail" class="mobile-user-email"></div>
-                    </div>
-                </div>
-                
-                <!-- İstatistikler -->
-                <div class="mobile-user-stats">
-                    <div class="mobile-stat-item">
-                        <span id="mobileStatGames" class="mobile-stat-value">0</span>
-                        <span class="mobile-stat-label">Oyun</span>
-                    </div>
-                    <div class="mobile-stat-item">
-                        <span id="mobileStatHours" class="mobile-stat-value">0</span>
-                        <span class="mobile-stat-label">Saat</span>
-                    </div>
-                    <div class="mobile-stat-item">
-                        <span id="mobileStatLevel" class="mobile-stat-value">1</span>
-                        <span class="mobile-stat-label">Seviye</span>
-                    </div>
-                </div>
-                
-                <!-- Aksiyon Butonları -->
-                <div class="mobile-user-actions">
-                    <a href="profile.html" class="mobile-action-btn mobile-profile-btn">
-                        <span>👤</span>
-                        Profilim
-                    </a>
-                    <a href="beta.html" class="mobile-action-btn mobile-beta-btn">
-                        <span>🎮</span>
-                        Beta Testleri
-                    </a>
-                </div>
-                
-                <!-- Çıkış Yap Butonu -->
-                <button id="mobileLogoutBtn" class="mobile-logout-btn">
-                    <span>🚪</span>
-                    Çıkış Yap
-                </button>
-            </div>
-            
-            <!-- Versiyon Bilgisi -->
-            <div class="mobile-version">
-                HEXAGES GAMES v1.1
-            </div>
+            <!-- Mobil çıkış yap butonu - Giriş yapılmışsa görünür -->
+            <button id="mobileLogoutBtn" class="mobile-logout-btn">
+                <span>🚪</span> Çıkış Yap
+            </button>
         </div>
     </nav>
 
-    <section class="page-section">
+    <section class="hero">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="https://customer-assets.emergentagent.com/job_golden-hex-games/artifacts/yuep7m61_WhatsApp%20Video%202025-10-02%20saat%2020.17.01_99fbc83e.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="hexagesgames.png" alt="HEXAGES GAMES" class="hero-logo">
+            <h1 class="hero-title">HEXAGES GAMES</h1>
+            <p class="hero-subtitle">Geleceğin Oyunlarını Bugünden Yaratıyoruz</p>
+            <p class="hero-description">Yenilikçi tasarımlar, etkileyici hikayeler ve unutulmaz oyun deneyimleri ile oyun dünyasında iz bırakıyoruz.</p>
+            <div class="hero-buttons">
+                <a href="games.html" class="btn btn-primary">Oyunlarımızı Keşfet →</a>
+                <a href="contact.html" class="btn btn-secondary">Bizimle İletişime Geç</a>
+            </div>
+        </div>
+        <br>
+        <div class="scroll-indicator">
+            <br>
+            <br>
+            <br>
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <section class="features">
         <div class="container">
-            <div class="page-header">
-                <h1>Oyunlarımız</h1>
-                <p>Tutkuyla geliştirdiğimiz, oyun dünyasına yenilik getiren projelerimizi keşfedin</p>
-            </div>
-            
-            <!-- Yatay Oyun Grid -->
-            <div class="games-grid-large horizontal-games">
-                <!-- Oyun 1 -->
-                <div class="game-card">
-                    <div class="game-image">
-                        <img src="helfdoomss.jpg" alt="Helf Doom">
-                        <div class="game-status status-development">
-                            Geliştirme Aşamasında
-                        </div>
-                    </div>
-                    <div class="game-content">
-                        <div class="game-meta">
-                            <span>Aksiyon</span>
-                            <span>RPG</span>
-                        </div>
-                        <h3>Helf Doom</h3>
-                        <p>arkadaşlarınızla birlikte oynayabileceğiniz bir multiplayer akıl oyunu</p>
-                    </div>
+            <h2 class="section-title">Neden HEXAGES GAMES?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>İnovatif Oyunlar</h3>
+                    <p>Benzersiz oyun mekaniği ve hikaye anlatımı</p>
                 </div>
-
-                <!-- Oyun 2 -->
-                <div class="game-card">
-                    <div class="game-image">
-                        <img src="hexagesgames.png" alt="yakında">
-                        <div class="game-status status-development">
-                            Geliştirme Aşamasında
-                        </div>
-                    </div>
-                    <div class="game-content">
-                        <div class="game-meta">
-                            <span>Fantazi</span>
-                            <span>Açık Dünya</span>
-                        </div>
-                        <h3>yakında</h3>
-                        <p>yakında yeni projelere.</p>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Tutkulu Ekip</h3>
+                    <p>Deneyimli ve yaratıcı geliştiriciler</p>
                 </div>
-
-                <!-- Oyun 3 -->
-                <div class="game-card">
-                    <div class="game-image">
-                        <img src="hexagesgames.png" alt="Yakında">
-                        <div class="game-status status-soon">
-                            Yakında
-                        </div>
-                    </div>
-                    <div class="game-content">
-                        <div class="game-meta">
-                            <span>Bilim Kurgu</span>
-                            <span>Simülasyon</span>
-                        </div>
-                        <h3>yakında</h3>
-                        <p>yakında yeni projelere</p>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Sürekli Büyüme</h3>
+                    <p>Her gün daha iyiye giden teknoloji ve içerik</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Kaliteli İçerik</h3>
+                    <p>AAA kalitesinde oyun deneyimleri</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="games-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Öne Çıkan Oyunlar</h2>
+                <a href="games.html" class="view-all">Tümünü Gör →</a>
+            </div>
+            <div class="games-grid" id="featuredGames"></div>
         </div>
     </section>
 
@@ -715,7 +713,14 @@
                         <img src="hexagesgames.png" alt="HEXAGES GAMES">
                         <span>HEXAGES GAMES</span>
                     </div>
-                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz.</p>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz. Tutkulu ekibimizle geleceğin oyunlarını tasarlıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="https://x.com/hexages_games" class="social-link">🐦</a>
+                        <a href="https://www.instagram.com/hexagesgames" class="social-link">📷</a>
+                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link">📺</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h3>Hızlı Linkler</h3>
@@ -723,25 +728,29 @@
                         <li><a href="index.html">Ana Sayfa</a></li>
                         <li><a href="games.html">Oyunlar</a></li>
                         <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
                         <li><a href="profile.html">Profil</a></li>
-                        <li><a href="beta.html">Beta Testleri</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h3>İletişim</h3>
                     <ul>
-                        <li>📧 hexagesgames@gmail.com</li>
+                        <li>📧 info@hexagesgames.com</li>
                         <li>📍 İstanbul, Türkiye</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Gizlilik Politikası</a>
+                    <a href="terms.html">Kullanım Koşulları</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- FIREBASE AUTH JAVASCRIPT -->
+    <!-- FIREBASE AUTH JAVASCRIPT - YENİ DÜZENLENMİŞ -->
     <script>
     // Firebase Configuration
     const firebaseConfig = {
@@ -750,11 +759,13 @@
         projectId: "hexagesgames-f8fe2",
         storageBucket: "hexagesgames-f8fe2.firebasestorage.app",
         messagingSenderId: "469976981538",
-        appId: "1:469976981538:web:c5b49c15b0206c7fb76a7b"
+        appId: "1:469976981538:web:c5b49c15b0206c7fb76a7b",
+        measurementId: "G-6E33GJ0ZB0"
     };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
     const auth = firebase.auth();
 
     // DOM Elements
@@ -762,25 +773,29 @@
     const authBtn = document.getElementById('authBtn');
     const profileBtn = document.getElementById('profileBtn');
     const profileBtnText = document.getElementById('profileBtnText');
-    const betaBtn = document.getElementById('betaBtn');
-    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
-    const mobileUserSection = document.getElementById('mobileUserSection');
-    const mobileLoginSection = document.getElementById('mobileLoginSection');
-    const mobileUserAvatar = document.getElementById('mobileUserAvatar');
-    const mobileUserName = document.getElementById('mobileUserName');
-    const mobileUserEmail = document.getElementById('mobileUserEmail');
-    const mobileStatGames = document.getElementById('mobileStatGames');
-    const mobileStatHours = document.getElementById('mobileStatHours');
-    const mobileStatLevel = document.getElementById('mobileStatLevel');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    const mobileAuthLink = document.getElementById('mobileAuthLink');
+    const mobileProfileLink = document.getElementById('mobileProfileLink');
     const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
     const googleLoginBtn = document.getElementById('googleLoginBtn');
     const authClose = document.getElementById('authClose');
+    const userDropdown = document.getElementById('userDropdown');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    // Dropdown elements
+    const dropdownAvatar = document.getElementById('dropdownAvatar');
+    const dropdownUserName = document.getElementById('dropdownUserName');
+    const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+    const statGames = document.getElementById('statGames');
+    const statHours = document.getElementById('statHours');
+    const statLevel = document.getElementById('statLevel');
 
     // Auth State Listener
     auth.onAuthStateChanged((user) => {
         if (user) {
             // Kullanıcı giriş yaptı
             updateUserUI(user);
+            updateDropdown(user);
             updateMobileMenuUI(user);
             console.log('✅ Kullanıcı giriş yaptı:', user.displayName || user.email);
         } else {
@@ -793,76 +808,108 @@
 
     // Kullanıcı arayüzünü güncelle
     function updateUserUI(user) {
-        // Giriş butonunu gizle, profil ve beta butonlarını göster
+        // Giriş butonunu gizle, profil butonunu göster
         authBtn.style.display = 'none';
         profileBtn.style.display = 'flex';
-        betaBtn.style.display = 'flex';
         
         // Profil butonuna kullanıcı adını ekle (kısa)
         const displayName = user.displayName || user.email.split('@')[0];
         const shortName = displayName.length > 8 ? displayName.substring(0, 8) + '...' : displayName;
         profileBtnText.textContent = shortName;
+        
+        // Mobil butonları güncelle
+        if (mobileAuthBtn) mobileAuthBtn.style.display = 'none';
     }
 
     // Mobil menü UI'sini güncelle
     function updateMobileMenuUI(user) {
+        const displayName = user.displayName || user.email.split('@')[0];
+        
+        // Profil linkini göster
+        if (mobileProfileLink) {
+            mobileProfileLink.style.display = 'block';
+            mobileProfileLink.innerHTML = `<span>👤</span> ${displayName}`;
+        }
+        
+        // Giriş butonunu gizle
+        if (mobileAuthLink) {
+            mobileAuthLink.style.display = 'none';
+        }
+        
+        // Çıkış butonunu göster
+        if (mobileLogoutBtn) {
+            mobileLogoutBtn.style.display = 'block';
+        }
+    }
+
+    // Mobil menü UI'sini sıfırla
+    function resetMobileMenuUI() {
+        // Profil linkini gizle
+        if (mobileProfileLink) {
+            mobileProfileLink.style.display = 'none';
+        }
+        
+        // Giriş butonunu göster
+        if (mobileAuthLink) {
+            mobileAuthLink.style.display = 'block';
+        }
+        
+        // Çıkış butonunu gizle
+        if (mobileLogoutBtn) {
+            mobileLogoutBtn.style.display = 'none';
+        }
+    }
+
+    // Dropdown'ı güncelle
+    function updateDropdown(user) {
         const displayName = user.displayName || 'Kullanıcı';
         const email = user.email || '';
         const photoURL = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=3b82f6&color=fff`;
         
-        // Kullanıcı bilgilerini güncelle
-        mobileUserAvatar.src = photoURL;
-        mobileUserName.textContent = displayName;
-        mobileUserEmail.textContent = email;
+        // Temel bilgiler
+        dropdownAvatar.src = photoURL;
+        dropdownUserName.textContent = displayName;
+        dropdownUserEmail.textContent = email;
         
         // İstatistikleri güncelle (örnek veriler)
         const games = Math.floor(Math.random() * 5) + 1; // 1-5 arası oyun
         const hours = Math.floor(Math.random() * 50) + 10; // 10-60 arası saat
         const level = Math.floor(Math.random() * 10) + 1; // 1-10 arası seviye
         
-        mobileStatGames.textContent = games;
-        mobileStatHours.textContent = hours;
-        mobileStatLevel.textContent = level;
-        
-        // Giriş bölümünü gizle, kullanıcı bölümünü göster
-        mobileLoginSection.style.display = 'none';
-        mobileUserSection.style.display = 'block';
-        mobileLogoutBtn.style.display = 'block';
-    }
-
-    // Mobil menü UI'sini sıfırla
-    function resetMobileMenuUI() {
-        // Kullanıcı bölümünü gizle, giriş bölümünü göster
-        mobileUserSection.style.display = 'none';
-        mobileLoginSection.style.display = 'block';
-        mobileLogoutBtn.style.display = 'none';
+        statGames.textContent = games;
+        statHours.textContent = hours;
+        statLevel.textContent = level;
     }
 
     // UI'yi sıfırla (çıkış yapınca)
     function resetUI() {
-        // Giriş butonunu göster, profil ve beta butonlarını gizle
+        // Giriş butonunu göster, profil butonunu gizle
         authBtn.style.display = 'flex';
         profileBtn.style.display = 'none';
-        betaBtn.style.display = 'none';
         profileBtnText.textContent = 'Profil';
+        
+        // Mobil butonları göster
+        if (mobileAuthBtn) mobileAuthBtn.style.display = 'flex';
+        
+        // Dropdown'ı kapat
+        userDropdown.classList.remove('active');
     }
 
     // Auth modal'ı aç
     function openAuthModal() {
         authModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
-        // Mobil menüyü kapat
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        if (mobileMenu) mobileMenu.classList.remove('active');
-        if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
     }
 
     // Auth modal'ı kapat
     function closeAuthModal() {
         authModal.classList.remove('active');
         document.body.style.overflow = '';
+    }
+
+    // Dropdown'ı aç/kapat
+    function toggleUserDropdown() {
+        userDropdown.classList.toggle('active');
     }
 
     // Google ile giriş
@@ -881,16 +928,12 @@
                 console.log('✅ Google girişi başarılı');
                 closeAuthModal();
                 
-                // İlk başarımı aç (eğer profil sayfası sisteminiz varsa)
-                try {
-                    if (typeof window.unlockAchievement === 'function') {
-                        setTimeout(() => {
-                            window.unlockAchievement(1); // İlk Adım başarımı
-                        }, 1000);
-                    }
-                } catch (e) {
-                    console.log('Başarım sistemi yok, atlanıyor...');
-                }
+                // Mobil menüyü kapat
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
             })
             .catch((error) => {
                 console.error('❌ Google giriş hatası:', error);
@@ -908,6 +951,8 @@
         auth.signOut()
             .then(() => {
                 console.log('✅ Çıkış yapıldı');
+                userDropdown.classList.remove('active');
+                
                 // Mobil menüyü kapat
                 const mobileMenu = document.getElementById('mobileMenu');
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -921,13 +966,42 @@
             });
     }
 
+    // Mobil çıkış yap
+    function mobileSignOut() {
+        auth.signOut()
+            .then(() => {
+                console.log('✅ Mobil çıkış yapıldı');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            })
+            .catch((error) => {
+                console.error('❌ Mobil çıkış hatası:', error);
+                alert('Çıkış yapılırken bir hata oluştu');
+            });
+    }
+
     // Event Listeners
     authBtn.addEventListener('click', openAuthModal);
-    mobileLoginBtn.addEventListener('click', openAuthModal);
-    mobileLogoutBtn.addEventListener('click', signOut);
+    profileBtn.addEventListener('click', toggleUserDropdown);
+    
+    if (mobileAuthBtn) mobileAuthBtn.addEventListener('click', openAuthModal);
+    if (mobileAuthLink) mobileAuthLink.addEventListener('click', openAuthModal);
+    
+    if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', mobileSignOut);
     
     googleLoginBtn.addEventListener('click', signInWithGoogle);
     authClose.addEventListener('click', closeAuthModal);
+    logoutBtn.addEventListener('click', signOut);
+
+    // Dropdown dışında tıklayınca kapat
+    document.addEventListener('click', (event) => {
+        if (!profileBtn.contains(event.target) && !userDropdown.contains(event.target)) {
+            userDropdown.classList.remove('active');
+        }
+    });
 
     // Modal dışında tıklayınca kapat
     authModal.addEventListener('click', (event) => {
@@ -940,6 +1014,7 @@
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             closeAuthModal();
+            userDropdown.classList.remove('active');
         }
     });
 
@@ -969,7 +1044,7 @@
     
     // Sayfa yüklendiğinde çalışacak kod
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM yüklendi, hamburger menü hazırlanıyor...');
+        console.log('🚀 HEXAGES GAMES yüklendi');
         
         // Hamburger butonuna click eventi ekle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -978,9 +1053,9 @@
         }
         
         // Mobil menü linklerine tıklayınca menüyü kapat
-        const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-action-btn');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
         mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', () => {
                 const mobileMenu = document.getElementById('mobileMenu');
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
                 
@@ -989,6 +1064,19 @@
                 document.body.style.overflow = '';
             });
         });
+        
+        // Mobil profil linkine tıklayınca menüyü kapat
+        const mobileProfileLink = document.getElementById('mobileProfileLink');
+        if (mobileProfileLink) {
+            mobileProfileLink.addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
         
         // Pencere boyutu değişince mobil menüyü kapat
         window.addEventListener('resize', function() {
@@ -1005,13 +1093,18 @@
         // Navbar scroll efekti
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
+            if (window.scrollY > 20) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
         });
+        
+        console.log('✅ Tüm sistemler hazır!');
     });
+    
+    // Fonksiyonu global scope'a ekle
+    window.toggleMobileMenu = toggleMobileMenu;
     </script>
     
     <!-- ESKİ SCRIPT.JS DOSYASI -->
