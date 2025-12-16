@@ -28,7 +28,7 @@
         flex-direction: column;
     }
 
-    /* NAV */
+    /* NAV - BEYAZ YAZILAR */
     .navbar {
         background: rgba(0, 0, 0, 0.95);
         backdrop-filter: blur(10px);
@@ -45,7 +45,7 @@
     }
 
     .nav-logo {
-        color: #3b82f6;
+        color: #ffffff !important; /* BEYAZ */
         font-weight: bold;
         font-size: 1.5rem;
         text-decoration: none;
@@ -65,20 +65,20 @@
     }
 
     .nav-links a {
-        color: #cccccc;
+        color: #ffffff !important; /* BEYAZ */
         text-decoration: none;
         font-weight: 500;
-        transition: color 0.3s;
+        transition: opacity 0.3s;
         padding: 0.5rem 0;
         position: relative;
     }
 
     .nav-links a:hover {
-        color: #ffffff;
+        opacity: 0.8 !important;
     }
 
     .nav-links a.active {
-        color: #3b82f6;
+        color: #3b82f6 !important;
     }
 
     .nav-links a.active::after {
@@ -97,7 +97,7 @@
         display: none;
         background: none;
         border: none;
-        color: #cccccc;
+        color: #ffffff !important; /* BEYAZ */
         font-size: 1.8rem;
         cursor: pointer;
         padding: 0.5rem;
@@ -122,7 +122,7 @@
 
     .mobile-menu a {
         display: block;
-        color: #cccccc;
+        color: #ffffff !important; /* BEYAZ */
         text-decoration: none;
         padding: 1rem;
         border-bottom: 1px solid #333333;
@@ -132,7 +132,7 @@
 
     .mobile-menu a:hover,
     .mobile-menu a.active {
-        color: #3b82f6;
+        color: #3b82f6 !important;
         background: rgba(59, 130, 246, 0.1);
         padding-left: 1.5rem;
     }
@@ -149,7 +149,7 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        border: 4px solid #3b82f6;
+        border: 4px solid #55aaff; /* MINECRAFT AÇIK MAVİ */
         margin-bottom: 1.5rem;
         object-fit: cover;
         background: #1a1a1a;
@@ -157,7 +157,7 @@
 
     .profile-name {
         font-size: 2.2rem;
-        background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        background: linear-gradient(135deg, #55aaff, #88ccff); /* MINECRAFT GRADIENT */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 0.5rem;
@@ -182,7 +182,7 @@
 
     .points-value {
         font-size: 3.5rem;
-        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        background: linear-gradient(135deg, #ffaa00, #ffcc55); /* MINECRAFT ALTIN */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800;
@@ -203,7 +203,7 @@
 
     .stat-value {
         font-size: 2rem;
-        color: #3b82f6;
+        color: #55aaff !important; /* MINECRAFT AÇIK MAVİ */
         font-weight: 700;
         display: block;
         margin-bottom: 0.5rem;
@@ -214,7 +214,7 @@
         font-size: 0.95rem;
     }
 
-    /* BAŞARIMLAR */
+    /* BAŞARIMLAR - MINECRAFT RENKLERİ */
     .achievements {
         padding: 3rem 2rem;
         max-width: 1000px;
@@ -233,8 +233,8 @@
 
     .achievement-card {
         background: rgba(31, 41, 55, 0.7);
-        border: 1px solid #374151;
-        border-radius: 12px;
+        border: 2px solid #55aaff; /* MINECRAFT AÇIK MAVİ */
+        border-radius: 8px; /* MINECRAFT TARZI KÖŞELER */
         padding: 1.5rem;
         margin-bottom: 1.5rem;
         cursor: pointer;
@@ -244,20 +244,20 @@
     }
 
     .achievement-card:hover {
-        border-color: #3b82f6;
+        border-color: #88ccff; /* DAHA AÇIK MAVİ */
         background: rgba(31, 41, 55, 0.9);
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+        box-shadow: 0 10px 25px rgba(85, 170, 255, 0.3); /* MAVİ GÖLGE */
     }
 
     .achievement-card.unlocked {
-        border-color: #10b981;
-        background: rgba(16, 185, 129, 0.1);
+        border-color: #55ff55; /* MINECRAFT YEŞİL */
+        background: rgba(85, 255, 85, 0.1);
     }
 
     .achievement-card.unlocked:hover {
-        border-color: #10b981;
-        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+        border-color: #55ff55;
+        box-shadow: 0 10px 25px rgba(85, 255, 85, 0.3);
     }
 
     .achievement-header {
@@ -270,18 +270,20 @@
     .achievement-icon {
         width: 56px;
         height: 56px;
-        background: #374151;
-        border-radius: 50%;
+        background: #2a2a2a; /* KOYU ARKA PLAN */
+        border-radius: 8px; /* MINECRAFT TARZI */
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
         flex-shrink: 0;
         transition: all 0.3s;
+        border: 2px solid #55aaff; /* MAVİ ÇERÇEVE */
     }
 
     .achievement-card.unlocked .achievement-icon {
-        background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        background: linear-gradient(135deg, #55aaff, #88ccff);
+        border-color: #55ff55; /* YEŞİL */
     }
 
     .achievement-card:hover .achievement-icon {
@@ -292,24 +294,25 @@
         font-weight: 700;
         color: #ffffff;
         font-size: 1.3rem;
+        text-shadow: 1px 1px 0 #000; /* MINECRAFT TARZI GÖLGE */
     }
 
     .achievement-desc {
-        color: #9ca3af;
+        color: #cccccc; /* DAHA AÇIK GRİ */
         font-size: 1rem;
         margin-bottom: 1rem;
         line-height: 1.5;
     }
 
     .achievement-points {
-        color: #f59e0b;
+        color: #ffaa00 !important; /* MINECRAFT ALTIN */
         font-weight: 700;
         font-size: 1rem;
         margin-right: 1rem;
     }
 
     .click-hint {
-        color: #3b82f6;
+        color: #55aaff !important; /* MINECRAFT MAVİ */
         font-weight: 600;
         font-size: 0.9rem;
         margin-top: 1rem;
@@ -324,22 +327,24 @@
         50% { opacity: 0.7; }
     }
 
-    /* BİLDİRİM */
+    /* BİLDİRİM - MINECRAFT STİLİ */
     .notification {
         position: fixed;
         top: 20px;
         right: 20px;
         background: rgba(17, 24, 39, 0.95);
-        border: 2px solid #3b82f6;
-        border-radius: 12px;
+        border: 3px solid #55aaff; /* KALIN MAVİ ÇERÇEVE */
+        border-radius: 8px; /* MINECRAFT TARZI */
         padding: 1.2rem;
         color: white;
         z-index: 9999;
         display: none;
         max-width: 320px;
-        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 10px 30px rgba(85, 170, 255, 0.4);
         backdrop-filter: blur(10px);
         animation: slideIn 0.5s ease;
+        font-family: 'Minecraft', monospace; /* MINECRAFT FONTU */
+        text-shadow: 1px 1px 0 #000;
     }
 
     @keyframes slideIn {
@@ -409,16 +414,17 @@
         justify-content: center;
         width: 40px;
         height: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
+        background: rgba(85, 170, 255, 0.2); /* MAVİ ARKA PLAN */
+        border-radius: 8px; /* MINECRAFT TARZI */
         color: #ffffff;
         text-decoration: none;
         font-size: 1.2rem;
         transition: all 0.3s;
+        border: 2px solid #55aaff;
     }
 
     .social-link:hover {
-        background: #3b82f6;
+        background: #55aaff;
         transform: translateY(-3px);
     }
 
@@ -445,7 +451,7 @@
     }
 
     .footer-col a:hover {
-        color: #3b82f6;
+        color: #55aaff; /* MINECRAFT MAVİ */
     }
 
     .footer-bottom {
@@ -471,7 +477,21 @@
     }
 
     .footer-links a:hover {
-        color: #9ca3af;
+        color: #55aaff; /* MINECRAFT MAVİ */
+    }
+
+    /* MINECRAFT EKLENTİLERİ */
+    .minecraft-text {
+        font-family: 'Minecraft', monospace;
+        text-shadow: 2px 2px 0 #000;
+    }
+
+    .minecraft-border {
+        border: 3px solid;
+        border-image-slice: 2;
+        border-image-width: 2;
+        border-image-repeat: stretch;
+        border-image-source: url('data:image/svg+xml;utf8,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h8v8H2z" fill="%2355aaff" stroke="%2355aaff" stroke-width="1"/></svg>');
     }
 
     /* RESPONSIVE */
@@ -520,6 +540,12 @@
         .footer {
             padding: 2rem 1rem;
         }
+    }
+
+    /* MINECRAFT FONT EKLEME */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    .minecraft-font {
+        font-family: 'Press Start 2P', cursive;
     }
     </style>
 </head>
@@ -727,21 +753,21 @@
                         <div class="achievement-icon">${ach.icon}</div>
                         <div>
                             <div class="achievement-name">${ach.name}</div>
-                            <div style="font-size: 0.85rem; color: ${ach.unlocked ? '#10b981' : '#ef4444'}; margin-top: 0.2rem;">
+                            <div style="font-size: 0.85rem; color: ${ach.unlocked ? '#55ff55' : '#ff5555'}; margin-top: 0.2rem; text-shadow: 1px 1px 0 #000;">
                                 ${ach.unlocked ? '✓ AÇILDI' : '🔒 KİLİTLİ'}
                             </div>
                         </div>
                     </div>
                     <div class="achievement-desc">${ach.desc}</div>
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
-                        <div style="color: #f59e0b; font-weight: 700; font-size: 1rem;">
+                        <div style="color: #ffaa00 !important; font-weight: 700; font-size: 1rem; text-shadow: 1px 1px 0 #000;">
                             ⭐ ${ach.points} Puan
                         </div>
                         ${!ach.unlocked ? 
-                            `<div class="click-hint">
+                            `<div class="click-hint" style="color: #55aaff !important;">
                                 <span>🎯</span> ALMAK İÇİN TIKLA → ${ach.page.replace('.html', '')}
                             </div>` 
-                            : `<div style="color: #10b981; font-size: 0.85rem;">
+                            : `<div style="color: #55ff55; font-size: 0.85rem; text-shadow: 1px 1px 0 #000;">
                                 ✓ ${ach.date || 'Kazanıldı'}
                             </div>`
                         }
@@ -770,7 +796,7 @@
             console.log('✅ Başarımlar yüklendi');
         } catch (error) {
             console.error('❌ Başarımları yüklerken hata:', error);
-            achievementsList.innerHTML = '<p style="color: #ef4444; text-align: center;">Başarımlar yüklenirken bir hata oluştu.</p>';
+            achievementsList.innerHTML = '<p style="color: #ff5555; text-align: center; text-shadow: 1px 1px 0 #000;">Başarımlar yüklenirken bir hata oluştu.</p>';
         }
     }
 
@@ -883,7 +909,7 @@
                         
                         profileName.textContent = displayName;
                         profileEmail.textContent = email;
-                        profileAvatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=3b82f6&color=fff`;
+                        profileAvatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=55aaff&color=fff`;
                         
                         // İlk başarımı ver (ilk giriş)
                         if (!localStorage.getItem('hex_first_login')) {
@@ -911,7 +937,7 @@
         // Firebase çalışmazsa demo mod
         profileName.textContent = "Demo Kullanıcı";
         profileEmail.textContent = "demo@hexagesgames.com";
-        profileAvatar.src = "https://ui-avatars.com/api/?name=Demo+Kullanıcı&background=3b82f6&color=fff";
+        profileAvatar.src = "https://ui-avatars.com/api/?name=Demo+Kullanıcı&background=55aaff&color=fff";
     }
 
     // ==================== SAYFA YÜKLENİNCE ====================
