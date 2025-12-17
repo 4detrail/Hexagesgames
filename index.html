@@ -32,9 +32,12 @@
         --gradient-primary: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
         --gradient-secondary: linear-gradient(135deg, #0a0a0a 0%, #262626 100%);
         --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        --nav-bg: rgba(0, 0, 0, 0.95);
+        --nav-bg: rgba(0, 0, 0, 0.98);
+        --nav-scrolled-bg: rgba(0, 0, 0, 0.95);
         --logo-filter: invert(1) brightness(2);
         --hero-bg: #000000;
+        --nav-text: #ffffff;
+        --nav-border: rgba(255, 255, 255, 0.1);
     }
 
     [data-theme="light"] {
@@ -55,8 +58,11 @@
         --gradient-secondary: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         --nav-bg: rgba(255, 255, 255, 0.98);
+        --nav-scrolled-bg: rgba(255, 255, 255, 0.98);
         --logo-filter: none;
         --hero-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        --nav-text: #000000;
+        --nav-border: rgba(0, 0, 0, 0.1);
     }
 
     /* TEMEL STİLLER */
@@ -71,10 +77,10 @@
 
     /* TEMA BUTONLARI */
     .theme-toggle-btn {
-        background: var(--gradient-secondary);
-        border: 1px solid var(--border-color);
+        background: transparent;
+        border: 1px solid var(--nav-border);
         border-radius: 12px;
-        color: var(--text-secondary);
+        color: var(--nav-text);
         padding: 10px;
         font-size: 1.25rem;
         cursor: pointer;
@@ -91,12 +97,13 @@
         transform: rotate(15deg) scale(1.1);
         box-shadow: 0 4px 12px var(--shadow-color);
         border-color: var(--accent-color);
+        background: var(--bg-tertiary);
     }
 
-    /* NAVBAR */
+    /* NAVBAR - DÜZELTMELER */
     nav {
         background-color: var(--nav-bg);
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--nav-border);
         position: fixed;
         top: 0;
         left: 0;
@@ -104,8 +111,13 @@
         z-index: 1000;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        padding: 0.75rem 0;
+        padding: 0;
         transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+        background-color: var(--nav-scrolled-bg);
+        box-shadow: 0 4px 20px var(--shadow-color);
     }
 
     .nav-container {
@@ -123,7 +135,7 @@
         align-items: center;
         gap: 1rem;
         text-decoration: none;
-        color: var(--text-primary);
+        color: var(--nav-text);
         font-size: 1.5rem;
         font-weight: 700;
         letter-spacing: -0.5px;
@@ -143,7 +155,7 @@
     }
 
     .nav-link {
-        color: var(--text-secondary);
+        color: var(--nav-text);
         text-decoration: none;
         font-weight: 500;
         transition: all 0.3s ease;
@@ -151,11 +163,13 @@
         position: relative;
         font-size: 0.95rem;
         letter-spacing: -0.2px;
+        opacity: 0.9;
     }
 
     .nav-link:hover,
     .nav-link.active {
-        color: var(--text-primary);
+        opacity: 1;
+        color: var(--nav-text);
     }
 
     .nav-link.active:after {
@@ -165,14 +179,15 @@
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(to right, var(--accent-color), transparent);
+        background: linear-gradient(to right, var(--nav-text), transparent);
+        opacity: 0.8;
     }
 
     /* HAMBURGER MENÜ */
     .mobile-menu-btn {
         display: none;
         background: none;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--nav-border);
         border-radius: 10px;
         cursor: pointer;
         padding: 0.75rem;
@@ -189,7 +204,7 @@
         display: block;
         width: 22px;
         height: 2px;
-        background-color: var(--text-secondary);
+        background-color: var(--nav-text);
         position: relative;
         transition: all 0.3s ease;
     }
@@ -200,7 +215,7 @@
         position: absolute;
         width: 22px;
         height: 2px;
-        background-color: var(--text-secondary);
+        background-color: var(--nav-text);
         transition: all 0.3s ease;
         left: 0;
     }
@@ -235,7 +250,7 @@
         background-color: var(--nav-bg);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
-        border-top: 1px solid var(--border-color);
+        border-top: 1px solid var(--nav-border);
         z-index: 999;
         max-height: 0;
         overflow: hidden;
@@ -251,12 +266,16 @@
     .mobile-link {
         display: block;
         padding: 1.25rem 2rem;
-        color: var(--text-secondary);
+        color: var(--nav-text);
         text-decoration: none;
         font-size: 1rem;
         font-weight: 500;
         transition: all 0.3s ease;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--nav-border);
+        background: none;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
     }
 
     .mobile-link:last-child {
@@ -265,12 +284,12 @@
 
     .mobile-link:hover,
     .mobile-link.active {
-        color: var(--text-primary);
+        color: var(--nav-text);
         background-color: var(--bg-tertiary);
         padding-left: 2.5rem;
     }
 
-    /* HERO SECTION - TEMA ÖZEL */
+    /* HERO SECTION */
     .hero {
         position: relative;
         min-height: 100vh;
@@ -412,10 +431,10 @@
     }
     
     .auth-btn {
-        background: var(--gradient-secondary);
-        border: 1px solid var(--border-color);
+        background: transparent;
+        border: 1px solid var(--nav-border);
         border-radius: 12px;
-        color: var(--text-secondary);
+        color: var(--nav-text);
         padding: 0.75rem 1.25rem;
         font-size: 0.875rem;
         font-weight: 600;
@@ -428,17 +447,17 @@
     }
     
     .auth-btn:hover {
-        background: var(--gradient-primary);
-        color: var(--text-primary);
+        background: var(--bg-tertiary);
+        color: var(--nav-text);
         border-color: var(--accent-color);
         transform: translateY(-2px);
     }
     
     .profile-btn {
-        background: var(--gradient-secondary);
-        border: 1px solid var(--border-color);
+        background: transparent;
+        border: 1px solid var(--nav-border);
         border-radius: 12px;
-        color: var(--text-secondary);
+        color: var(--nav-text);
         padding: 0.75rem 1.25rem;
         font-size: 0.875rem;
         font-weight: 600;
@@ -451,8 +470,8 @@
     }
     
     .profile-btn:hover {
-        background: var(--gradient-primary);
-        color: var(--text-primary);
+        background: var(--bg-tertiary);
+        color: var(--nav-text);
         border-color: var(--accent-color);
         transform: translateY(-2px);
     }
@@ -697,6 +716,98 @@
     .mobile-auth {
         display: none;
     }
+    
+    /* SOCIAL LINKS */
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: var(--gradient-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-size: 1.25rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+    
+    .social-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px var(--shadow-color);
+        border-color: var(--accent-color);
+        background: var(--gradient-secondary);
+    }
+    
+    /* FOOTER LISTS */
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .footer-col h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+        font-weight: 700;
+    }
+    
+    .footer-col ul li {
+        margin-bottom: 0.75rem;
+    }
+    
+    .footer-col ul li a {
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-col ul li a:hover {
+        color: var(--text-primary);
+    }
+    
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-tertiary);
+        font-size: 0.875rem;
+    }
+    
+    .footer-links {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .footer-links a {
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+        color: var(--text-primary);
+    }
+    
+    /* NAVBAR YUKARI KAYBOLMA */
+    .nav-container {
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-hidden {
+        transform: translateY(-100%);
+    }
     </style>
 </head>
 <body>
@@ -711,7 +822,9 @@
                 Google ile Giriş Yap
             </button>
             
-            <button id="authClose" class="auth-close">Daha Sonra</button>
+            <button id="authClose" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
+                Daha Sonra
+            </button>
         </div>
     </div>
 
@@ -762,11 +875,11 @@
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
             
-            <button id="mobileThemeLink" class="mobile-link" style="border: none; background: none; width: 100%; text-align: left;">
+            <button id="mobileThemeLink" class="mobile-link">
                 <span class="theme-icon">🌙</span> Tema Değiştir
             </button>
             
-            <button id="mobileAuthLink" class="mobile-link" style="border: none; background: none; width: 100%; text-align: left;">
+            <button id="mobileAuthLink" class="mobile-link">
                 <span>👤</span> Giriş Yap
             </button>
             
@@ -774,7 +887,7 @@
                 <span>👤</span> Profilim
             </a>
             
-            <button id="mobileLogoutBtn" class="mobile-link" style="border: none; background: none; width: 100%; text-align: left; display: none;">
+            <button id="mobileLogoutBtn" class="mobile-link" style="display: none;">
                 <span>🚪</span> Çıkış Yap
             </button>
         </div>
@@ -910,7 +1023,6 @@
     const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
     const googleLoginBtn = document.getElementById('googleLoginBtn');
     const authClose = document.getElementById('authClose');
-    const logoutBtn = document.getElementById('logoutBtn');
 
     // Auth State Listener
     auth.onAuthStateChanged((user) => {
@@ -999,7 +1111,7 @@
         });
         
         googleLoginBtn.innerHTML = '<span class="loading-spinner"></span> Giriş yapılıyor...';
-        googleLoginBtn.classList.add('loading');
+        googleLoginBtn.disabled = true;
         
         auth.signInWithPopup(provider)
             .then((result) => {
@@ -1018,7 +1130,7 @@
             })
             .finally(() => {
                 googleLoginBtn.innerHTML = '<img src="https://www.google.com/favicon.ico" alt="Google"> Google ile Giriş Yap';
-                googleLoginBtn.classList.remove('loading');
+                googleLoginBtn.disabled = false;
             });
     }
 
@@ -1066,8 +1178,6 @@
     
     googleLoginBtn.addEventListener('click', signInWithGoogle);
     authClose.addEventListener('click', closeAuthModal);
-
-    if (logoutBtn) logoutBtn.addEventListener('click', signOut);
 
     // Modal dışında tıklayınca kapat
     authModal.addEventListener('click', (event) => {
@@ -1133,13 +1243,31 @@
             }
         });
         
+        // Scroll event için navbar güncelleme
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+        const navContainer = document.querySelector('.nav-container');
+        
         window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 20) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Yukarı kaydırma - navbar görünür
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Aşağı kaydırma
                 navbar.classList.add('scrolled');
+                navContainer.classList.add('nav-hidden');
             } else {
-                navbar.classList.remove('scrolled');
+                // Yukarı kaydırma
+                navContainer.classList.remove('nav-hidden');
+                
+                if (scrollTop > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
             }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
     });
     
