@@ -150,19 +150,24 @@
     .nav-link {
         color: var(--nav-text);
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600; /* BOLD YAPILDI */
         transition: all 0.3s ease;
         padding: 0.5rem 0;
         position: relative;
         font-size: 0.95rem;
         letter-spacing: -0.2px;
-        opacity: 0.9;
+        opacity: 0.8;
     }
 
-    .nav-link:hover,
+    .nav-link:hover {
+        opacity: 1;
+        color: var(--nav-text);
+    }
+
     .nav-link.active {
         opacity: 1;
         color: var(--nav-text);
+        font-weight: 700; /* AKTİF OLAN DAHA BOLD */
     }
 
     .nav-link.active:after {
@@ -172,7 +177,7 @@
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(to right, var(--nav-text), transparent);
+        background: var(--nav-text);
         opacity: 0.8;
     }
 
@@ -262,7 +267,7 @@
         color: var(--nav-text);
         text-decoration: none;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600; /* BOLD YAPILDI */
         transition: all 0.3s ease;
         border-bottom: 1px solid var(--nav-border);
         background: none;
@@ -275,11 +280,16 @@
         border-bottom: none;
     }
 
-    .mobile-link:hover,
+    .mobile-link:hover {
+        color: var(--nav-text);
+        opacity: 1;
+        padding-left: 2.5rem;
+    }
+
     .mobile-link.active {
         color: var(--nav-text);
-        background-color: var(--bg-tertiary);
-        padding-left: 2.5rem;
+        font-weight: 700; /* AKTİF OLAN DAHA BOLD */
+        opacity: 1;
     }
 
     /* HERO SECTION */
@@ -1259,12 +1269,6 @@
         const mobileThemeLink = document.getElementById('mobileThemeLink');
         const themeIcons = document.querySelectorAll('.theme-icon');
         
-        // Logo için filtre değişkeni
-        const logoFilter = {
-            dark: 'invert(1) brightness(2)',
-            light: 'none'
-        };
-        
         // Varsayılan tema kontrolü
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
@@ -1302,7 +1306,11 @@
         function updateLogoFilter(theme) {
             const logos = document.querySelectorAll('img[src*="hexagesgameslogo"]');
             logos.forEach(logo => {
-                logo.style.filter = logoFilter[theme];
+                if (theme === 'dark') {
+                    logo.style.filter = 'invert(1) brightness(2)';
+                } else {
+                    logo.style.filter = 'none';
+                }
                 logo.style.transition = 'filter 0.3s ease';
             });
         }
@@ -1379,13 +1387,13 @@
             });
             
             // Logo filtrelerini güncelle
-            const logoFilter = {
-                dark: 'invert(1) brightness(2)',
-                light: 'none'
-            };
             const logos = document.querySelectorAll('img[src*="hexagesgameslogo"]');
             logos.forEach(logo => {
-                logo.style.filter = logoFilter[savedTheme];
+                if (savedTheme === 'dark') {
+                    logo.style.filter = 'invert(1) brightness(2)';
+                } else {
+                    logo.style.filter = 'none';
+                }
             });
         }
     });
