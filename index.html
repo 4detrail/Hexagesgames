@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,75 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
     
     <style>
-    /* HAMBURGER MENÜ CSS - TÜM SAYFALARDA OLMALI */
+    /* TEMA DEĞİŞKENLERİ */
+    :root {
+        /* Light tema değişkenleri */
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-tertiary: #f1f5f9;
+        --text-primary: #1f2937;
+        --text-secondary: #4b5563;
+        --text-tertiary: #6b7280;
+        --border-color: #e5e7eb;
+        --accent-color: #3b82f6;
+        --accent-hover: #2563eb;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --hero-overlay: rgba(0, 0, 0, 0.7);
+        --card-bg: #ffffff;
+        --gradient-primary: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        --gradient-secondary: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    [data-theme="dark"] {
+        /* Dark tema değişkenleri */
+        --bg-primary: #111827;
+        --bg-secondary: #1f2937;
+        --bg-tertiary: #374151;
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --text-tertiary: #9ca3af;
+        --border-color: #4b5563;
+        --accent-color: #3b82f6;
+        --accent-hover: #60a5fa;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --hero-overlay: rgba(0, 0, 0, 0.8);
+        --card-bg: #1f2937;
+        --gradient-primary: linear-gradient(135deg, var(--bg-primary) 0%, #000 100%);
+        --gradient-secondary: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    }
+
+    /* Tema butonları */
+    .theme-toggle-btn {
+        background: var(--gradient-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        color: var(--text-secondary);
+        padding: 0.5rem;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .theme-toggle-btn:hover {
+        background: var(--gradient-primary);
+        color: var(--text-primary);
+        transform: rotate(15deg);
+    }
+
+    /* Body ve genel stiller */
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        min-height: 100vh;
+    }
+
+    /* HAMBURGER MENÜ CSS */
     .mobile-menu-btn {
         display: none;
         background: none;
@@ -33,7 +101,7 @@
         display: block;
         width: 24px;
         height: 2px;
-        background-color: #9ca3af;
+        background-color: var(--text-tertiary);
         position: relative;
         transition: all 0.3s ease;
     }
@@ -44,7 +112,7 @@
         position: absolute;
         width: 24px;
         height: 2px;
-        background-color: #9ca3af;
+        background-color: var(--text-tertiary);
         transition: all 0.3s ease;
         left: 0;
     }
@@ -57,7 +125,6 @@
         bottom: -8px;
     }
 
-    /* Hamburger animasyonu */
     .mobile-menu-btn.active .hamburger {
         background-color: transparent;
     }
@@ -78,32 +145,32 @@
         top: 100%;
         left: 0;
         right: 0;
-        background-color: rgba(17, 24, 39, 0.98);
+        background-color: var(--bg-secondary);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(55, 65, 81, 0.5);
+        border-top: 1px solid var(--border-color);
         z-index: 999;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 30px var(--shadow-color);
         display: block;
     }
 
     .mobile-menu.active {
-        max-height: 500px;
+        max-height: 600px;
     }
 
     /* Mobil menü linkleri */
     .mobile-link {
         display: block;
         padding: 1.25rem 2rem;
-        color: #d1d5db;
+        color: var(--text-secondary);
         text-decoration: none;
         font-size: 1rem;
         font-weight: 500;
         transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        border-bottom: 1px solid var(--border-color);
         position: relative;
         overflow: hidden;
     }
@@ -126,8 +193,8 @@
 
     .mobile-link:hover,
     .mobile-link.active {
-        color: #fff;
-        background-color: rgba(31, 41, 55, 0.5);
+        color: var(--text-primary);
+        background-color: var(--bg-tertiary);
         padding-left: 2.5rem;
     }
 
@@ -136,44 +203,27 @@
         transform: translateX(0);
     }
 
-    /* Mobil profil linki - Giriş Yapılmışsa Görünür */
+    /* Mobil profil linki */
     .mobile-profile-link {
         display: none;
         padding: 1.25rem 2rem;
-        color: #d1d5db;
+        color: var(--text-secondary);
         text-decoration: none;
         font-size: 1rem;
         font-weight: 500;
         transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        border-bottom: 1px solid var(--border-color);
         position: relative;
         overflow: hidden;
-        background-color: rgba(31, 41, 55, 0.3);
-        border-left: 4px solid #3b82f6;
-    }
-
-    .mobile-profile-link:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 4px;
-        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
+        background-color: var(--bg-tertiary);
+        border-left: 4px solid var(--accent-color);
     }
 
     .mobile-profile-link:hover,
     .mobile-profile-link.active {
-        color: #fff;
-        background-color: rgba(31, 41, 55, 0.5);
+        color: var(--text-primary);
+        background-color: var(--bg-tertiary);
         padding-left: 2.5rem;
-    }
-
-    .mobile-profile-link:hover:before,
-    .mobile-profile-link.active:before {
-        transform: translateX(0);
     }
 
     /* Mobil çıkış yap butonu */
@@ -185,8 +235,8 @@
         font-size: 1rem;
         font-weight: 500;
         transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
-        background-color: rgba(31, 41, 55, 0.3);
+        border-bottom: 1px solid var(--border-color);
+        background-color: var(--bg-tertiary);
         border-left: 4px solid #ef4444;
         cursor: pointer;
         text-align: left;
@@ -201,6 +251,71 @@
         padding-left: 2.5rem;
     }
 
+    /* Navbar */
+    nav {
+        background-color: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        transition: all 0.3s ease;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+    }
+
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .nav-logo img {
+        height: 40px;
+        width: auto;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .nav-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        padding: 0.5rem 0;
+        position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--text-primary);
+    }
+
+    .nav-link.active:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    }
+
     /* Responsive tasarım */
     @media (max-width: 768px) {
         .mobile-menu-btn {
@@ -211,12 +326,10 @@
             display: none !important;
         }
         
-        /* Navbar yüksekliği mobile uyumlu */
         .nav-container {
             min-height: 70px;
         }
         
-        /* Mobilde auth butonunu göster */
         .mobile-auth {
             display: block !important;
         }
@@ -226,12 +339,7 @@
         }
     }
 
-    /* Ekstra güvenlik */
-    body.menu-open {
-        overflow: hidden;
-    }
-    
-    /* FIREBASE AUTH STYLES - YENİ DÜZENLEME */
+    /* FIREBASE AUTH STYLES */
     .auth-section {
         display: flex;
         align-items: center;
@@ -240,10 +348,10 @@
     }
     
     .auth-btn {
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        border: 1px solid #374151;
+        background: var(--gradient-secondary);
+        border: 1px solid var(--border-color);
         border-radius: 0.5rem;
-        color: #d1d5db;
+        color: var(--text-secondary);
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
         font-weight: 500;
@@ -255,18 +363,18 @@
     }
     
     .auth-btn:hover {
-        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-        color: #fff;
-        border-color: #4b5563;
+        background: var(--gradient-primary);
+        color: var(--text-primary);
+        border-color: var(--text-tertiary);
         transform: translateY(-2px);
     }
     
-    /* Profil butonu - SADE BUTON */
+    /* Profil butonu */
     .profile-btn {
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        border: 1px solid #374151;
+        background: var(--gradient-secondary);
+        border: 1px solid var(--border-color);
         border-radius: 0.5rem;
-        color: #d1d5db;
+        color: var(--text-secondary);
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
         font-weight: 500;
@@ -278,9 +386,9 @@
     }
     
     .profile-btn:hover {
-        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-        color: #fff;
-        border-color: #4b5563;
+        background: var(--gradient-primary);
+        color: var(--text-primary);
+        border-color: var(--text-tertiary);
         transform: translateY(-2px);
     }
     
@@ -304,24 +412,24 @@
     }
     
     .auth-container {
-        background: linear-gradient(135deg, #111827 0%, #000 100%);
-        border: 1px solid #374151;
+        background: var(--gradient-primary);
+        border: 1px solid var(--border-color);
         border-radius: 1rem;
         padding: 3rem;
         max-width: 400px;
         width: 90%;
         text-align: center;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 20px 60px var(--shadow-color);
     }
     
     .auth-container h2 {
-        color: #fff;
+        color: var(--text-primary);
         font-size: 1.5rem;
         margin-bottom: 1rem;
     }
     
     .auth-container p {
-        color: #9ca3af;
+        color: var(--text-tertiary);
         margin-bottom: 2rem;
     }
     
@@ -346,7 +454,7 @@
     .google-login-btn:hover {
         background: #f5f5f5;
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 20px var(--shadow-color);
     }
     
     .google-login-btn img {
@@ -357,7 +465,7 @@
     .auth-close {
         background: none;
         border: none;
-        color: #9ca3af;
+        color: var(--text-tertiary);
         font-size: 0.875rem;
         cursor: pointer;
         padding: 0.5rem 1rem;
@@ -365,7 +473,7 @@
     }
     
     .auth-close:hover {
-        color: #fff;
+        color: var(--text-primary);
     }
     
     /* Loading state */
@@ -378,8 +486,8 @@
         display: inline-block;
         width: 20px;
         height: 20px;
-        border: 2px solid #9ca3af;
-        border-top-color: #3b82f6;
+        border: 2px solid var(--text-tertiary);
+        border-top-color: var(--accent-color);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
     }
@@ -388,16 +496,16 @@
         to { transform: rotate(360deg); }
     }
     
-    /* Dropdown menu - NAVBAR DIŞINDA GÖSTER */
+    /* Dropdown menu */
     .user-dropdown {
         position: fixed;
         top: 70px;
         right: 20px;
-        background: linear-gradient(135deg, #111827 0%, #000 100%);
-        border: 1px solid #374151;
+        background: var(--gradient-primary);
+        border: 1px solid var(--border-color);
         border-radius: 0.5rem;
         min-width: 220px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 40px var(--shadow-color);
         display: none;
         z-index: 1000;
         animation: slideDown 0.3s ease;
@@ -420,7 +528,7 @@
     
     .dropdown-header {
         padding: 1.25rem 1.5rem;
-        border-bottom: 1px solid #374151;
+        border-bottom: 1px solid var(--border-color);
         text-align: center;
     }
     
@@ -435,18 +543,18 @@
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        border: 2px solid #3b82f6;
+        border: 2px solid var(--accent-color);
         object-fit: cover;
     }
     
     .dropdown-user-name {
-        color: #fff;
+        color: var(--text-primary);
         font-size: 1rem;
         font-weight: 600;
     }
     
     .dropdown-user-email {
-        color: #9ca3af;
+        color: var(--text-tertiary);
         font-size: 0.75rem;
     }
     
@@ -462,20 +570,20 @@
     }
     
     .stat-value {
-        color: #3b82f6;
+        color: var(--accent-color);
         font-size: 1.25rem;
         font-weight: 700;
         display: block;
     }
     
     .stat-label {
-        color: #9ca3af;
+        color: var(--text-tertiary);
         font-size: 0.75rem;
     }
     
     .dropdown-divider {
         height: 1px;
-        background: #374151;
+        background: var(--border-color);
         margin: 0.5rem 0;
     }
     
@@ -484,10 +592,10 @@
         align-items: center;
         gap: 0.75rem;
         padding: 1rem 1.5rem;
-        color: #d1d5db;
+        color: var(--text-secondary);
         text-decoration: none;
         transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        border-bottom: 1px solid var(--border-color);
     }
     
     .dropdown-item:last-child {
@@ -495,14 +603,14 @@
     }
     
     .dropdown-item:hover {
-        background-color: rgba(31, 41, 55, 0.5);
-        color: #fff;
+        background-color: var(--bg-tertiary);
+        color: var(--text-primary);
         padding-left: 1.75rem;
     }
     
     .dropdown-footer {
         padding: 1rem 1.5rem;
-        border-top: 1px solid #374151;
+        border-top: 1px solid var(--border-color);
         text-align: center;
     }
     
@@ -518,7 +626,439 @@
             right: 20px;
         }
     }
-</style>
+
+    /* HERO SECTION */
+    .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--hero-overlay);
+        z-index: -1;
+    }
+
+    .hero-content {
+        text-align: center;
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        z-index: 1;
+    }
+
+    .hero-logo {
+        height: 120px;
+        width: auto;
+        margin-bottom: 2rem;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.125rem;
+        color: var(--text-tertiary);
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-secondary {
+        background-color: var(--bg-tertiary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--border-color);
+        transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .mouse {
+        width: 30px;
+        height: 50px;
+        border: 2px solid var(--text-tertiary);
+        border-radius: 15px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .mouse:before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 10px;
+        background: var(--text-secondary);
+        border-radius: 2px;
+        animation: scroll 2s infinite;
+    }
+
+    @keyframes scroll {
+        0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        50% { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
+    }
+
+    /* FEATURES SECTION */
+    .features {
+        padding: 5rem 1rem;
+        background-color: var(--bg-secondary);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .feature-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px var(--shadow-color);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+
+    .feature-card p {
+        color: var(--text-tertiary);
+        line-height: 1.6;
+    }
+
+    /* GAMES SECTION */
+    .games-section {
+        padding: 5rem 1rem;
+        background-color: var(--bg-primary);
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+
+    .view-all {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .view-all:hover {
+        color: var(--accent-hover);
+    }
+
+    .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .game-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+
+    .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px var(--shadow-color);
+    }
+
+    .game-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .game-content {
+        padding: 1.5rem;
+    }
+
+    .game-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+
+    .game-description {
+        color: var(--text-tertiary);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .game-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .game-tag {
+        background-color: var(--bg-tertiary);
+        color: var(--text-secondary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .game-link {
+        display: inline-block;
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .game-link:hover {
+        color: var(--accent-hover);
+    }
+
+    /* FOOTER */
+    .footer {
+        background-color: var(--bg-secondary);
+        border-top: 1px solid var(--border-color);
+        padding: 4rem 1rem 2rem;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .footer-col-wide {
+        grid-column: span 2;
+    }
+
+    @media (max-width: 768px) {
+        .footer-col-wide {
+            grid-column: span 1;
+        }
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-logo img {
+        height: 40px;
+        width: auto;
+    }
+
+    .footer-logo span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-primary);
+    }
+
+    .footer-description {
+        color: var(--text-tertiary);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background-color: var(--bg-tertiary);
+        color: var(--text-secondary);
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 1.25rem;
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        background-color: var(--accent-color);
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    .footer-col h3 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+    }
+
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 0.75rem;
+        color: var(--text-tertiary);
+    }
+
+    .footer-col ul li a {
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-col ul li a:hover {
+        color: var(--text-primary);
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .footer-bottom p {
+        color: var(--text-tertiary);
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--text-primary);
+    }
+
+    /* Navbar scroll efekti */
+    nav.scrolled {
+        background-color: var(--bg-secondary);
+        box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    </style>
 </head>
 <body>
     <!-- Auth Modal -->
@@ -536,7 +1076,7 @@
         </div>
     </div>
 
-    <!-- User Dropdown Menu - NAVBAR'IN DIŞINDA -->
+    <!-- User Dropdown Menu -->
     <div id="userDropdown" class="user-dropdown">
         <div class="dropdown-header">
             <div class="dropdown-user-info">
@@ -581,7 +1121,7 @@
         </div>
         
         <div class="dropdown-footer">
-            <small style="color: #6b7280">HEXAGES GAMES v1.1</small>
+            <small style="color: var(--text-tertiary)">HEXAGES GAMES v1.1</small>
         </div>
     </div>
 
@@ -598,18 +1138,23 @@
                 <a href="news.html" class="nav-link">Haberler</a>
                 <a href="contact.html" class="nav-link">İletişim</a>
                 
-                <!-- Auth Section - SADE BUTONLAR -->
+                <!-- Auth Section -->
                 <div class="auth-section">
-                    <!-- Giriş butonu (giriş yapılmamışsa) -->
+                    <!-- Giriş butonu -->
                     <button id="authBtn" class="auth-btn">
                         <span>👤</span>
                         <span>Giriş Yap</span>
                     </button>
                     
-                    <!-- Profil butonu (giriş yapılmışsa) -->
+                    <!-- Profil butonu -->
                     <button id="profileBtn" class="profile-btn" style="display: none;">
                         <span>👤</span>
                         <span id="profileBtnText">Profil</span>
+                    </button>
+                    
+                    <!-- Tema değiştirme butonu -->
+                    <button id="themeToggle" class="theme-toggle-btn">
+                        <span class="theme-icon">🌙</span>
                     </button>
                 </div>
             </div>
@@ -617,6 +1162,9 @@
             <!-- Mobile Auth -->
             <div class="mobile-auth">
                 <button id="mobileAuthBtn" class="auth-btn">👤</button>
+                <button id="mobileThemeToggle" class="theme-toggle-btn">
+                    <span class="theme-icon">🌙</span>
+                </button>
             </div>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -630,17 +1178,22 @@
             <a href="news.html" class="mobile-link">Haberler</a>
             <a href="contact.html" class="mobile-link">İletişim</a>
             
-            <!-- Mobil profil linki - Giriş yapılmışsa görünür -->
+            <!-- Tema değiştirme butonu -->
+            <button id="mobileThemeLink" class="mobile-link" style="border: none; background: none; width: 100%; text-align: left;">
+                <span>🌙</span> Tema Değiştir
+            </button>
+            
+            <!-- Mobil profil linki -->
             <a href="profile.html" id="mobileProfileLink" class="mobile-profile-link">
                 <span>👤</span> Profilim
             </a>
             
-            <!-- Mobil giriş yap butonu - Giriş yapılmamışsa görünür -->
+            <!-- Mobil giriş yap butonu -->
             <button id="mobileAuthLink" class="mobile-link auth-btn" style="border: none; background: none; width: 100%; text-align: left;">
                 <span>👤</span> Giriş Yap
             </button>
             
-            <!-- Mobil çıkış yap butonu - Giriş yapılmışsa görünür -->
+            <!-- Mobil çıkış yap butonu -->
             <button id="mobileLogoutBtn" class="mobile-logout-btn">
                 <span>🚪</span> Çıkış Yap
             </button>
@@ -705,7 +1258,9 @@
                 <h2 class="section-title">Öne Çıkan Oyunlar</h2>
                 <a href="games.html" class="view-all">Tümünü Gör →</a>
             </div>
-            <div class="games-grid" id="featuredGames"></div>
+            <div class="games-grid" id="featuredGames">
+                <!-- Oyun kartları buraya dinamik olarak yüklenecek -->
+            </div>
         </div>
     </section>
 
@@ -753,7 +1308,7 @@
         </div>
     </footer>
 
-    <!-- FIREBASE AUTH JAVASCRIPT - YENİ DÜZENLENMİŞ -->
+    <!-- FIREBASE AUTH JAVASCRIPT -->
     <script>
     // Firebase Configuration
     const firebaseConfig = {
@@ -1108,6 +1663,119 @@
     
     // Fonksiyonu global scope'a ekle
     window.toggleMobileMenu = toggleMobileMenu;
+    </script>
+    
+    <!-- TEMA SİSTEMİ JAVASCRIPT -->
+    <script>
+    // TEMA SİSTEMİ
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        const mobileThemeLink = document.getElementById('mobileThemeLink');
+        const themeIcons = document.querySelectorAll('.theme-icon');
+        
+        // Varsayılan tema kontrolü
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (prefersDark) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+        
+        // Tema ayarla
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            // Tüm ikonları güncelle
+            themeIcons.forEach(icon => {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            });
+            
+            // Tüm sayfalar için cookie ayarla
+            document.cookie = `theme=${theme}; path=/; max-age=31536000`;
+            
+            console.log(`🎨 Tema değiştirildi: ${theme}`);
+        }
+        
+        // Tema değiştir
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            
+            // Mobil menüyü kapat
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenu) mobileMenu.classList.remove('active');
+            if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Event listener'lar
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        if (mobileThemeLink) {
+            mobileThemeLink.addEventListener('click', toggleTheme);
+        }
+        
+        // Diğer sayfalardan cookie kontrolü
+        function checkCookieTheme() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'theme') {
+                    setTheme(value);
+                    break;
+                }
+            }
+        }
+        
+        // Başlangıçta tema yükle
+        initTheme();
+        checkCookieTheme();
+        
+        // Sistem teması değişirse dinle
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    });
+    
+    // Sayfa yüklendiğinde tema kontrolü (diğer sayfalar için)
+    window.addEventListener('load', function() {
+        const cookies = document.cookie.split(';');
+        let savedTheme = null;
+        
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'theme') {
+                savedTheme = value;
+                break;
+            }
+        }
+        
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const themeIcons = document.querySelectorAll('.theme-icon');
+            themeIcons.forEach(icon => {
+                icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+            });
+        }
+    });
     </script>
     
     <!-- ESKİ SCRIPT.JS DOSYASI -->
