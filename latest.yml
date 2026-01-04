@@ -1,8 +1,8 @@
 version: 1.0.6
 files:
-  - url: https://dl.dropboxusercontent.com/scl/fi/1p67qe5gb4sqrvjlhrbzr/Hexagesgames_Setup_1.0.6.exe?rlkey=ts5x8hbef68xnenmp8favvs5k&st=5ujnnx3j&dl=1
+  - url: https://github.com/4detrail/hexagesgames-release/releases/download/v1.0.6/Hexagesgames_Setup_1.0.6.exe
     sha512: jL275YTYZmf3luqdDg6F0D2wzAZ0T3ggNgrBJ+rz2LmrKDzY/ZvWRx8SiIrzH1FN+H918FGDK58q5I+4kcmWew==
     size: 98857199
-path: https://dl.dropboxusercontent.com/scl/fi/1p67qe5gb4sqrvjlhrbzr/Hexagesgames_Setup_1.0.6.exe?rlkey=ts5x8hbef68xnenmp8favvs5k&st=5ujnnx3j&dl=1
+path: https://github.com/4detrail/hexagesgames-release/releases/download/v1.0.6/Hexagesgames_Setup_1.0.6.exe
 sha512: jL275YTYZmf3luqdDg6F0D2wzAZ0T3ggNgrBJ+rz2LmrKDzY/ZvWRx8SiIrzH1FN+H918FGDK58q5I+4kcmWew==
 releaseDate: '2026-01-04T13:58:46.591Z'
