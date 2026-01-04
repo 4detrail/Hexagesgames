@@ -1,8 +1,8 @@
-version: 1.0.4
+version: 1.0.5
 files:
-  - url: https://www.dropbox.com/scl/fi/spsdnkbn9cnj4jop8umvz/HEXAGES_Setup_1.0.4.exe?rlkey=j536j498ixrna24yxpuatnv2v&st=h9h4wecs&dl=1
-    sha512: v58tfBmoccJFolvaVSr5W0StAE0l/dHmRu99Y7Uj/GtoQvL8Xl33snma9d1IuHIDIefMl+uDxzNBsk8My1ADIQ==
-    size: 98845003
-path: https://www.dropbox.com/scl/fi/spsdnkbn9cnj4jop8umvz/HEXAGES_Setup_1.0.4.exe?rlkey=j536j498ixrna24yxpuatnv2v&st=h9h4wecs&dl=1
-sha512: v58tfBmoccJFolvaVSr5W0StAE0l/dHmRu99Y7Uj/GtoQvL8Xl33snma9d1IuHIDIefMl+uDxzNBsk8My1ADIQ==
-releaseDate: '2026-01-04T10:32:08.395Z'
+  - url: https://www.dropbox.com/scl/fi/xu112jg9536ufu5va4v0d/HEXAGES_Setup_1.0.5.exe?rlkey=90pwertk6g7uhbugc9ng7udrk&st=as9zlcwr&dl=1
+    sha512: trpzB+JgC+C+dSSItpZvoLIZiTN/FWv0inWFo7JYOtw0CHtKl0ZHZGIAcOFYQNkUwKY410f1v1O7cLexRkxdBg==
+    size: 98845536
+path: https://www.dropbox.com/scl/fi/xu112jg9536ufu5va4v0d/HEXAGES_Setup_1.0.5.exe?rlkey=90pwertk6g7uhbugc9ng7udrk&st=as9zlcwr&dl=1
+sha512: trpzB+JgC+C+dSSItpZvoLIZiTN/FWv0inWFo7JYOtw0CHtKl0ZHZGIAcOFYQNkUwKY410f1v1O7cLexRkxdBg==
+releaseDate: '2026-01-04T12:26:47.993Z'
