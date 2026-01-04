@@ -1,8 +1,8 @@
-version: 1.0.5
+version: 1.0.6
 files:
-  - url: https://dl.dropboxusercontent.com/scl/fi/x5j4fkvzb7dbsrujz3tal/HEXAGES_Setup_1.0.5.exe?rlkey=je3txlyhgj80r8tvdp7nyvww0&st=jx48j2e1&dl=1
-    sha512: +YNCpAEjMxtSoFYlpdUx0clYtz3HHNlYQ1Ck4t/OOQaYAxDmxsIeq0um3W3sRRtYgXmmE0rKgpAyhGxrl6D9/Q==
-    size: 98858414
-path: https://dl.dropboxusercontent.com/scl/fi/x5j4fkvzb7dbsrujz3tal/HEXAGES_Setup_1.0.5.exe?rlkey=je3txlyhgj80r8tvdp7nyvww0&st=jx48j2e1&dl=1
-sha512: +YNCpAEjMxtSoFYlpdUx0clYtz3HHNlYQ1Ck4t/OOQaYAxDmxsIeq0um3W3sRRtYgXmmE0rKgpAyhGxrl6D9/Q==
-releaseDate: '2026-01-04T13:03:30.754Z'
+  - url: https://dl.dropboxusercontent.com/scl/fi/1p67qe5gb4sqrvjlhrbzr/Hexagesgames_Setup_1.0.6.exe?rlkey=ts5x8hbef68xnenmp8favvs5k&st=5ujnnx3j&dl=1
+    sha512: jL275YTYZmf3luqdDg6F0D2wzAZ0T3ggNgrBJ+rz2LmrKDzY/ZvWRx8SiIrzH1FN+H918FGDK58q5I+4kcmWew==
+    size: 98857199
+path: https://dl.dropboxusercontent.com/scl/fi/1p67qe5gb4sqrvjlhrbzr/Hexagesgames_Setup_1.0.6.exe?rlkey=ts5x8hbef68xnenmp8favvs5k&st=5ujnnx3j&dl=1
+sha512: jL275YTYZmf3luqdDg6F0D2wzAZ0T3ggNgrBJ+rz2LmrKDzY/ZvWRx8SiIrzH1FN+H918FGDK58q5I+4kcmWew==
+releaseDate: '2026-01-04T13:58:46.591Z'
