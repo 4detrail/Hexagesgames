@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İndir & Gereksinimler - HEXAGES GAMES</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* GEREKSİNİMLER SAYFASI ÖZEL CSS */
+        .download-hero {
+            padding: 150px 20px 80px;
+            background: radial-gradient(circle at center, #1a0b2e 0%, #050505 100%);
+            text-align: center;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: -60px auto 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .spec-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .spec-box h3 {
+            color: #8b5cf6;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 5px;
+        }
+
+        .spec-label { color: #9ca3af; font-size: 0.9rem; }
+        .spec-value { color: #fff; font-weight: 500; font-size: 0.9rem; }
+
+        .download-btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .download-btn-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5);
+        }
+
+        .ver-info {
+            color: #6b7280;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .specs-grid { grid-template-columns: 1fr; }
+            .download-card { margin: 20px; padding: 20px; }
+        }
+    </style>
+</head>
+<body style="background-color: #050505; color: white; font-family: 'Inter', sans-serif;">
+
+    <section class="download-hero">
+        <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 10px;">HEXAGES CORE</h1>
+        <p style="color: #9ca3af; max-width: 600px; margin: 0 auto;">Tüm oyunlarımıza tek bir noktadan erişin, güncellemeleri otomatik alın.</p>
+    </section>
+
+    <div class="download-card" style="text-align: center;">
+        <a href="updates/HEXAGES_Setup_1.1.0.exe" class="download-btn-large">
+            <span>⬇️</span> LAUNCHER'I ŞİMDİ İNDİR
+        </a>
+        <div class="ver-info">Sürüm: 1.1.0 | Boyut: ~65 MB | Platform: Windows 10/11</div>
+
+        <div class="specs-grid">
+            <div class="spec-box">
+                <h3>Minimum</h3>
+                <div class="spec-item"><span class="spec-label">İşletim Sistemi</span><span class="spec-value">Windows 10 64-bit</span></div>
+                <div class="spec-item"><span class="spec-label">İşlemci</span><span class="spec-value">Intel i3 / AMD Ryzen 3</span></div>
+                <div class="spec-item"><span class="spec-label">Bellek</span><span class="spec-value">4 GB RAM</span></div>
+                <div class="spec-item"><span class="spec-label">Ekran Kartı</span><span class="spec-value">Intel HD Graphics 620</span></div>
+                <div class="spec-item"><span class="spec-label">Depolama</span><span class="spec-value">500 MB Boş Alan</span></div>
+            </div>
+
+            <div class="spec-box" style="border-left-color: #10b981;">
+                <h3 style="color: #10b981;">Önerilen</h3>
+                <div class="spec-item"><span class="spec-label">İşletim Sistemi</span><span class="spec-value">Windows 11 64-bit</span></div>
+                <div class="spec-item"><span class="spec-label">İşlemci</span><span class="spec-value">Intel i5 / AMD Ryzen 5</span></div>
+                <div class="spec-item"><span class="spec-label">Bellek</span><span class="spec-value">8 GB RAM</span></div>
+                <div class="spec-item"><span class="spec-label">Ekran Kartı</span><span class="spec-value">NVIDIA GTX 1050 Ti</span></div>
+                <div class="spec-item"><span class="spec-label">Bağlantı</span><span class="spec-value">Geniş Bant İnternet</span></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-wide">
+                    <div class="footer-logo">
+                        <img src="hexagesgames1.png" alt="HEXAGES GAMES">
+                        <span>HEXAGES GAMES</span>
+                    </div>
+                    <p class="footer-description">Oyun dünyasında yenilikçi ve etkileyici deneyimler yaratıyoruz. Tutkulu ekibimizle geleceğin oyunlarını tasarlıyoruz.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="https://x.com/hexages_games" class="social-link">🐦</a>
+                        <a href="https://www.instagram.com/hexagesgames" class="social-link">📷</a>
+                        <a href="https://discord.gg/Pne3fnnKkK" class="social-link">📺</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="games.html">Oyunlar</a></li>
+                        <li><a href="developers.html">Geliştiriciler</a></li>
+                        <li><a href="news.html">Haberler</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@hexagesgames.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 HEXAGES GAMES. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Gizlilik Politikası</a>
+                    <a href="terms.html">Kullanım Koşulları</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
