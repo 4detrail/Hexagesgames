@@ -1,8 +1,8 @@
 version: 1.1.1
 files:
   - url: https://github.com/4detrail/hexagesgames-release/releases/download/v1.1.1/Hexagesgames_Setup_1.1.1.exe
-   sha512: hMxTcRy4qi4tEXAIil9Ry9CELX1Oirtv6o/GQpJt54oHY3cqbpb2zGmZwImy2yBHhfV5lUPL9P1wyLnbKPuezQ==
-    size: 99778423
+   sha512: J1F92LhpJ3KwEz9PN5NjuUKnjwJhWu7aO+YWDkXFmH/pu/wrHSutin/HwccnAZ4F/iF9V8ChiF6Ok4rwMtB4TQ==
+    size: 113709102
 path: https://github.com/4detrail/hexagesgames-release/releases/download/v1.1.1/Hexagesgames_Setup_1.1.1.exe
-sha512: hMxTcRy4qi4tEXAIil9Ry9CELX1Oirtv6o/GQpJt54oHY3cqbpb2zGmZwImy2yBHhfV5lUPL9P1wyLnbKPuezQ==
-releaseDate: '2026-01-08T20:11:57.896Z'
+sha512: J1F92LhpJ3KwEz9PN5NjuUKnjwJhWu7aO+YWDkXFmH/pu/wrHSutin/HwccnAZ4F/iF9V8ChiF6Ok4rwMtB4TQ==
+releaseDate: '2026-01-08T21:07:32.067Z'
