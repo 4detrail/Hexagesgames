@@ -1,8 +1,8 @@
-version: 1.0.0
+version: 1.0.1
 files:
-  - url: https://github.com/4detrail/hexagesgames-release/releases/download/v1.0.0-demo-mobile/Hexages.Games.Mobile.apk
+  - url: https://github.com/4detrail/hexagesgames-release/releases/download/demv1.0.1-demo-mobile/Hexages.Games.Mobile.apk
     sha512: 080ee77786c4f6b7dc2be3ba8127ee84b0c72b9d5284890e88fb8c7c1668375f6bbb643f39522668cc96a86676f6c5456363f53286aa0d74dae8f245c5dcf264
     size: 9114144
-path: https://github.com/4detrail/hexagesgames-release/releases/download/v1.0.0-demo-mobile/Hexages.Games.Mobile.apk
+path: https://github.com/4detrail/hexagesgames-release/releases/download/demv1.0.1-demo-mobile/Hexages.Games.Mobile.apk
 sha512: 080ee77786c4f6b7dc2be3ba8127ee84b0c72b9d5284890e88fb8c7c1668375f6bbb643f39522668cc96a86676f6c5456363f53286aa0d74dae8f245c5dcf264
 releaseDate: '2024-01-15T00:00:00.000Z'
