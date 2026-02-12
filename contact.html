@@ -517,6 +517,74 @@
                 right: 20px;
             }
         }
+
+        /* FORM BİLDİRİM STYLES */
+        .form-notification {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideUp 0.3s ease;
+        }
+
+        .form-notification.success {
+            display: flex;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+            color: #10b981;
+        }
+
+        .form-notification.error {
+            display: flex;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .form-notification.info {
+            display: flex;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+        }
+
+        .notification-icon {
+            font-size: 1.25rem;
+        }
+
+        .notification-text {
+            flex: 1;
+            font-size: 0.875rem;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-loader {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary.btn-full {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary.btn-full.loading {
+            opacity: 0.8;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -680,8 +748,8 @@
                 
                 <div class="contact-form-container">
                     <h2>Bize Mesaj Gönderin</h2>
-                    <!-- FormSpree entegrasyonu burada -->
-                    <form id="contactForm" action="https://formspree.io/f/xeorpqve" method="POST">
+                    <!-- AJAX ile form gönderme - YÖNLENDİRME YOK, SAYFA YENİLENMEZ -->
+                    <form id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Ad Soyad</label>
@@ -700,9 +768,20 @@
                             <label for="message">Mesaj</label>
                             <textarea id="message" name="message" rows="6" required placeholder="Mesajınızı buraya yazın..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Mesaj Gönder →</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary btn-full">
+                            <span class="btn-text">Mesaj Gönder →</span>
+                            <span class="btn-loader" style="display: none;">
+                                <span class="loading-spinner" style="width: 20px; height: 20px; margin-right: 8px;"></span>
+                                Gönderiliyor...
+                            </span>
+                        </button>
                     </form>
-                    <div id="formMessage" class="form-message"></div>
+                    
+                    <!-- Bildirim Alanı - FormSpree yönlendirmesi yerine -->
+                    <div id="formNotification" class="form-notification">
+                        <span class="notification-icon"></span>
+                        <span class="notification-text"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1095,6 +1174,76 @@
     
     // Fonksiyonu global scope'a ekle
     window.toggleMobileMenu = toggleMobileMenu;
+    </script>
+    
+    <!-- İLETİŞİM FORMU AJAX - YÖNLENDİRME YOK, SAYFA YENİLENMEZ -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        const formNotification = document.getElementById('formNotification');
+        const notificationIcon = formNotification.querySelector('.notification-icon');
+        const notificationText = formNotification.querySelector('.notification-text');
+        
+        // Bildirim göster
+        function showNotification(type, message, icon) {
+            formNotification.className = 'form-notification ' + type;
+            notificationIcon.textContent = icon;
+            notificationText.textContent = message;
+            
+            // 5 saniye sonra gizle
+            setTimeout(() => {
+                formNotification.className = 'form-notification';
+            }, 5000);
+        }
+        
+        // Form gönderme
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Yönlendirmeyi engelle
+            
+            // Form verilerini topla
+            const formData = new FormData(contactForm);
+            
+            // Loading state
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline-flex';
+            submitBtn.classList.add('loading');
+            
+            // FormSpree'ye AJAX ile gönder - YÖNLENDİRME YOK!
+            fetch('https://formspree.io/f/xeorpqve', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    // Başarılı
+                    showNotification('success', 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', '✅');
+                    contactForm.reset(); // Formu temizle
+                } else {
+                    // Hata
+                    showNotification('error', 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.', '❌');
+                }
+            })
+            .catch(error => {
+                console.error('Form hatası:', error);
+                showNotification('error', 'Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin.', '❌');
+            })
+            .finally(() => {
+                // Loading state'i kaldır
+                btnText.style.display = 'inline';
+                btnLoader.style.display = 'none';
+                submitBtn.classList.remove('loading');
+            });
+        });
+        
+        console.log('📬 İletişim formu AJAX ile hazır - Yönlendirme YOK!');
+    });
     </script>
     
     <!-- ESKİ SCRIPT.JS DOSYASI -->
